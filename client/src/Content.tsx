@@ -1,12 +1,25 @@
 import React from 'react'
-import PosterGallery from './PosterGallery';
+import {Route, Switch} from 'react-router-dom'
+import PosterGallery from './PosterGallery'
 import SignUpCom from './SignUpCom'
-
+import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
+import {green} from '@material-ui/core/colors'
+const contentTheme = createMuiTheme({
+	palette: {
+		primary: {
+			main: green['900']
+		}
+	}
+})
+//'#096e25'
     function Content() {
         return(
-          	<div>
-            	<PosterGallery />
-            </div>
+          	<MuiThemeProvider theme={contentTheme}>
+				<Switch>
+					<Route exact path="/" component={SignUpCom} />
+					<Route path="/postergallery" component={PosterGallery} />
+				</Switch>
+            </MuiThemeProvider>
         )
     }
 export default Content
