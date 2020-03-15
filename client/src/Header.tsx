@@ -1,22 +1,26 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-// import TopBar from "@material/top-app-bar/mdc-top-app-bar"
-// import IconButton from "@material/icon-button/mdc-icon-button";
+import {FormControl, Input, InputLabel, Button} from '@material-ui/core'
+import Tree from './img/treeIconTestSmall.png'
 
-    function Header() {
-        return(
-            <div>
-                <header className="mdc-top-app-bar primary">
+function Header() {
+    return(
+        <div>
+            <header className="mdc-top-app-bar primary">
                 <div className="mdc-top-app-bar__row">
                     <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-                        menu
-                    </Button>
-                    <span className="mdc-top-app-bar__title">Title</span>
+                        <img className="" src={Tree} alt="Tree Icon"></img>
+                        <FormControl size="small">
+                            <InputLabel htmlFor="search">Search:</InputLabel>
+                            <Input id="search" aria-describedby="search-form" />
+                        </FormControl>
+                        <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+                            menu
+                        </Button>
+                        <span className="mdc-top-app-bar__title">Title</span>
                     </section>
                 </div>
-                </header>
-            </div>
-        )
-    }
+            </header>
+        </div>
+    )
+}
 export default Header
