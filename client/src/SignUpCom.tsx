@@ -1,12 +1,11 @@
 import React from 'react'
 import {Box, FormControl, Input, InputLabel, Button} from '@material-ui/core'
-    function SignUpCom() {
+    const SignUpCom: React.FC<any> = (props) => {
         return(
-        	
             <Box className="sign-up-box">
                 <Box className="sign-in-from-sign-up">
             	    Already have an account? Login here:
-            	    <Button variant="contained" color="secondary" className="sign-up-to-sign-in">Sign In</Button>
+            	    <Button variant="contained" color="primary" className="sign-up-to-sign-in">Sign In</Button>
                 </Box>
             	<FormControl>
             		<InputLabel htmlFor="first-name">First Name:</InputLabel>
@@ -24,7 +23,7 @@ import {Box, FormControl, Input, InputLabel, Button} from '@material-ui/core'
                     <InputLabel htmlFor="password">Password:</InputLabel>
                     <Input id="password" aria-describedby="password-form" />
                 </FormControl>
-                <Button variant="contained" color="secondary" className="submit-button">Sign Up</Button>
+                <Button variant="contained" color="primary" className="submit-button">Sign Up</Button>
             </Box>
 
         )
