@@ -7,7 +7,6 @@ import Footer from './Footer';
 
 import './App.css';
 import './css/style.css'
-// import './Theme.js'
 
 
 function App() {

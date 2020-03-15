@@ -9,10 +9,6 @@ function Header() {
                 <div className="mdc-top-app-bar__row">
                     <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                         <img className="" src={Tree} alt="Tree Icon"></img>
-                        <FormControl size="small">
-                            <InputLabel htmlFor="search">Search:</InputLabel>
-                            <Input id="search" aria-describedby="search-form" />
-                        </FormControl>
                         <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
                             menu
                         </Button>
