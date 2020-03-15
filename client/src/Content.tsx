@@ -6,7 +6,7 @@ import {green} from '@material-ui/core/colors'
 const contentTheme = createMuiTheme({
 	palette: {
 		primary: {
-			main: green['900']
+			main: green['A700']
 		}
 	}
 })
