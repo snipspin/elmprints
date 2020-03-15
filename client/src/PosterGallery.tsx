@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import PosterTile from './PosterTile'
 
-export interface Poster {
-    imageURL: string;
-}
+import { Poster } from './dec';
+
 
 function PosterGallery() {
     const [posterArray, setPosterArray] = useState<Array<Poster>>([])
@@ -22,7 +21,6 @@ function PosterGallery() {
     return(
         <div>
         {
-            
         posterArray.map((poster,i) => (
             <PosterTile key={i} imageURL={poster.imageURL} />
         ))
