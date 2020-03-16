@@ -3,6 +3,7 @@ span {
 }
 
 .sign-up-box {
+  height: 80vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -11,14 +12,13 @@ span {
   color: black;
 }
 
+.sign-up-box span {
+  color: white;
+}
+
 .sign-up-to-sign-in {
   position: relative;
   left: 10px;
-}
-.sign-up-to-sign-in span {
-  color: white;
-}
-.submit-button span {
   color: white;
 }
 

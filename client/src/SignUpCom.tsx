@@ -9,19 +9,19 @@ import {Box, FormControl, Input, InputLabel, Button} from '@material-ui/core'
                 </Box>
             	<FormControl>
             		<InputLabel htmlFor="first-name">First Name:</InputLabel>
-            		<Input id="first-name" aria-describedby="first-name-form" />
+            		<Input id="first-name" name="first-name" aria-describedby="first-name-form" />
             	</FormControl>
                 <FormControl>
                     <InputLabel htmlFor="last-name">Last Name:</InputLabel>
-                    <Input id="first-name" aria-describedby="last-name-form" />
+                    <Input id="last-name" name="last-name" aria-describedby="last-name-form" />
                 </FormControl>                
                 <FormControl>
                     <InputLabel htmlFor="email">Email:</InputLabel>
-                    <Input id="email" aria-describedby="email-form" />
+                    <Input id="email" name="email" aria-describedby="email-form" />
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="password">Password:</InputLabel>
-                    <Input id="password" aria-describedby="password-form" />
+                    <Input type="password" name="password" aria-describedby="password-form" />
                 </FormControl>
                 <Button variant="contained" color="primary" className="submit-button">Sign Up</Button>
             </Box>
