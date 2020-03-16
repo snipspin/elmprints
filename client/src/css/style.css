@@ -64,4 +64,23 @@ nav a:hover {
   color: white;
 }
 
+.footerTop {
+  background-color: gray;
+}
+
+.footerBottom {
+  background-color: black;
+  color: white;
+}
+
+.body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
 /*# sourceMappingURL=style.css.map */

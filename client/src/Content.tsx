@@ -6,6 +6,7 @@ import SignUpCom from './SignUpCom'
 import ProfilePageCom from './ProfilePageCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
+
 const contentTheme = createMuiTheme({
 	palette: {
 		primary: {
@@ -14,16 +15,19 @@ const contentTheme = createMuiTheme({
 	}
 })
 //'#096e25'
-    function Content() {
-        return(
-          	<MuiThemeProvider theme={contentTheme}>
-				<Switch>
-					<Route exact path="/" component={SignUpCom} />
-					<Route path="/postergallery" component={PosterGallery} />
-					<Route path="/profile" component={ProfilePageCom} />
-					<Route path="/faq" component={FAQPageCom} />
-				</Switch>
-            </MuiThemeProvider>
-        )
-    }
+
+function Content() {
+		return(
+				<div className="main">
+						<MuiThemeProvider theme={contentTheme}>
+								<Switch>
+									<Route exact path="/" component={SignUpCom} />
+									<Route path="/postergallery" component={PosterGallery} />
+									<Route path="/profile" component={ProfilePageCom} />
+									<Route path="/faq" component={FAQPageCom} />
+								</Switch>
+						</MuiThemeProvider>
+				</div>
+		)
+}
 export default Content
