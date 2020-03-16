@@ -19,7 +19,7 @@
 
 ### Stretch goals
 * As a user my profile includes my current shopping cart, order history and wishlist
-* As a user when I visit a products detail page I can see consumer reviews
+* As a user when I visit a product's detail page I can see consumer reviews
 * As a user I want to be able to upload an image/product to be listed as an available product for purchase
 
 ## Wireframes
