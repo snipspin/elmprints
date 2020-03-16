@@ -1,10 +1,14 @@
 .sign-up-box {
+	height: 80vh;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	color: black;	
+}
+.sign-up-box span {
+	color: white;
 }
 
 .sign-up-to-sign-in {
