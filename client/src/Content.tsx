@@ -6,6 +6,8 @@ import SignUpCom from './SignUpCom'
 import ProfilePageCom from './ProfilePageCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
+import { makeStyles }from '@material-ui/core/styles'
+import styles from './styles';
 
 const contentTheme = createMuiTheme({
 	palette: {
@@ -15,10 +17,11 @@ const contentTheme = createMuiTheme({
 	}
 })
 //'#096e25'
-
+const useStyles =  makeStyles(theme => (styles(theme)));
 function Content() {
+	const classes = useStyles();
 		return(
-				<div className="main">
+				<div className={classes.root + " main"}>
 						<MuiThemeProvider theme={contentTheme}>
 								<Switch>
 									<Route exact path="/" component={SignUpCom} />
