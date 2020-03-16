@@ -15,13 +15,19 @@ let addressSchema = new mongoose.Schema({
     type: String
   },
   zipcode: {
-    type: Number,
+    type: String,
     minlength: 5
   }
 })
 
+let itemSchema = new mongoose.Schema({
+  item: String,
+  price: Number,
+  imgUrl: String
+})
+
 let cartSchema = new mongoose.Schema({
-  items: Array[String]
+  items: [itemSchema]
 })
 
 let userSchema = new mongoose.Schema({
@@ -46,7 +52,9 @@ let userSchema = new mongoose.Schema({
   },
   shippingAddress: addressSchema,
   billingAddress: addressSchema,
-  shoppingCart: cartSchema
+  shoppingCart: cartSchema,
+  orderHistory: cartSchema,
+  wishList: cartSchema
 })
 
 // hash password
