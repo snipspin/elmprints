@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import ProfileUserInfo from './ProfileUserInfo'
     const ProfilePageCom: React.FC<any> = (props) => {
         return(
         	<Grid 
@@ -10,29 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
         		alignItems="center"
         	>   
                 <Grid item xs={6}>
-        	        <Grid
-                        container
-                        spacing={2}
-        			    direction="column"
-        			    justify="space-evenly"
-        			    alignItems="center"
-        		    >
-                    <Grid item xs={12}>
-        			    <span>Username</span>
-                    </Grid>
-                    <Grid item xs={12}>
-        			    <span>Email</span>
-                    </Grid>
-                    <Grid item xs={12}>
-        			    <Button variant="contained" color="primary">Add billing address</Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                        Use billing address for shipping?<Checkbox value="sameAsBilling" inputProps={{ 'aria-label': 'Use billing address for shipping?'}} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button variant="contained" color="primary">Add shipping address</Button>
-                    </Grid>
-                    </Grid>
+                    <ProfileUserInfo />
         		</Grid>
                 <Grid item xs={6}>
                     <Grid
