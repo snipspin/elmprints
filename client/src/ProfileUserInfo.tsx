@@ -3,13 +3,12 @@ import {Button, Grid, Checkbox} from '@material-ui/core'
 import ProfileAddressForm from './ProfileAddressForm'
 const ProfileUserInfo: React.FC<any> = (props) => {
 	const [addressForm, setAddressForm] = useState(false)
-	const displayAddressForm = () => {
-		if(addressForm)
-			return <ProfileAddressForm />
-	}
-	const handleButtonClick = () => {
-		setAddressForm(true)
-		displayAddressForm()
+	const handleButtonClick = () : void => {
+		if (!addressForm) {
+			setAddressForm(true)
+		} else {
+			setAddressForm(false)
+		}
 	}
 	return (
 
@@ -28,7 +27,7 @@ const ProfileUserInfo: React.FC<any> = (props) => {
 				<span>Email</span>
 			</Grid>
             <Grid item xs={12}>
-        		{addressForm ? <ProfileAddressForm /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
+        		{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick}/> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
             </Grid>
 			<Grid item xs={12}>
                 Use billing address for shipping?<Checkbox value="sameAsBilling" inputProps={{ 'aria-label': 'Use billing address for shipping?'}} />

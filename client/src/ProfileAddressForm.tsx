@@ -1,7 +1,16 @@
 import React from 'react'
 import {Box, Input, InputLabel, FormControl, Button} from '@material-ui/core'
-const ProfileAddressForm: React.FC<any> = (props) => {
+export interface AddressProps {
+	display: boolean
+	onSubmit(): any
+}
+const ProfileAddressForm: React.FC<AddressProps> = (props) => {
+	const handleSubmit = (e : React.MouseEvent<HTMLButtonElement,  MouseEvent>) : void => {
+		e.preventDefault()
+		props.onSubmit()
+	}
 	return (
+		<div>
 		<Box className="address-form">
 			<FormControl>
 				<InputLabel htmlFor="addressFullName">Full Name:</InputLabel>
@@ -27,7 +36,11 @@ const ProfileAddressForm: React.FC<any> = (props) => {
 				<InputLabel htmlFor="addrZip">Zip Code:</InputLabel>
 				<Input name="addrZip" aria-describedby="address zip code form" />
 			</FormControl>
+
+			
 		</Box>
+		<Button variant="contained" color="primary" onClick={(e) => handleSubmit(e)}>Submit</Button>
+		</div>
 	)
 }
 export default ProfileAddressForm
