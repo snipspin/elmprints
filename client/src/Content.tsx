@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import PosterGallery from './PosterGallery'
 import SignUpCom from './SignUpCom'
+import ProfilePageCom from './ProfilePageCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
 const contentTheme = createMuiTheme({
@@ -18,6 +19,7 @@ const contentTheme = createMuiTheme({
 				<Switch>
 					<Route exact path="/" component={SignUpCom} />
 					<Route path="/postergallery" component={PosterGallery} />
+					<Route path="/profile" component={ProfilePageCom} />
 				</Switch>
             </MuiThemeProvider>
         )
