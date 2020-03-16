@@ -11,15 +11,15 @@ import './css/style.css'
 
 
 function App() {
-  return (
-    <BrowserRouter>
-      <div className="App body">
-        <Header />
-        <Content />
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App body">
+                <Header />
+                <Content />
+                <Footer />
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App
