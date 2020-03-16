@@ -13,7 +13,7 @@ import './css/style.css'
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App body">
         <Header />
         <Content />
         <Footer />
