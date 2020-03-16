@@ -1,5 +1,47 @@
-span {
-  color: blue;
+.headerDiv {
+  box-shadow: 10px 5px 9px #888888;
+  background: #947758;
+  padding-top: 2px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchBar {
+  background-color: #9b9a9a;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px auto;
+  width: 75%;
+  margin-top: 5px;
+}
+
+nav a {
+  background-color: #b4b3b3;
+  width: 32%;
+  height: 21px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+nav a:hover {
+  background-color: #908e8e;
+}
+
+.posterNav {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.faqNav {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 .sign-up-box {
