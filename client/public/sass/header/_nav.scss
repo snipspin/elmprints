@@ -1,0 +1,29 @@
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px auto;
+  width: 75%;
+  margin-top: 5px;
+}
+
+nav a {
+  background-color: rgb(180, 179, 179);
+  width: 32%;
+  height: 21px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 5px;
+  &:hover {
+    background-color: rgb(144, 142, 142)
+  }
+}
+
+.posterNav {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.faqNav {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
