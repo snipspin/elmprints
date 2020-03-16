@@ -1,10 +1,61 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { Grid } from '@material-ui/core'
 
-    function FAQPageCom() {
-        return(
-            <div>
-                FAQPageCom
-            </div>
-        )
-    }
+interface FaqItem {
+    title: string;
+    content: string;
+}
+
+function FAQPageCom() {
+    const [faqArray, setfaqArray] = useState<Array<FaqItem>>([])
+    const [expanded, setExpanded] = React.useState<string | false>(false);
+    const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
+        setExpanded(isExpanded ? panel : false);
+    };
+    
+    
+    useEffect(() => {
+        let faqs: Array<FaqItem> = []
+        for (let index = 0; index < 10; index++) {
+            faqs.push({title: `FAQ ${index+1}`, content: `Answer ${index+1}`});
+        }
+        console.log(faqs)
+        setfaqArray(faqs);  
+        console.log(faqArray);
+    },[])
+    return(
+        <Grid 
+            container 
+    		direction="row"
+    		justify="space-evenly"
+    		alignItems="center"
+        >
+            {
+                faqArray.map((faq,i) => (
+                    <Grid item xs={8} key={i}>
+                        <ExpansionPanel expanded={expanded === `faq${i}`} onChange={handleChange(`faq${i}`)}>
+                            <ExpansionPanelSummary 
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls={`faq${i}-content`}
+                            id={`faq${i}-header`}
+                            >
+                                <Typography>{faq.title}</Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+                                <Typography>
+                                  {faq.content}
+                                </Typography>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                    </Grid>
+                ))
+            }
+        </Grid>
+    )
+}
 export default FAQPageCom
