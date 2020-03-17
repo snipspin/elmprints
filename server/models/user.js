@@ -59,7 +59,10 @@ let userSchema = new mongoose.Schema({
 
 // hash password
 userSchema.pre('save', function(next) {
-  this.password = bcrypt.hashSync(this.password, 12);
+  if (this.isNew) {
+    // New, as opposed to modified
+    this.password = bcrypt.hashSync(this.password, 12)
+  }
   next();
 })
 
@@ -67,6 +70,7 @@ userSchema.pre('save', function(next) {
 userSchema.set('toJSON', {
   transform: (doc, user) => {
     delete user.password;
+    delete user.__v;
     return user;
   }
 })
