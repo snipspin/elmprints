@@ -8,12 +8,12 @@ let router = require('express').Router()
 // NOTE: This is the user data from the time the token was issued
 
 // Get route for all art
-router.get('/', (req: express.Request, res: express.Response) => {
+router.get('/', (req, res) => {
   res.send({ message: 'Show all Art' })
 })
 
 // Get route for one piece of art
-router.get('/:id', (req: express.Request, res: express.Response) => {
+router.get('/:id', (req, res) => {
   res.send({ message: 'Show one piece of Art' })
 })
 

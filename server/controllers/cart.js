@@ -10,22 +10,22 @@ let router = require('express').Router()
 // To avoid this, reissue a token when you update user data
 
 // Get route for current state of cart for user
-router.get('/', (req: express.Request, res: express.Response) => {
+router.get('/', (req, res) => {
   res.send({ message: 'Show current cart' })
 })
 
 // Get route for page to pay for items in cart
-router.get('/payment', (req: express.Request, res: express.Response) => {
+router.get('/payment', (req, res) => {
   res.send({ message: 'Show payment page for current cart' })
 })
 
 // ? POST /cart for paying - Unclear how Stripe will need payment at the moment
-router.post('/', (req: express.Request, res: express.Response) => {
+router.post('/', (req, res) => {
   res.send({ message: 'This route was from submitting a payment and should deliver confirmation of purchase and redirect to receipt page' })
 })
 
 // Get route for receipt page
-router.get('/receipt', (req: express.Request, res: express.Response) => {
+router.get('/receipt', (req, res) => {
   res.send({ message: 'Show receipt following purchase' })
 })
 
