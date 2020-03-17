@@ -1,4 +1,4 @@
-import React, {useEffect, useState, ChangeEvent} from 'react'
+import React, {useEffect, useState, ChangeEvent, MouseEvent} from 'react'
 import {Box, FormControl, Input, InputLabel, Button} from '@material-ui/core'
 import {Decoded} from './App'
 import {Redirect} from 'react-router-dom'
@@ -17,7 +17,7 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
     useEffect(() => {
         setMessage('')
     }, [firstname, lastname, email, password])
-    const handleSubmit = (e: any) => {
+    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         console.log('in handle submit function')
         let data: object = {
