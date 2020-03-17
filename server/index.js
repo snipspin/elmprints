@@ -26,8 +26,18 @@ app.use('/auth', expressJwt({
   ]
 }), require('./controllers/auth'))
 
+app.use('/poster', require('./controllers/poster'))
+
+app.use('/art', require('./controllers/art'))
+
+app.use('/cart', require('./controllers/cart'))
+
 // example secret call for auth:
 // app.use('/dogs', expressJwt({ secret: process.env.JWT_SECRET }), require('./controllers/dogs'))
+
+app.get('/faq', (req, res) => {
+  res.send({ message: 'FAQ questions and answers' })
+})
 
 app.get('*', (req, res) => {
   res.status(404).send({ message: 'Not Found' })
