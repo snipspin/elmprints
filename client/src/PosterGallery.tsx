@@ -10,7 +10,7 @@ function PosterGallery() {
     // Populate posterArray
     useEffect(() => {
         let newImageArray: Array<Poster> = [];
-        for (let index = 0; index < 10; index++) {
+        for (let index = 0; index < 8; index++) {
         newImageArray.push({imageURL: 'http://placekitten.com/200/200'});
         }
         console.log(newImageArray)
@@ -20,11 +20,14 @@ function PosterGallery() {
     
     return(
         <div>
-        {
-        posterArray.map((poster,i) => (
-            <PosterTile key={i} imageURL={poster.imageURL} />
-        ))
-        }
+            <h3>Bestseller</h3>
+            <div className="postersDiv">
+                {
+                posterArray.map((poster,i) => (
+                    <PosterTile key={i} imageURL={poster.imageURL} />
+                    ))
+                }
+            </div>
         </div>
     )
 }
