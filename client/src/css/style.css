@@ -83,4 +83,14 @@ nav a:hover {
   flex: 1 0 auto;
 }
 
+.postersDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.posterDiv {
+  margin: 43px;
+}
+
 /*# sourceMappingURL=style.css.map */

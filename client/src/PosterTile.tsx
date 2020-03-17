@@ -6,8 +6,9 @@ export interface PosterProps {
 
 const PosterTile: React.FC<PosterProps> = (props) => {
     return(
-        <div>
+        <div className="posterDiv">
         	<img src={props.imageURL} />
+            <h3>Price</h3>
         </div>
     )
 }
