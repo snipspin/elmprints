@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import Search from '@material-ui/icons/Search'
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
       borderRadius: 3,
       border: '2px solid black',
       height: 36,
-      width: 75
+      width: 95
     }
 }));
 export interface HeaderProps {
@@ -56,7 +56,22 @@ export interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> =(props) => {
     const classes = useStyles()
-
+    const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        localStorage.removeItem('mernToken')
+        props.updateUser(null)
+    }
+    let variableButton = (
+        <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+            Sign In
+        </Button>        
+    )
+    if(props.user) {
+        variableButton = (
+            <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" 
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleLogout(e)}>Sign out</Button>
+        )
+    }
     return(
         <div className="headerDiv">
             <header className="mdc-top-app-bar primary">
@@ -76,9 +91,7 @@ const Header: React.FC<HeaderProps> =(props) => {
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </div>
-                        <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-                            Sign In
-                        </Button>
+                        {variableButton}
                         <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
                             <ShoppingCart />
                         </Button>
