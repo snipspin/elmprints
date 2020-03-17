@@ -53,8 +53,8 @@ let userSchema = new mongoose.Schema({
   shippingAddress: addressSchema,
   billingAddress: addressSchema,
   shoppingCart: cartSchema,
-  orderHistory: cartSchema,
-  wishList: cartSchema
+  orderHistory: [itemSchema],
+  wishList: [itemSchema]
 })
 
 // hash password

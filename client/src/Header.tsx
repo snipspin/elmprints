@@ -4,6 +4,7 @@ import {Button, InputBase} from '@material-ui/core'
 import Search from '@material-ui/icons/Search'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import Tree from './img/treeIconTestSmallGreen.png'
+import {Decoded} from './App'
 // import {border} from '@material-ui/system/borders'
 
 const useStyles = makeStyles(theme => ({
@@ -49,8 +50,11 @@ const useStyles = makeStyles(theme => ({
       width: 75
     }
 }));
-
-function Header() {
+export interface HeaderProps {
+    user: Decoded | null,
+    updateUser: (newToken: string | null) => void
+}
+const Header: React.FC<HeaderProps> =(props) => {
     const classes = useStyles()
 
     return(
