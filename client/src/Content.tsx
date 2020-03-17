@@ -8,7 +8,13 @@ import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
 import styles from './styles';
+import {Decoded} from './App'
+import {User} from './dec'
 
+export interface ContentProps {
+	user: Decoded | null,
+	updateUser: (newToken: string | null) => void
+}
 const contentTheme = createMuiTheme({
 	palette: {
 		primary: {
@@ -18,13 +24,13 @@ const contentTheme = createMuiTheme({
 })
 //'#096e25'
 const useStyles =  makeStyles(theme => (styles(theme)));
-function Content() {
+const Content: React.FC<ContentProps> = (props) => {
 	const classes = useStyles();
 		return(
 				<div className={classes.root + " main"}>
 						<MuiThemeProvider theme={contentTheme}>
 								<Switch>
-									<Route exact path="/" component={SignUpCom} />
+									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/postergallery" component={PosterGallery} />
 									<Route path="/profile" component={ProfilePageCom} />
 									<Route path="/faq" component={FAQPageCom} />

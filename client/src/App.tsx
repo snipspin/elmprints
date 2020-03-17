@@ -1,21 +1,51 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import logo from './logo.svg'
 import {BrowserRouter} from 'react-router-dom'
-
+import jwtDecode from 'jwt-decode'
 import Header from './Header';
 import Content from './Content';
 import Footer from './Footer';
-
+import {User} from './dec'
 import './App.css'
 import './css/style.css'
 
+export interface Decoded extends User {
+	exp: number
+}
 
-function App() {
+const App: React.FC = () => {
+	let [user, setUser] = useState<Decoded | null>(null)
+	useEffect(() => {
+		decodeToken(null)
+	}, [])
+	const updateUser = (newToken: string | null) => {
+		if(newToken) {
+			localStorage.setItem('mernToken', newToken)
+			decodeToken(newToken)
+		} else {
+			setUser(null)
+		}
+	}
+	const decodeToken = (existingToken: string | null) => {
+		let token = existingToken || localStorage.getItem('mernToken')
+		if (token) {
+			let decoded : Decoded = jwtDecode(token)
+		
+			if(!decoded || Date.now() >= decoded.exp * 1000) {
+				console.log('expired')
+				setUser(null)
+			} else {
+				setUser(decoded)
+			}
+		} else {
+			setUser(null)
+		}
+	}
     return (
         <BrowserRouter>
             <div className="App body">
-                <Header />
-                <Content />
+                <Header updateUser={updateUser} user={user} />
+                <Content updateUser={updateUser} user={user} />
                 <Footer />
             </div>
         </BrowserRouter>
