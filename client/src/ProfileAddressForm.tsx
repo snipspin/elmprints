@@ -1,7 +1,7 @@
 import React from 'react'
 import {Grid, Box, Input, InputLabel, FormControl, Button} from '@material-ui/core'
 export interface AddressProps {
-	display: boolean
+	display: boolean,
 	onSubmit(): any
 }
 const ProfileAddressForm: React.FC<AddressProps> = (props) => {

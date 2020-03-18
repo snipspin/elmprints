@@ -1,7 +1,15 @@
 import React, {useState} from 'react'
 import {Button, Grid, Checkbox, Box} from '@material-ui/core'
 import ProfileAddressForm from './ProfileAddressForm'
-const ProfileUserInfo: React.FC<any> = (props) => {
+import {Decoded} from './App'
+import {User} from './dec' 
+import {Redirect} from 'react-router-dom' 
+export interface ProfileUserInfoProps {
+    user: Decoded | null,
+    updateUser: (newToken: string | null) => void
+}
+
+const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 	const [addressForm, setAddressForm] = useState(false)
 	const handleButtonClick = () : void => {
 		if (!addressForm) {
@@ -9,6 +17,10 @@ const ProfileUserInfo: React.FC<any> = (props) => {
 		} else {
 			setAddressForm(false)
 		}
+	}
+
+	if(!props.user) {
+		return <Redirect to="/posters" />
 	}
 	return (
 
@@ -24,11 +36,11 @@ const ProfileUserInfo: React.FC<any> = (props) => {
 				<span>Username</span>
 			</Grid>
 			<Grid item xs={12}>
-				<span>Email</span>
+				<span>{props.user.email}</span>
 			</Grid>
             <Grid item xs={12}>
             	<Box>
-        			{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick}/> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
+        			{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick} /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
             	</Box>
             </Grid>
 			<Grid item xs={12}>
