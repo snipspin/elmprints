@@ -1,24 +1,45 @@
 import React, {useState, useEffect} from 'react'
 import PosterTile from './PosterTile'
-
-import { Poster } from './dec';
+import axios, {AxiosError} from 'axios'
+import { AxiosServerError, AxiosServerResponse, ServerImageInformation} from './dec';
 
 export interface PosterRowProps {
-  rowCategory: string;
-}
+    rowCategory: string;
+  }
+
+  //rowCategory: string;
+const axiosClient = axios.create({
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    responseType: 'json',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+});
+
+const getServerImageInformation = async ():Promise<AxiosServerResponse>  => {
+  try {
+    const response = await axiosClient.get('/poster')
+    return ({statusCode: `${response.status}` , responseObject: response.data})
+  } catch (err) {
+    if (err && err.response) {
+      const axiosError = err as AxiosError<AxiosServerError>
+      return ({statusCode: `${axiosError.code}`, responseObject: [{sourceID:'', imageID:'', imagePath:''}]})
+    }
+    throw err;
+  }
+};
 
 const PosterRow: React.FC<PosterRowProps> = (props) => {
-    const [posterArray, setPosterArray] = useState<Array<Poster>>([])
-
+    const [posterArray, setPosterArray] = useState<Array<ServerImageInformation>>([])
     // Populate posterArray
     useEffect(() => {
-        let newImageArray: Array<Poster> = [];
-        for (let index = 0; index < 8; index++) {
-        newImageArray.push({imageURL: 'http://placekitten.com/200/200'});
-        }
-        console.log(newImageArray)
-        setPosterArray(newImageArray);  
-        console.log(posterArray);
+        getServerImageInformation()
+        .then(response => {
+            setPosterArray(response.responseObject)
+        }).catch(err => {
+            console.log(err);
+        })
+
     },[])
     
     return(
@@ -27,8 +48,8 @@ const PosterRow: React.FC<PosterRowProps> = (props) => {
             <div className="postersDiv">
                 {
                 posterArray.map((poster,i) => (
-                    <div className="posterRow">
-                        <PosterTile key={i} imageURL={poster.imageURL} />
+                    <div key={i} className="posterRow">
+                        <PosterTile imageURL={poster.imagePath} />
                         <h3 className="posterRowPrices">Price</h3>
                     </div>
                     ))

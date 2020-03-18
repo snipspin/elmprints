@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import PosterRow from './PosterRow'
 
-export interface PosterRowProps {
+export interface PosterGalleryProps {
     rowCategoryOne: string;
     rowCategoryTwo: string;
 }
 
-const PosterGallery: React.FC<PosterRowProps> = (props) => {
+const PosterGallery: React.FC<PosterGalleryProps> = (props) => {
     return(
         <div>
             <PosterRow rowCategory={props.rowCategoryOne} />
