@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     }
 
     // Good - they exist. Now we check the password
-    if (!user.isValidPassword(req.body.password)) {
+    if (!user.isAuthenticated(req.body.password)) {
       return res.status(401).send({ message: 'Invalid credentials' })
     }
 
