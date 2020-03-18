@@ -34,3 +34,19 @@ export interface Item {
 	price: number,
 	imageUrl: string
 }
+
+export type AxiosServerError = { 
+	code: number, 
+	description: string 
+}
+
+export type AxiosServerResponse = {
+    statusCode: string,
+    responseObject: ServerImageInformation[]
+}
+
+export type ServerImageInformation = {
+    sourceID: string,
+    imageID: string,
+    imagePath: string
+}
