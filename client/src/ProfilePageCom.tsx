@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Redirect } from 'react-router-dom'
 import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
@@ -11,6 +11,7 @@ import {User} from './dec'
         updateUser: (newToken: string | null) => void
     }    
     const ProfilePageCom: React.FC<ProfilePageComProps> = (props) => {
+
         if(!props.user) {
             return <Redirect to="/posters" />
         }
@@ -22,7 +23,7 @@ import {User} from './dec'
         		alignItems="center"
         	>   
                 <Grid item xs={6}>
-                    <ProfileUserInfo />
+                    <ProfileUserInfo user={props.user} updateUser={props.updateUser} />
         		</Grid>
                 <Grid item xs={6}>
                     <Grid

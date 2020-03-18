@@ -12,7 +12,6 @@ import { makeStyles }from '@material-ui/core/styles'
 import styles from './styles';
 import {Decoded} from './App'
 import {User} from './dec'
-
 export interface ContentProps {
 	user: Decoded | null,
 	updateUser: (newToken: string | null) => void
