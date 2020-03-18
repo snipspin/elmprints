@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import PosterGallery from './PosterGallery'
+import PosterDetail from './PosterDetail'
 import FAQPageCom from './FAQPageCom'
 import SignUpCom from './SignUpCom'
 import ProfilePageCom from './ProfilePageCom'
@@ -33,6 +34,8 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/postergallery" component={PosterGallery} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
+									<Route path="/poster/test" component={PosterDetail} />
+
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
 						</MuiThemeProvider>

@@ -1,4 +1,3 @@
-import express from 'express'
 require('dotenv').config()
 let db = require('../models')
 let jwt = require('jsonwebtoken')

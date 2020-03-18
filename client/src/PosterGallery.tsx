@@ -20,11 +20,25 @@ function PosterGallery() {
     
     return(
         <div>
-            <h3>Bestseller</h3>
+            <h3 className="posterGalleryH3">Bestsellers</h3>
             <div className="postersDiv">
                 {
                 posterArray.map((poster,i) => (
-                    <PosterTile key={i} imageURL={poster.imageURL} />
+                    <div className="posterGallery">
+                        <PosterTile key={i} imageURL={poster.imageURL} />
+                        <h3 className="posterGalleryPrices">Price</h3>
+                    </div>
+                    ))
+                }
+            </div>
+            <h3 className="posterGalleryH3">Featured</h3>
+            <div className="postersDiv">
+                {
+                posterArray.map((poster,i) => (
+                    <div className="posterGallery">
+                        <PosterTile key={i} imageURL={poster.imageURL} />
+                        <h3 className="posterGalleryPrices">Price</h3>
+                    </div>
                     ))
                 }
             </div>
