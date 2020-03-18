@@ -27,7 +27,8 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
             lastname,
             password
         }
-        fetch(`${process.env.REACT_APP_SERVER_URL}/auth/signup`, {
+        let url = `${process.env.REACT_APP_SERVER_URL}/auth/signup`
+        fetch(url, {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

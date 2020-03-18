@@ -13,3 +13,24 @@
 .searchBar {
   background-color: rgb(155, 154, 154);
 }
+
+.loginBtn {
+  border-radius: 3px;
+  border: 2px solid black;
+  height: 36px;
+  width: 95px;
+  position: relative;
+  &:hover {
+    background-color: rgba(0,0,0,.15);
+  }
+}
+
+.loginLink {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  text-decoration: none;
+  color: black;
+  height: 36px;
+  width: 95px;
+}
