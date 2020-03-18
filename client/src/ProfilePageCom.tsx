@@ -1,8 +1,19 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ProfileUserInfo from './ProfileUserInfo'
-    const ProfilePageCom: React.FC<any> = (props) => {
+import styles from './styles';
+import {Decoded} from './App'
+import {User} from './dec'    
+    export interface ProfilePageComProps {
+        user: Decoded | null,
+        updateUser: (newToken: string | null) => void
+    }    
+    const ProfilePageCom: React.FC<ProfilePageComProps> = (props) => {
+        if(!props.user) {
+            return <Redirect to="/postergallery" />
+        }
         return(
         	<Grid 
         		container 

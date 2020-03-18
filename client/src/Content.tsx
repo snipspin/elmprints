@@ -32,7 +32,7 @@ const Content: React.FC<ContentProps> = (props) => {
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/postergallery" component={PosterGallery} />
-									<Route path="/profile" component={ProfilePageCom} />
+									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
 						</MuiThemeProvider>
