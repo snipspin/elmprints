@@ -32,10 +32,11 @@ const Content: React.FC<ContentProps> = (props) => {
 						<MuiThemeProvider theme={contentTheme}>
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
-									<Route path="/postergallery" component={PosterGallery} />
+									<Route path="/posters/:id" component={PosterDetail} />
+									<Route path="/posters" render={() => <PosterGallery rowCategoryOne={'Bestsellers'} rowCategoryTwo={'Featured'} />} />
+									<Route path="/art/:id" component={PosterDetail} />
+									<Route path="/art" render={() => <PosterGallery rowCategoryOne={'Bestsellers'} rowCategoryTwo={'Featured'} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
-									<Route path="/poster/test" component={PosterDetail} />
-
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
 						</MuiThemeProvider>
