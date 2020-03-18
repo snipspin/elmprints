@@ -1,10 +1,11 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import Search from '@material-ui/icons/Search'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import Tree from './img/treeIconTestSmallGreen.png'
 import {Decoded} from './App'
+import {Redirect} from 'react-router-dom'
 // import {border} from '@material-ui/system/borders'
 
 const useStyles = makeStyles(theme => ({
@@ -54,23 +55,34 @@ export interface HeaderProps {
     user: Decoded | null,
     updateUser: (newToken: string | null) => void
 }
+
 const Header: React.FC<HeaderProps> =(props) => {
+    let [signInState, setSignInState] = useState(false)
+
+
     const classes = useStyles()
     const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         localStorage.removeItem('mernToken')
         props.updateUser(null)
     }
+    const sendToLogin = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setSignInState(true)
+    }
     let variableButton = (
-        <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-            Sign In
-        </Button>        
+        <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+        onClick={(e: MouseEvent<HTMLButtonElement>) => sendToLogin(e)}>Sign In</Button>        
     )
     if(props.user) {
         variableButton = (
             <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" 
             onClick={(e: MouseEvent<HTMLButtonElement>) => handleLogout(e)}>Sign out</Button>
         )
+    }
+    let send = null
+    if(signInState) {
+        send = <Redirect to="/login" />    
     }
     return(
         <div className="headerDiv">
@@ -109,6 +121,7 @@ const Header: React.FC<HeaderProps> =(props) => {
                     FAQ
                 </a>
             </nav>
+            {send}
         </div>
     )
 }

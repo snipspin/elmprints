@@ -13,6 +13,7 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
     let [lastname, setLastname] = useState('')
     let [message, setMessage] = useState('')
     let [password, setPassword] = useState('')
+    let [redirect, setRedirect] = useState(false)
 
     useEffect(() => {
         setMessage('')
@@ -49,12 +50,19 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
     if(props.user) {
         return <Redirect to="/profile" />
     }
+    const handleRedirect = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setRedirect(true)
+    }
+    if(redirect) {
+        return <Redirect to="/login" />
+    }
 
     return(
         <Box className="sign-up-box">
             <Box className="sign-in-from-sign-up">
                 Already have an account? Login here:
-                <Button variant="contained" color="primary" className="sign-up-to-sign-in">Sign In</Button>
+                <Button onClick={(e: MouseEvent<HTMLButtonElement>) => handleRedirect(e)} variant="contained" color="primary" className="sign-up-to-sign-in">Sign In</Button>
             </Box>
             <FormControl>
                 <InputLabel htmlFor="firstname">First Name:</InputLabel>

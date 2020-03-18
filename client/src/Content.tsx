@@ -5,6 +5,7 @@ import PosterDetail from './PosterDetail'
 import FAQPageCom from './FAQPageCom'
 import SignUpCom from './SignUpCom'
 import ProfilePageCom from './ProfilePageCom'
+import SignInWindowCom from './SignInWindowCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
@@ -32,6 +33,7 @@ const Content: React.FC<ContentProps> = (props) => {
 						<MuiThemeProvider theme={contentTheme}>
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
+									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/posters/:id" component={PosterDetail} />
 									<Route path="/posters" render={() => <PosterGallery rowCategoryOne={'Bestsellers'} rowCategoryTwo={'Featured'} />} />
 									<Route path="/art/:id" component={PosterDetail} />
