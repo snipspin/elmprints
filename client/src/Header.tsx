@@ -102,7 +102,7 @@ const Header: React.FC<HeaderProps> =(props) => {
             </header>
             <nav>
                 <Link to="/posters" className="posterNav">Posters</Link>
-                <Link to="/art:">Art</Link>
+                <Link to="/art">Art</Link>
                 <Link to="/faq" className="faqNav">FAQ</Link>
             </nav>
         </div>
