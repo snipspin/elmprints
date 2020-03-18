@@ -14,6 +14,27 @@
   background-color: #9b9a9a;
 }
 
+.loginBtn {
+  border-radius: 3px;
+  border: 2px solid black;
+  height: 36px;
+  width: 95px;
+  position: relative;
+}
+.loginBtn:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.loginLink {
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  text-decoration: none;
+  color: black;
+  height: 36px;
+  width: 95px;
+}
+
 nav {
   display: flex;
   justify-content: space-evenly;

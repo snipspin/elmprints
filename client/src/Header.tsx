@@ -66,7 +66,9 @@ const Header: React.FC<HeaderProps> =(props) => {
         props.updateUser(null)
     }
     let variableButton = (
-        <Link to="/login">Sign In</Link>        
+        <div className="loginBtn">
+            <Link to="/login" className="loginLink">Sign In</Link>        
+        </div>
     )
     if(props.user) {
         variableButton = (
@@ -102,7 +104,7 @@ const Header: React.FC<HeaderProps> =(props) => {
             </header>
             <nav>
                 <Link to="/posters" className="posterNav">Posters</Link>
-                <Link to="/art:">Art</Link>
+                <Link to="/art">Art</Link>
                 <Link to="/faq" className="faqNav">FAQ</Link>
             </nav>
         </div>
