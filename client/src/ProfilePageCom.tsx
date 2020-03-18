@@ -12,7 +12,7 @@ import {User} from './dec'
     }    
     const ProfilePageCom: React.FC<ProfilePageComProps> = (props) => {
         if(!props.user) {
-            return <Redirect to="/postergallery" />
+            return <Redirect to="/posters" />
         }
         return(
         	<Grid 

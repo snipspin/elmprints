@@ -1,11 +1,11 @@
-import React, { MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState, useEffect } from 'react'
 import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import Search from '@material-ui/icons/Search'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import Tree from './img/treeIconTestSmallGreen.png'
 import {Decoded} from './App'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 // import {border} from '@material-ui/system/borders'
 
 const useStyles = makeStyles(theme => ({
@@ -57,32 +57,22 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> =(props) => {
-    let [signInState, setSignInState] = useState(false)
-
-
+    //let [signInState, setSignInState] = useState(false)
+    //let send = null
     const classes = useStyles()
     const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         localStorage.removeItem('mernToken')
         props.updateUser(null)
     }
-    const sendToLogin = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        setSignInState(true)
-    }
     let variableButton = (
-        <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
-        onClick={(e: MouseEvent<HTMLButtonElement>) => sendToLogin(e)}>Sign In</Button>        
+        <Link to="/login">Sign In</Link>        
     )
     if(props.user) {
         variableButton = (
             <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" 
             onClick={(e: MouseEvent<HTMLButtonElement>) => handleLogout(e)}>Sign out</Button>
         )
-    }
-    let send = null
-    if(signInState) {
-        send = <Redirect to="/login" />    
     }
     return(
         <div className="headerDiv">
@@ -111,17 +101,10 @@ const Header: React.FC<HeaderProps> =(props) => {
                 </div>
             </header>
             <nav>
-                <a href="" className="posterNav">
-                    Poster
-                </a>
-                <a href="">
-                    Art
-                </a>
-                <a href="" className="faqNav">
-                    FAQ
-                </a>
+                <Link to="/posters" className="posterNav">Posters</Link>
+                <Link to="/art:">Art</Link>
+                <Link to="/faq" className="faqNav">FAQ</Link>
             </nav>
-            {send}
         </div>
     )
 }
