@@ -3,12 +3,13 @@ const axios = require('axios');
 let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
+let postersUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+let posterUrl = `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.TMDB_API_KEY}`
 
 // Get route for all posters
 router.get('/', (req, res) => {
   // Get a list of movies from TMDB
-  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
-  axios.get(url)
+  axios.get(postersUrl)
   .then(function (response) {
     // handle success
     movieDataTransformer(response.data.results)
@@ -25,8 +26,7 @@ router.get('/', (req, res) => {
 
 // Get route for one posters
 router.get('/:id', (req, res) => {
-  let url = `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.TMDB_API_KEY}`
-  axios.get(url)
+  axios.get(posterUrl)
   .then(response => {
     res.send({sourceID:1, imageID: response.data.id, imagePath: `https://image.tmdb.org/t/p/w500/${response.data.poster_path}`})
   })

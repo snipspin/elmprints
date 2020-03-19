@@ -1,14 +1,14 @@
 import React from 'react'
 
-export interface PosterProps {
+export interface ProductTileProps {
     imageURL: string;
 } 
 
-const PosterTile: React.FC<PosterProps> = (props) => {
+const ProductTile: React.FC<ProductTileProps> = (props) => {
     return(
         <div className="posterDiv">
         	<img src={props.imageURL} />
         </div>
     )
 }
-export default PosterTile
+export default ProductTile
