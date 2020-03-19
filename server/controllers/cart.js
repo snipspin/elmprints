@@ -8,6 +8,21 @@ let router = require('express').Router()
 // WARNING: If you update the user info those changes will not be reflected here
 // To avoid this, reissue a token when you update user data
 
+
+// Set your secret key. Remember to switch to your live secret key in production!
+// See your keys here: https://dashboard.stripe.com/account/apikeys
+const stripe = require('stripe')(process.env.STRIPE_SK);
+
+(async () => {
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: 1099,
+    currency: 'usd',
+    // Verify your integration in this guide by including this parameter
+    metadata: {integration_check: 'accept_a_payment'},
+  });
+})();
+
+
 // Get route for current state of cart for user
 router.get('/', (req, res) => {
   res.send({ message: 'Show current cart' })
