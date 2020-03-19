@@ -3,6 +3,7 @@ import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import Search from '@material-ui/icons/Search'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
+import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import Tree from './img/treeIconTestSmallGreen.png'
 import {Decoded} from './App'
 import {Redirect, Link} from 'react-router-dom'
@@ -99,6 +100,9 @@ const Header: React.FC<HeaderProps> =(props) => {
                         <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
                             <ShoppingCart />
                         </Button>
+                        <Link to="/profile">
+                            <AccountCircleOutlined fontSize="large" />
+                        </Link>
                     </section>
                 </div>
             </header>
