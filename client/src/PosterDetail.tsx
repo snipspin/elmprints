@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import PosterTile from './PosterTile'
+import ProductTile from './ProductTile'
 import {Button} from '@material-ui/core'
 import {createStyles, makeStyles, withStyles, Theme, fade} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -88,7 +88,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     
     return(
         <div className="posterDetail">
-            <PosterTile imageURL={testPoster.imageURL} />
+            <ProductTile imageURL={testPoster.imageURL} />
             <div className="posterDetailRight">
                 <h1>{testPoster.name}</h1>
                 <div className="priceDiv">
