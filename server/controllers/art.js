@@ -3,14 +3,14 @@ let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
 const axios = require('axios');
+let artUrl = `https://api.harvardartmuseums.org/image?q=width:>500&apikey=${process.env.HAM_API_KEY}`
 
 // If user is logged in, req.user has user data
 // NOTE: This is the user data from the time the token was issued
 
 // Get route for all art
 router.get('/', (req, res) => {
-  let url = `https://api.harvardartmuseums.org/image?q=width:>500&apikey=${process.env.HAM_API_KEY}`
-  axios.get(url)
+  axios.get(artUrl)
   .then(function (response) {
     // handle success
     artDataTransformer(response.data.records)
