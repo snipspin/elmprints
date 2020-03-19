@@ -22,7 +22,10 @@ app.use('/auth', expressJwt({
 }).unless({ // unless defines exceptions to the rule
   path: [
     { url: '/auth/login', methods: ['POST'] },
-    { url: '/auth/signup', methods: ['POST'] }
+    { url: '/auth/signup', methods: ['POST'] },
+   	{ url: '/auth/profile/billing', methods: ['PUT']},
+   	{ url: '/auth/profile/sameshipping', methods: ['PUT']},
+   	{ url: '/auth/profile/shipping', methods: ['PUT']}
   ]
 }), require('./controllers/auth'))
 
