@@ -77,7 +77,7 @@ router.put('/profile/billing', (req, res) => {
     {billingAddress: 
       {
         streetOne: req.body.streetOne,
-        streetTwo: req.body.streeTwo,
+        streetTwo: req.body.streetTwo,
         city: req.body.city,
         state: req.body.state,
         zipcode: req.body.zipcode
@@ -103,7 +103,7 @@ router.put('/profile/shipping', (req, res) => {
     {shippingAddress: 
       {
         streetOne: req.body.streetOne,
-        streetTwo: req.body.streeTwo,
+        streetTwo: req.body.streetTwo,
         city: req.body.city,
         state: req.body.state,
         zipcode: req.body.zipcode
@@ -128,7 +128,7 @@ router.put('/profile/sameshipping', (req, res) => {
   db.User.findOneAndUpdate({ email: req.body.email}, { $set :
     {shippingAddress: {
         streetOne: req.body.streetOne,
-        streetTwo: req.body.streeTwo,
+        streetTwo: req.body.streetTwo,
         city: req.body.city,
         state: req.body.state,
         zipcode: req.body.zipcode
