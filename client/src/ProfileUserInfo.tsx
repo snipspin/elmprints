@@ -22,6 +22,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 	if(!props.user) {
 		return <Redirect to="/posters" />
 	}
+
 	return (
 
 		<Grid
@@ -38,10 +39,17 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 			<Grid item xs={12}>
 				<span>{props.user.email}</span>
 			</Grid>
+			{props.user.billingAddress && <Grid item xs={12}><span>props.user.billingAddress.streetOne</span></Grid>}
+            {props.user.billingAddress && <Grid item xs={12}><span>props.user.billingAddress.streetTwo</span></Grid>}
+            {props.user.billingAddress && <Grid item xs={12}><span>props.user.billingAddress.city</span></Grid>}
+            {props.user.billingAddress && <Grid item xs={12}><span>props.user.billingAddress.state</span></Grid>}
+            {props.user.billingAddress && <Grid item xs={12}><span>props.user.billingAddress.zipcode</span></Grid>}
             <Grid item xs={12}>
-            	<Box>
-        			{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick} updateUser={props.updateUser} user={props.user} /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
-            	</Box>
+            	{!props.user.billingAddress && 
+            		<Box>
+        				{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick} updateUser={props.updateUser} user={props.user} /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
+            		</Box>
+            	}
             </Grid>
 			<Grid item xs={12}>
 				<Box>
