@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ProductTile from './ProductTile'
+import ProductPreviewTile from './ProductPreviewTile'
 import axios, {AxiosError} from 'axios'
 import { AxiosServerError, AxiosServerResponse, ServerImageInformation} from './dec';
 
@@ -51,7 +51,7 @@ const ProductRow: React.FC<ProductRowProps> = (props) => {
                 {
                 imageArray.map((image,i) => (
                     <div key={i} className="posterRow">
-                        <ProductTile imageURL={image.imagePath} />
+                        <ProductPreviewTile imageURL={image.imagePath} />
                 <h3 className="posterRowPrices">$ {image.price || 100}</h3>
                     </div>
                     ))
