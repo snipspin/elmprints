@@ -1,9 +1,11 @@
 require('dotenv').config()
 const axios = require('axios');
-let db = require('../models')
-let jwt = require('jsonwebtoken')
-let router = require('express').Router()
-let postersUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+const db = require('../models')
+const jwt = require('jsonwebtoken')
+const router = require('express').Router()
+
+const postersUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+const posterBasePrice = 24.99
 
 // Get route for all posters
 router.get('/', (req, res) => {
@@ -28,7 +30,12 @@ router.get('/:id', (req, res) => {
   let posterUrl = `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.TMDB_API_KEY}`
   axios.get(posterUrl)
   .then(response => {
-    res.send({sourceID:1, imageID: response.data.id, imagePath: `https://image.tmdb.org/t/p/w500/${response.data.poster_path}`})
+    res.send(
+      {sourceID:1, 
+        imageID: response.data.id, 
+        imagePath: `https://image.tmdb.org/t/p/w500/${response.data.poster_path}`,
+        price: calculatePrice(response.data.vote_average)
+      })
   })
   .catch(err => res.send(err))
 })
@@ -39,7 +46,12 @@ const movieDataTransformer = (inputData) => {
       if (inputData !== null) 
       {
         let outputData = inputData.map((element) => {
-          return {sourceID:1, imageID: element.id, imagePath: `https://image.tmdb.org/t/p/w500/${element.poster_path}`}
+          return {
+            sourceID:1, 
+            imageID: element.id, 
+            imagePath: `https://image.tmdb.org/t/p/w500/${element.poster_path}`,
+            price: calculatePrice(element.vote_average)
+          }
         })
         then(outputData);
       }
@@ -49,5 +61,9 @@ const movieDataTransformer = (inputData) => {
       }        
   });
 };
+
+const calculatePrice = (factor) => {
+  return Math.round(posterBasePrice * (0.1*factor) || posterBasePrice)
+}
 
 module.exports = router
