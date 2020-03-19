@@ -66,7 +66,9 @@ const Header: React.FC<HeaderProps> =(props) => {
         props.updateUser(null)
     }
     let variableButton = (
-        <Link to="/login">Sign In</Link>        
+        <div className="loginBtn">
+            <Link to="/login" className="loginLink">Sign In</Link>        
+        </div>
     )
     if(props.user) {
         variableButton = (
