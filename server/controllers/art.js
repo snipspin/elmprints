@@ -9,7 +9,7 @@ const axios = require('axios');
 
 // Get route for all art
 router.get('/', (req, res) => {
-  let url = 'https://api.harvardartmuseums.org/image?q=width:>500&apikey='+
+  let url = `https://api.harvardartmuseums.org/image?q=width:>500&apikey=${process.env.HAM_API_KEY}`
   axios.get(url)
   .then(function (response) {
     // handle success

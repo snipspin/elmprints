@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import PosterTile from './PosterTile'
+import ProductTile from './ProductTile'
 import axios, {AxiosError} from 'axios'
 import { AxiosServerError, AxiosServerResponse, ServerImageInformation} from './dec';
 
-export interface PosterRowProps {
+export interface ProductRowProps {
     rowCategory: string;
-  }
+    productCategory: string
+}
 
-  //rowCategory: string;
 const axiosClient = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
     responseType: 'json',
@@ -16,9 +16,9 @@ const axiosClient = axios.create({
     }
 });
 
-const getServerImageInformation = async ():Promise<AxiosServerResponse>  => {
+const getServerImageInformation = async (productCategory: string):Promise<AxiosServerResponse>  => {
   try {
-    const response = await axiosClient.get('/poster')
+    const response = await axiosClient.get(`/${productCategory}`)
     return ({statusCode: `${response.status}` , responseObject: response.data})
   } catch (err) {
     if (err && err.response) {
@@ -29,27 +29,29 @@ const getServerImageInformation = async ():Promise<AxiosServerResponse>  => {
   }
 };
 
-const PosterRow: React.FC<PosterRowProps> = (props) => {
-    const [posterArray, setPosterArray] = useState<Array<ServerImageInformation>>([])
-    // Populate posterArray
+const ProductRow: React.FC<ProductRowProps> = (props) => {
+    const [imageArray, setImageArray] = useState<Array<ServerImageInformation>>([])
     useEffect(() => {
-        getServerImageInformation()
-        .then(response => {
-            setPosterArray(response.responseObject)
-        }).catch(err => {
-            console.log(err);
-        })
+        async function loadImageData() {
+            await getServerImageInformation(props.productCategory)
+            .then(response => {
+                setImageArray(response.responseObject)
+            }).catch(err => {
+                console.log(err);
+            })
+        }
 
+        loadImageData();
     },[])
-    
+
     return(
         <div>
             <h3 className="posterRowH3">{props.rowCategory}</h3>
             <div className="postersDiv">
                 {
-                posterArray.map((poster,i) => (
+                imageArray.map((image,i) => (
                     <div key={i} className="posterRow">
-                        <PosterTile imageURL={poster.imagePath} />
+                        <ProductTile imageURL={image.imagePath} />
                         <h3 className="posterRowPrices">Price</h3>
                     </div>
                     ))
@@ -57,6 +59,8 @@ const PosterRow: React.FC<PosterRowProps> = (props) => {
             </div>
         </div>
     )
+    
 }
 
-export default PosterRow
+
+export default ProductRow
