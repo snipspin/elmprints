@@ -3,11 +3,11 @@ const axios = require('axios');
 let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
+let url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
 
 // Get route for all posters
 router.get('/', (req, res) => {
   // Get a list of movies from TMDB
-  let url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
   axios.get(url)
   .then(function (response) {
     // handle success
