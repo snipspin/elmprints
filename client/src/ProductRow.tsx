@@ -23,7 +23,7 @@ const getServerImageInformation = async (productCategory: string):Promise<AxiosS
   } catch (err) {
     if (err && err.response) {
       const axiosError = err as AxiosError<AxiosServerError>
-      return ({statusCode: `${axiosError.code}`, responseObject: [{sourceID:'', imageID:'', imagePath:''}]})
+      return ({statusCode: `${axiosError.code}`, responseObject: [{sourceID:'', imageID:'', imagePath:'', price: 0}]})
     }
     throw err;
   }
@@ -52,7 +52,7 @@ const ProductRow: React.FC<ProductRowProps> = (props) => {
                 imageArray.map((image,i) => (
                     <div key={i} className="posterRow">
                         <ProductTile imageURL={image.imagePath} />
-                        <h3 className="posterRowPrices">Price</h3>
+                <h3 className="posterRowPrices">$ {image.price || 100}</h3>
                     </div>
                     ))
                 }
@@ -61,6 +61,5 @@ const ProductRow: React.FC<ProductRowProps> = (props) => {
     )
     
 }
-
 
 export default ProductRow

@@ -48,5 +48,6 @@ export type AxiosServerResponse = {
 export type ServerImageInformation = {
     sourceID: string,
     imageID: string,
-    imagePath: string
+	imagePath: string,
+	price: number
 }

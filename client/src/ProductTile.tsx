@@ -1,7 +1,7 @@
 import React from 'react'
 
 export interface ProductTileProps {
-    imageURL: string;
+    imageURL: string
 } 
 
 const ProductTile: React.FC<ProductTileProps> = (props) => {
