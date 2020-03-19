@@ -69,8 +69,10 @@ router.post('/signup', (req, res) => {
     res.status(503).send({ message: 'Database or server error' })
   })
 })
-router.put('/profile', (req, res) => {
+router.put('/profile/billing', (req, res) => {
   console.log(req.body)
+
+
   db.User.findOneAndUpdate({ email: req.body.email}, { $set :
     {billingAddress: 
       {
@@ -80,7 +82,7 @@ router.put('/profile', (req, res) => {
         state: req.body.state,
         zipcode: req.body.zipcode
       }
-    }}, { new: true}).populate('billingAdress').then(updateUser => {
+    }}, { new: true}).then(updateUser => {
       console.log(updateUser)
       let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
         expiresIn: 60 * 60 * 8
@@ -90,8 +92,62 @@ router.put('/profile', (req, res) => {
     .catch(err => {
       console.log('Error updating user address', err)
       res.status(500).send(err)
-    })
+  })
+ 
 })
+router.put('/profile/shipping', (req, res) => {
+  console.log(req.body)
+
+
+  db.User.findOneAndUpdate({ email: req.body.email}, { $set :
+    {shippingAddress: 
+      {
+        streetOne: req.body.streetOne,
+        streetTwo: req.body.streeTwo,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode
+      }
+    }}, { new: true}).then(updateUser => {
+      console.log(updateUser)
+      let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8
+      })
+      res.status(200).send({token})
+    })
+    .catch(err => {
+      console.log('Error updating user address', err)
+      res.status(500).send(err)
+  })
+ 
+})
+router.put('/profile/sameshipping', (req, res) => {
+  db.User.findById(req.body.userId).then(user => {
+    console.log(user)
+  })
+  db.User.findOneAndUpdate({ email: req.body.email}, { $set :
+    {shippingAddress: {
+        streetOne: req.body.streetOne,
+        streetTwo: req.body.streeTwo,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode
+
+      }
+    }}, { new: true}).then(updateUser => {
+      console.log(updateUser)
+      let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8
+      })
+      res.status(200).send({token})
+    })
+    .catch(err => {
+      console.log('Error updating user address', err)
+      res.status(500).send(err)
+  })
+ 
+})
+
 
 // NOTE: User should be logged in to access this route
 router.get('/profile', (req, res) => {

@@ -50,8 +50,8 @@ let userSchema = new mongoose.Schema({
     minlength: 12,
     maxlength: 24
   },
-  shippingAddress: addressSchema,
   billingAddress: addressSchema,
+  shippingAddress: addressSchema,
   shoppingCart: cartSchema,
   orderHistory: [itemSchema],
   wishList: [itemSchema]
