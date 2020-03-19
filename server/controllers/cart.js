@@ -11,7 +11,8 @@ let router = require('express').Router()
 
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
-const stripe = require('stripe')(process.env.STRIPE_SK);
+router.post('/payment', (req,res) => {
+const stripe = require('stripe')(`${process.env.STRIPE_SK}`)
 
 (async () => {
   const paymentIntent = await stripe.paymentIntents.create({
@@ -19,9 +20,10 @@ const stripe = require('stripe')(process.env.STRIPE_SK);
     currency: 'usd',
     // Verify your integration in this guide by including this parameter
     metadata: {integration_check: 'accept_a_payment'},
-  });
-})();
-
+  })
+  res.send(paymentIntent)
+})()
+})
 
 // Get route for current state of cart for user
 router.get('/', (req, res) => {
