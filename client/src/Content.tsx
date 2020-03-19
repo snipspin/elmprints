@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, Switch} from 'react-router-dom'
-import PosterGallery from './PosterGallery'
+import ArtGalleryCom from './ArtGalleryCom'
+import PosterGalleryCom from './PosterGalleryCom'
 import PosterDetail from './PosterDetail'
 import FAQPageCom from './FAQPageCom'
 import SignUpCom from './SignUpCom'
@@ -34,9 +35,9 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/posters/:id" component={PosterDetail} />
-									<Route path="/posters" render={() => <PosterGallery rowCategoryOne={'Bestsellers'} rowCategoryTwo={'Featured'} />} />
+									<Route path="/posters" render={() => <PosterGalleryCom />} />
 									<Route path="/art/:id" component={PosterDetail} />
-									<Route path="/art" render={() => <PosterGallery rowCategoryOne={'Bestsellers'} rowCategoryTwo={'Featured'} />} />
+									<Route path="/art" render={() => <ArtGalleryCom />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
