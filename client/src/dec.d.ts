@@ -51,3 +51,9 @@ export type ServerImageInformation = {
 	imagePath: string,
 	price: number
 }
+export type ProductInformation = {
+	sourceID: string,
+	imageID: string,
+	imagePath: string,
+	price: string
+}
