@@ -2,6 +2,8 @@ import React, {useEffect, useState, ChangeEvent, MouseEvent } from 'react'
 import {Grid, Box, Input, InputLabel, FormControl, Button} from '@material-ui/core'
 import {Decoded} from './App'
 export interface AddressProps {
+	addressType: boolean, //if false address to add is billing and true is shipping
+	sameAddress: boolean,
 	display: boolean,
 	onSubmit(): any
 	user: Decoded,
@@ -22,7 +24,16 @@ const ProfileAddressForm: React.FC<AddressProps> = (props) => {
 	const handleSubmit = (e : MouseEvent<HTMLButtonElement>) : void => {
 		e.preventDefault()
 		let email = props.user.email
+		let addressType = props.addressType ? 'shipping' : 'billing'
+		if(props.sameAddress && props.user.billingAddress) {
+			setStreetOne(props.user.billingAddress.streetOne)
+			setStreetTwo(props.user.billingAddress.streetTwo)
+			setCity(props.user.billingAddress.city)
+			setState(props.user.billingAddress.state)
+			setZipcode(props.user.billingAddress.zipcode)
+		}
 		let data: object = {
+			addressType,
 			email,
 			streetOne,
 			streetTwo,
@@ -63,8 +74,10 @@ const ProfileAddressForm: React.FC<AddressProps> = (props) => {
 				<Box>
 					<FormControl>
 						<InputLabel htmlFor="streetOne">Address Line 1:</InputLabel>
-						<Input name="streetOne" aria-describedby="address line one form" 
-						onChange={(e: ChangeEvent<HTMLInputElement>) => setStreetOne(e.currentTarget.value)} />
+						{props.sameAddress ? <Input name="streetOne" value={props.user.billingAddress.streetOne} aria-describedby="address line one form" /> : 
+							<Input name="streetOne" aria-describedby="address line one form" 
+							onChange={(e: ChangeEvent<HTMLInputElement>) => setStreetOne(e.currentTarget.value)} />
+						}
 					</FormControl>
 				</Box>
 			</Grid>
