@@ -33,7 +33,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 
 		>
 			<Grid item xs={12}>
-				<span>Username</span>
+				<span>{props.user.firstname}  {props.user.lastname}</span>
 			</Grid>
 			<Grid item xs={12}>
 				<span>{props.user.email}</span>

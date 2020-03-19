@@ -69,15 +69,12 @@ router.post('/signup', (req, res) => {
     res.status(503).send({ message: 'Database or server error' })
   })
 })
+router.put('/profile', (req, res) => {
+  db.User.findOne({ email: req.body.email})
+})
 
 // NOTE: User should be logged in to access this route
 router.get('/profile', (req, res) => {
-  db.User.findOne({ email: req.params.email})
-  .then(user => {
-    if(user) {
-      return res.send(user)
-    }
-  }).catch(err => res.send(err))
   // The user is logged in, so req.user should have data!
   // TODO: Anything you want here!
 
