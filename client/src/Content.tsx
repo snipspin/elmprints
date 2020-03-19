@@ -27,7 +27,7 @@ const contentTheme = createMuiTheme({
 		}
 	}
 })
-//'#096e25'
+
 const useStyles =  makeStyles(theme => (styles(theme)));
 const Content: React.FC<ContentProps> = (props) => {
 	const classes = useStyles();
