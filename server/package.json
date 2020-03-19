@@ -22,6 +22,7 @@
     "mongoose": "^5.8.9",
     "morgan": "^1.9.1",
     "rowdy-logger": "^1.0.2",
+    "stripe": "^8.32.0",
     "yarn": "^1.22.4"
   }
 }

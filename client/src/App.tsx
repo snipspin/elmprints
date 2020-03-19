@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import logo from './logo.svg'
 import {BrowserRouter} from 'react-router-dom'
 import jwtDecode from 'jwt-decode'
 import Header from './Header';
@@ -45,7 +44,9 @@ const App: React.FC = () => {
         <BrowserRouter>
             <div className="App body">
                 <Header updateUser={updateUser} user={user} />
-                <Content updateUser={updateUser} user={user} />
+								<div className="content">
+                	<Content updateUser={updateUser} user={user} />
+								</div>
                 <Footer />
             </div>
         </BrowserRouter>
