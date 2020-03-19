@@ -40,7 +40,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 			</Grid>
             <Grid item xs={12}>
             	<Box>
-        			{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick} /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
+        			{addressForm ? <ProfileAddressForm display={addressForm} onSubmit={handleButtonClick} updateUser={props.updateUser} user={props.user} /> : <Button variant="contained" color="primary" onClick={handleButtonClick}>Add billing address</Button>}
             	</Box>
             </Grid>
 			<Grid item xs={12}>

@@ -70,7 +70,27 @@ router.post('/signup', (req, res) => {
   })
 })
 router.put('/profile', (req, res) => {
-  db.User.findOne({ email: req.body.email})
+  console.log(req.body)
+  db.User.findOneAndUpdate({ email: req.body.email}, { $set :
+    {billingAddress: 
+      {
+        streetOne: req.body.streetOne,
+        streetTwo: req.body.streeTwo,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode
+      }
+    }}, { new: true}).populate('billingAdress').then(updateUser => {
+      console.log(updateUser)
+      let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8
+      })
+      res.status(200).send({token})
+    })
+    .catch(err => {
+      console.log('Error updating user address', err)
+      res.status(500).send(err)
+    })
 })
 
 // NOTE: User should be logged in to access this route

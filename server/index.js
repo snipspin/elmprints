@@ -23,6 +23,7 @@ app.use('/auth', expressJwt({
   path: [
     { url: '/auth/login', methods: ['POST'] },
     { url: '/auth/signup', methods: ['POST'] },
+    { url: '/auth/profile', methods: ['PUT']}
   ]
 }), require('./controllers/auth'))
 
