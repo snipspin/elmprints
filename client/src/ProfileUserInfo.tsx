@@ -92,7 +92,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 			</Grid>
 			{props.user.billingAddress && <Grid item xs={12}><h3>Billing Address</h3></Grid>}
 			{props.user.billingAddress && <Grid item xs={12}><span>{props.user.billingAddress.streetOne}</span></Grid>}
-            {(props.user.billingAddress && props.user.billingAddress.streetTwo) && <Grid item xs={12}><span>{props.user.billingAddress.streetTwo}</span></Grid>}
+            {props.user.billingAddress && <Grid item xs={12}><span>{props.user.billingAddress.streetTwo}</span></Grid>}
             {props.user.billingAddress && <Grid item xs={12}><span>{props.user.billingAddress.city}</span></Grid>}
             {props.user.billingAddress && <Grid item xs={12}><span>{props.user.billingAddress.state}</span></Grid>}
             {props.user.billingAddress && <Grid item xs={12}><span>{props.user.billingAddress.zipcode}</span></Grid>}
@@ -125,7 +125,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
         	}
         	{props.user.shippingAddress && <Grid item xs={12}><h3>Shipping Address</h3></Grid>}
 			{props.user.shippingAddress && <Grid item xs={12}><span>{props.user.shippingAddress.streetOne}</span></Grid>}
-            {(props.user.shippingAddress && props.user.shippingAddress.streetTwo) && <Grid item xs={12}><span>{props.user.shippingAddress.streetTwo}</span></Grid>}
+            {props.user.shippingAddress && <Grid item xs={12}><span>{props.user.shippingAddress.streetTwo}</span></Grid>}
             {props.user.shippingAddress && <Grid item xs={12}><span>{props.user.shippingAddress.city}</span></Grid>}
             {props.user.shippingAddress && <Grid item xs={12}><span>{props.user.shippingAddress.state}</span></Grid>}
             {props.user.shippingAddress && <Grid item xs={12}><span>{props.user.shippingAddress.zipcode}</span></Grid>}

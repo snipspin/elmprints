@@ -41,9 +41,9 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/posters" render={() => <PosterGalleryCom />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom />} />
-									<Route path="/cart" render={() => <ShowCartPageCom />} />
 									<Route path="/cart/payment" render={() => <PaymentPageCom />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom />} />
+									<Route path="/cart" render={() => <ShowCartPageCom />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
