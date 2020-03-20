@@ -31,7 +31,7 @@ const contentTheme = createMuiTheme({
 const useStyles =  makeStyles(theme => (styles(theme)));
 const Content: React.FC<ContentProps> = (props) => {
 
-	let [currentProduct, setCurrentProduct] = useState<ProductInformation>({sourceID:'', imageID:'', imagePath:'', price: ''})
+	let [currentProduct, setCurrentProduct] = useState<ProductInformation>({title: '', sourceID:'', imageID:'', imagePath:'', price: ''})
 	const classes = useStyles();
 		return(
 				<div className={classes.root + " main"}>

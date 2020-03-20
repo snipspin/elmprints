@@ -30,8 +30,11 @@ router.get('/:id', (req, res) => {
   let posterUrl = `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${process.env.TMDB_API_KEY}`
   axios.get(posterUrl)
   .then(response => {
+    console.log(response.data.title)
+    console.log('this is the axios response information for a single poster')
     res.send(
-      {sourceID:1, 
+      {title: response.data.title,
+        sourceID:1, 
         imageID: response.data.id, 
         imagePath: `https://image.tmdb.org/t/p/w500/${response.data.poster_path}`,
         price: calculatePrice(response.data.vote_average)
@@ -47,6 +50,7 @@ const movieDataTransformer = (inputData) => {
       {
         let outputData = inputData.map((element) => {
           return {
+            title: element.title,
             sourceID:1, 
             imageID: element.id, 
             imagePath: `https://image.tmdb.org/t/p/w500/${element.poster_path}`,

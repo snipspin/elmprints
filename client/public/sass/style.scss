@@ -5,15 +5,16 @@
 
 .body {
   display: flex;
-  min-height: 100vh;
+  // min-height: 100vh;
   flex-direction: column;
 }
 
 .main {
   flex: 1 0 auto;
-  min-height: 100vh;
+  min-height: 79vh;
 }
 
-@import 'components/posterrow';
+@import 'components/productrow';
 @import 'components/posterdetail';
 @import 'components/poster';
+@import 'components/producttile';
