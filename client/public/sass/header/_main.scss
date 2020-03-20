@@ -37,6 +37,17 @@
 
 .brandingDiv {
   position: absolute;
+  display: flex;
   left: 10px;
-  top: 10px;
+}
+
+.brandingName {
+  line-height: 0.5em;
+  padding-left: 45px;
+}
+
+.brandingIcon {
+  height: 50px;
+  width: 50px;
+  margin-top: 10px;
 }
