@@ -2,6 +2,7 @@ require('dotenv').config()
 let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
+const stripe = require('stripe')(process.env.STRIPE_SK)
 
 // If user is logged in, req.user has user data
 // NOTE: This is the user data from the time the token was issued
@@ -12,15 +13,16 @@ let router = require('express').Router()
 // Set your secret key. Remember to switch to your live secret key in production!
 // See your keys here: https://dashboard.stripe.com/account/apikeys
 router.post('/payment', (req,res) => {
-const stripe = require('stripe')(`${process.env.STRIPE_SK}`)
-
+  console.log(req.body);
+  
 (async () => {
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1099,
+    amount: req.body.cart[0].price * 100,
     currency: 'usd',
     // Verify your integration in this guide by including this parameter
     metadata: {integration_check: 'accept_a_payment'},
   })
+  console.log(paymentIntent)
   res.send(paymentIntent)
 })()
 })

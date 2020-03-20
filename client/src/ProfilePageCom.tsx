@@ -81,17 +81,5 @@ import {User} from './dec'
         )
         	
     }
-           /*
-                <Grid 
-                    item xs={12}
-                    direction="column"
-                    justify="space-between"
-                    alignItems="baseline"
-                >
-                    <span>Your Cart</span>
-
-                </Grid>
-                </Grid>
-            </Grid>
-            */
+    
 export default ProfilePageCom

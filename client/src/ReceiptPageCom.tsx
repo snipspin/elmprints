@@ -1,9 +1,16 @@
 import React from 'react'
+import {ProductInformation} from './dec'
+import {Decoded} from './App'
 
-    function ReceiptPageCom() {
+export type ReceiptPageComProps = {
+    user: Decoded | null,
+    currentProduct: ProductInformation 
+}
+
+const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
         return(
             <div>
-                Receipt page
+                {ReceiptPageCom}
             </div>
         )
     }

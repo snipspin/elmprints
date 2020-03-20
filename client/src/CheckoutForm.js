@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import {Redirect} from 'react-router-dom'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
 
 import CardSection from './CardSection';
 
-export default function CheckoutForm() {
+export default function CheckoutForm(props) {
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false)
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -19,8 +22,10 @@ export default function CheckoutForm() {
       return;
     }
 
-    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment`, 
-    {amount: 1500, cardType: "card"}) // We pay 15€ with a credit card
+    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment`,
+    { cart: [props.currentProduct]})
+    //{amount: 1500, cardType: "card"}) 
+    // We pay 15€ with a credit card
     console.log(data.data.client_secret)
     const result = await stripe.confirmCardPayment(data.data.client_secret , {
       payment_method: {
@@ -37,14 +42,15 @@ export default function CheckoutForm() {
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        // Show a success message to your customer
-        // There's a risk of the customer closing the window before callback
-        // execution. Set up a webhook or plugin to listen for the
-        // payment_intent.succeeded event that handles any business critical
-        // post-payment actions.
+       // Successfully purchased
+      setPurchaseSuccess(true)
       }
     }
   };
+
+  if(purchaseSuccess) {
+    return (<Redirect to="/cart/receipt" />)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
