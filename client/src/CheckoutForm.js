@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom'
+import {Box, Grid, Checkbox, FormControlLabel} from '@material-ui/core'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
+import ProductTile from './ProductTile'
 
 import CardSection from './CardSection';
-
 export default function CheckoutForm(props) {
   const [purchaseSuccess, setPurchaseSuccess] = useState(false)
 
@@ -47,15 +48,55 @@ export default function CheckoutForm(props) {
       }
     }
   };
-
+  if(!props.user) {
+    return <Redirect to="/" />
+  }
   if(purchaseSuccess) {
     return (<Redirect to="/cart/receipt" />)
   }
-
+  const nameLabel = `Name for order: ${props.user.firstname} ${props.user.lastname}`
   return (
-    <form onSubmit={handleSubmit}>
-      <CardSection />
-      <button disabled={!stripe}>Confirm order</button>
-    </form>
+    <Grid
+      container
+      spacing={1}
+      justify="space-between"
+    >
+      <Grid item xs={6}>
+        <ProductTile imageURL={props.currentProduct.imagePath} />
+      </Grid>
+      <Grid item xs={6}>
+        <Grid container 
+              spacing={1}
+              justify="space-between"
+        >
+          <Grid item xs={3}></Grid>
+          <Grid item xs={4}>{nameLabel}</Grid>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={12}>
+            <FormControlLabel label="Confirm cardholder name:" value="start" 
+            control={<Checkbox value="name-confirm-checkbox" 
+            inputProps={{'aria-label': 'Confirm name for order'}} />}
+             labelPlacement="start" />
+          </Grid>
+          <Grid item xs={12}>Shipping address:</Grid>
+          <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
+          {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
+          <Grid item xs={12}>
+            {props.user.shippingAddress.city}
+            {props.user.shippingAddress.state}
+            {props.user.shippingAddress.zipcode}
+          </Grid>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={8}>  
+                <form onSubmit={handleSubmit}>
+                  <CardSection />
+                  <button disabled={!stripe}>Confirm order</button>
+                 </form>
+    
+          </Grid>
+          <Grid item xs={2}></Grid>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
