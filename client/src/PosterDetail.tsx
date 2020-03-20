@@ -8,6 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import {ProductInformation} from './dec'
+import {Decoded} from './App'
+import {Link} from 'react-router-dom'
 
 // Notes from Pete on May 17 2020:
 // interface below created to test showing more information than the Poster interface in the declaration file (as used in postergallery)
@@ -16,6 +18,7 @@ import {ProductInformation} from './dec'
 // if this is moved to dec file, then this import could be used as 
 // import { Poster } from './dec';
 export interface PosterProps {
+  user: Decoded | null,
   currentProduct: ProductInformation
 }
 
@@ -77,7 +80,12 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setQuantity(event.target.value as string);
     };
-    
+    const purchaseButton = (props.user)? (
+      <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Add to Cart</Button>
+    ) :
+    (
+      <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
+    )
     return(
         <div className="posterDetail">
             <ProductTile imageURL={props.currentProduct.imagePath} />
@@ -101,7 +109,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
                     </FormControl>
                 </div>
                 <div>
-                    <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Add to Cart</Button>
+                {purchaseButton}
                 </div>
                 <h2>Description</h2>
            
