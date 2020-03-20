@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom'
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
@@ -6,6 +6,8 @@ import axios from 'axios'
 import CardSection from './CardSection';
 
 export default function CheckoutForm(props) {
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false)
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -40,11 +42,15 @@ export default function CheckoutForm(props) {
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        // Successfully purchased
-        return <Redirect to="/cart/receipt" />
+       // Successfully purchased
+      setPurchaseSuccess(true)
       }
     }
   };
+
+  if(purchaseSuccess) {
+    return (<Redirect to="/cart/receipt" />)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
