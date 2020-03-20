@@ -79,38 +79,42 @@ const Header: React.FC<HeaderProps> =(props) => {
     }
     return(
         <div className="headerDiv">
-            <header className="mdc-top-app-bar primary">
-                <div className="mdc-top-app-bar__row">
-                    <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start header-top">
-                        <img src={Tree} alt="Tree Icon"></img>
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <Search />
+            <div className="brandingDiv">
+                <img src={Tree} alt="Tree Icon"></img>
+            </div>
+            <div className="headerMain">
+                <header className="mdc-top-app-bar primary">
+                    <div className="mdc-top-app-bar__row">
+                        <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start header-top">
+                            <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <Search />
+                                </div>
+                                <InputBase
+                                    placeholder="Search…"
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
                             </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput
-                                }}
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </div>
-                        {variableButton}
-                        <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-                            <ShoppingCart />
-                        </Button>
-                        <Link to="/profile">
-                            <AccountCircleOutlined fontSize="large" />
-                        </Link>
-                    </section>
-                </div>
-            </header>
-            <nav>
-                <Link to="/posters" className="posterNav">Posters</Link>
-                <Link to="/art">Art</Link>
-                <Link to="/faq" className="faqNav">FAQ</Link>
-            </nav>
+                            {variableButton}
+                            <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+                                <ShoppingCart />
+                            </Button>
+                            <Link to="/profile">
+                                <AccountCircleOutlined fontSize="large" />
+                            </Link>
+                        </section>
+                    </div>
+                </header>
+                <nav>
+                    <Link to="/posters" className="posterNav">Posters</Link>
+                    <Link to="/art">Art</Link>
+                    <Link to="/faq" className="faqNav">FAQ</Link>
+                </nav>
+            </div>
         </div>
     )
 }
