@@ -35,6 +35,12 @@
   width: 95px;
 }
 
+.brandingDiv {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
 nav {
   display: flex;
   justify-content: space-evenly;
@@ -55,12 +61,12 @@ nav a:hover {
   background-color: #908e8e;
 }
 
-.posterNav {
+nav a:first-child {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
 
-.faqNav {
+nav a:last-child {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
