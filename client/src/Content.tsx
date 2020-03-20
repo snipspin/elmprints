@@ -10,6 +10,7 @@ import SignInWindowCom from './SignInWindowCom'
 import ShowCartPageCom from './ShowCartPageCom'
 import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
+import SearchResultsCom from './SearchResultsCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
@@ -19,6 +20,7 @@ import {User, ProductInformation} from './dec'
 export interface ContentProps {
 	user: Decoded | null,
 	updateUser: (newToken: string | null) => void
+	searchTerm: string
 }
 const contentTheme = createMuiTheme({
 	palette: {
@@ -48,6 +50,7 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
+									<Route path="/search" render={() => <SearchResultsCom searchTerm={props.searchTerm} />} />
 								</Switch>
 						</MuiThemeProvider>
 				</div>

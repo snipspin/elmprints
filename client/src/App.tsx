@@ -14,6 +14,8 @@ export interface Decoded extends User {
 
 const App: React.FC = () => {
 	let [user, setUser] = useState<Decoded | null>(null)
+	const [searchTerm, setSearchTerm] = useState<string>('')
+
 	useEffect(() => {
 		decodeToken(null)
 	}, [])
@@ -43,9 +45,9 @@ const App: React.FC = () => {
     return (
         <BrowserRouter>
             <div className="App body">
-                <Header updateUser={updateUser} user={user} />
+                <Header updateUser={updateUser} user={user} setSearchTerm={setSearchTerm} />
 								<div className="content">
-                	<Content updateUser={updateUser} user={user} />
+                	<Content updateUser={updateUser} user={user} searchTerm={searchTerm} />
 								</div>
                 <Footer />
             </div>
