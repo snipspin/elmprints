@@ -8,7 +8,6 @@ export interface ProductPreviewTileProps {
 } 
 
 const ProductPreviewTile: React.FC<ProductPreviewTileProps> = (props) => {
-	console.log('I got here')
     let link: string = "posters/" + props.image.imageID
     const handleProductClick = (e: MouseEvent<HTMLImageElement>) => {
     	let sendProductInformation: ProductInformation = {

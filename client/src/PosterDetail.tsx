@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, MouseEvent} from 'react'
 import ProductTile from './ProductTile'
 import {Button} from '@material-ui/core'
 import {createStyles, makeStyles, withStyles, Theme, fade} from '@material-ui/core/styles';
@@ -80,8 +80,12 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setQuantity(event.target.value as string);
     };
+    const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      return (<Link to="/cart/payment" className="loginLinkProduct">Purchase</Link>)
+    }
     const purchaseButton = (props.user)? (
-      <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Add to Cart</Button>
+      <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"><Link to="/cart/payment" className="loginLinkProduct">Buy</Link></Button>
     ) :
     (
       <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
