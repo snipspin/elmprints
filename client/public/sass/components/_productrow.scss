@@ -1,0 +1,28 @@
+.productsMainRowDiv {
+  max-width: 1000px;
+  margin: 50px auto;
+  border: 1px solid black;
+  box-shadow: 8px 7px 7px #888888;
+}
+
+.productsDiv {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.productRow {
+  display: block;
+  margin-top: 0;
+  min-width: 25%;
+}
+
+.productRowH3 {
+  text-align: left;
+  margin: 41px;
+  margin-bottom: 20px;
+}
+
+.productRowPrices {
+  margin-bottom: 50px;
+}
