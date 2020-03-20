@@ -46,12 +46,14 @@ export type AxiosServerResponse = {
 }
 
 export type ServerImageInformation = {
-    sourceID: string,
-    imageID: string,
+	title: string,
+	sourceID: string,
+	imageID: string,
 	imagePath: string,
 	price: number
 }
 export type ProductInformation = {
+	title: string,
 	sourceID: string,
 	imageID: string,
 	imagePath: string,

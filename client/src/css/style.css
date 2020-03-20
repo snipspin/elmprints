@@ -102,13 +102,12 @@ nav a:last-child {
 
 .body {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
 }
 
 .main {
   flex: 1 0 auto;
-  min-height: 100vh;
+  min-height: 79vh;
 }
 
 .postersDiv {
@@ -165,6 +164,10 @@ nav a:last-child {
 
 .posterDiv {
   margin: 0 30px;
+}
+
+.posterPreviewImg {
+  max-width: 70vw;
 }
 
 /*# sourceMappingURL=style.css.map */

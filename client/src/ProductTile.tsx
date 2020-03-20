@@ -7,7 +7,7 @@ export interface ProductTileProps {
 const ProductTile: React.FC<ProductTileProps> = (props) => {
     return(
         <div className="posterDiv">
-        	<img src={props.imageURL} />
+        	<img className="posterPreviewImg" src={props.imageURL} />
         </div>
     )
 }
