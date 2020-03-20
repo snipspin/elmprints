@@ -2,8 +2,7 @@ import React from 'react'
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
-
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
+const stripePromise = loadStripe('pk_test_Q4YXjg3hCRD07OqrEqj9g7wf00vVQBzKb9');
 
 function PaymentPageCom() {
     return(

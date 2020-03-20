@@ -7,6 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
+import {ProductInformation} from './dec'
 
 // Notes from Pete on May 17 2020:
 // interface below created to test showing more information than the Poster interface in the declaration file (as used in postergallery)
@@ -15,18 +16,9 @@ import InputBase from '@material-ui/core/InputBase';
 // if this is moved to dec file, then this import could be used as 
 // import { Poster } from './dec';
 export interface PosterProps {
-  imageURL: string;
-  name: string;
-  price: number;
-  description: string;
+  currentProduct: ProductInformation
 }
 
-const testPoster: PosterProps = {
-  imageURL: 'https://image.tmdb.org/t/p/w500/xBHvZcjRiWyobQ9kxBhO6B2dtRI.jpg',
-  name: 'Ad Astra',
-  price: 30,
-  description: 'Dimensions are 1 foot by 3 feet'
-}
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -88,11 +80,11 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     
     return(
         <div className="posterDetail">
-            <ProductTile imageURL={testPoster.imageURL} />
+            <ProductTile imageURL={props.currentProduct.imagePath} />
             <div className="posterDetailRight">
-                <h1>{testPoster.name}</h1>
+         
                 <div className="priceDiv">
-                    <h4 className="posterDetailPrice">${testPoster.price}</h4>
+                    <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
                     <FormControl className={classes.margin}>
                         <InputLabel id="demo-customized-select-label">Qty</InputLabel>
                         <Select
@@ -112,7 +104,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
                     <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Add to Cart</Button>
                 </div>
                 <h2>Description</h2>
-                <h4>{testPoster.description}</h4>
+           
             </div>
         </div>
     )

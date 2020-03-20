@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Route, Switch} from 'react-router-dom'
 import ArtGalleryCom from './ArtGalleryCom'
 import PosterGalleryCom from './PosterGalleryCom'
@@ -15,7 +15,7 @@ import {green} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
 import styles from './styles';
 import {Decoded} from './App'
-import {User} from './dec'
+import {User, ProductInformation} from './dec'
 export interface ContentProps {
 	user: Decoded | null,
 	updateUser: (newToken: string | null) => void
@@ -27,9 +27,11 @@ const contentTheme = createMuiTheme({
 		}
 	}
 })
-//'#096e25'
+
 const useStyles =  makeStyles(theme => (styles(theme)));
 const Content: React.FC<ContentProps> = (props) => {
+
+	let [currentProduct, setCurrentProduct] = useState<ProductInformation>({sourceID:'', imageID:'', imagePath:'', price: ''})
 	const classes = useStyles();
 		return(
 				<div className={classes.root + " main"}>
@@ -37,10 +39,10 @@ const Content: React.FC<ContentProps> = (props) => {
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
-									<Route path="/posters/:id" component={PosterDetail} />
-									<Route path="/posters" render={() => <PosterGalleryCom />} />
+									<Route path="/posters/:id" render={() => <PosterDetail currentProduct={currentProduct} />} />
+									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
-									<Route path="/art" render={() => <ArtGalleryCom />} />
+									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/cart/payment" render={() => <PaymentPageCom />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom />} />
 									<Route path="/cart" render={() => <ShowCartPageCom />} />

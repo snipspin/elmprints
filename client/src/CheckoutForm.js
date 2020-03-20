@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import axios from 'axios'
 
 import CardSection from './CardSection';
 
@@ -18,7 +19,10 @@ export default function CheckoutForm() {
       return;
     }
 
-    const result = await stripe.confirmCardPayment('{CLIENT_SECRET}', {
+    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment`, 
+    {amount: 1500, cardType: "card"}) // We pay 15€ with a credit card
+    console.log(data.data.client_secret)
+    const result = await stripe.confirmCardPayment(data.data.client_secret , {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {

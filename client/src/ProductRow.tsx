@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import ProductPreviewTile from './ProductPreviewTile'
 import axios, {AxiosError} from 'axios'
-import { AxiosServerError, AxiosServerResponse, ServerImageInformation} from './dec';
+import { AxiosServerError, AxiosServerResponse, ServerImageInformation, ProductInformation} from './dec';
 
 export interface ProductRowProps {
     rowCategory: string;
     productCategory: string
+    currentProduct: ProductInformation,
+    setCurrentProduct(value: ProductInformation): void 
 }
 
 const axiosClient = axios.create({
@@ -51,7 +53,7 @@ const ProductRow: React.FC<ProductRowProps> = (props) => {
                 {
                 imageArray.map((image,i) => (
                     <div key={i} className="posterRow">
-                        <ProductPreviewTile imageURL={image.imagePath} />
+                        <ProductPreviewTile currentProduct={props.currentProduct} image={image} setCurrentProduct={props.setCurrentProduct} />
                 <h3 className="posterRowPrices">$ {image.price || 100}</h3>
                     </div>
                     ))

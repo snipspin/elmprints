@@ -45,7 +45,12 @@ const artDataTransformer = (inputData) => {
       if (inputData !== null) 
       {
         let outputData = inputData.map((element) => {
-          return {sourceID:2, imageID: element.id, imagePath: element.baseimageurl}
+          return {
+            sourceID:2, 
+            imageID: element.id, 
+            imagePath: element.baseimageurl,
+            price: calculatePrice(1)
+          }
         })
         then(outputData);
       }
@@ -55,6 +60,10 @@ const artDataTransformer = (inputData) => {
       }        
   });
 };
+
+const calculatePrice = (factor) => {
+  return 39.99
+}
 
 
 module.exports = router
