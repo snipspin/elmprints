@@ -33,12 +33,7 @@ const contentTheme = createMuiTheme({
 const useStyles =  makeStyles(theme => (styles(theme)));
 const Content: React.FC<ContentProps> = (props) => {
 
-<<<<<<< HEAD
 	let [currentProduct, setCurrentProduct] = useState<ProductInformation>({title: '', sourceID:'', imageID:'', imagePath:'', price: ''})
-=======
-	let [currentProduct, setCurrentProduct] = useState<ProductInformation>({sourceID:'', imageID:'', imagePath:'', price: ''})
-	
->>>>>>> moved search bar into its own component
 	const classes = useStyles();
 		return(
 				<div className={classes.root + " main"}>

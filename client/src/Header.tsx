@@ -71,7 +71,6 @@ const Header: React.FC<HeaderProps> =(props) => {
     }
 
     const handleSearchTermChange = (value:string):any => {
-        console.log('Handle SEARCH ' + value)
         props.setSearchTerm(value)
         setRedirect(true)
     }
