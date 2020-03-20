@@ -15,7 +15,7 @@ const PaymentPageCom: React.FC<PaymentPageProps> = (props) => {
         <div>
             PaymentPageCom
             <Elements stripe={stripePromise}>
-                <CheckoutForm />
+                <CheckoutForm currentProduct={props.currentProduct} />
             </Elements>
         </div>
     )
