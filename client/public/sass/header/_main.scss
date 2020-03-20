@@ -2,6 +2,7 @@
   box-shadow: 10px 5px 9px #888888;
   background: #947758;
   padding-top: 2px;
+  display: flex;
 }
 
 .header-top {
@@ -36,18 +37,20 @@
 }
 
 .brandingDiv {
-  position: absolute;
   display: flex;
   left: 10px;
 }
 
 .brandingName {
   line-height: 0.5em;
-  padding-left: 45px;
 }
 
 .brandingIcon {
   height: 50px;
   width: 50px;
-  margin-top: 10px;
+  margin: 10px;
+}
+
+.headerMain {
+  flex: 1;
 }
