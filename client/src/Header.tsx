@@ -7,7 +7,7 @@ import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import Tree from './img/treeIconTestSmallGreen.png'
 import {Decoded} from './App'
 import {Redirect, Link} from 'react-router-dom'
-// import {border} from '@material-ui/system/borders'
+import SearchBarCom from './SearchBarCom'
 
 const useStyles = makeStyles(theme => ({
     search: {
@@ -56,18 +56,25 @@ const useStyles = makeStyles(theme => ({
 }));
 export interface HeaderProps {
     user: Decoded | null,
-    updateUser: (newToken: string | null) => void
+    updateUser: (newToken: string | null) => void,
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Header: React.FC<HeaderProps> =(props) => {
-    //let [signInState, setSignInState] = useState(false)
-    //let send = null
+    const [redirect, setRedirect] = useState<boolean>(false)
     const classes = useStyles()
+    
     const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         localStorage.removeItem('mernToken')
         props.updateUser(null)
     }
+
+    const handleSearchTermChange = (value:string):any => {
+        props.setSearchTerm(value)
+        setRedirect(true)
+    }
+
     let variableButton = (
         <div className="loginBtn">
             <Link to="/login" className="loginLink">Sign In</Link>        
@@ -78,6 +85,10 @@ const Header: React.FC<HeaderProps> =(props) => {
             <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" 
             onClick={(e: MouseEvent<HTMLButtonElement>) => handleLogout(e)}>Sign out</Button>
         )
+    }
+
+    if (redirect) {
+        return <Redirect to="/search" />
     }
     return(
         <div className="headerDiv">
@@ -92,19 +103,8 @@ const Header: React.FC<HeaderProps> =(props) => {
                 <header className="mdc-top-app-bar primary">
                     <div className="mdc-top-app-bar__row">
                         <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start header-top">
-                            <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <Search />
-                                </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput
-                                    }}
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </div>
+                            <SearchBarCom onChange={handleSearchTermChange} />
+                            
                             {variableButton}
                             <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
                                 <ShoppingCart />
