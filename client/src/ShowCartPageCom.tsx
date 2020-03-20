@@ -1,11 +1,15 @@
 import React from 'react'
 import PaymentPageCom from './PaymentPageCom'
+import {ProductInformation} from './dec'
 
-    function ShowCartPageCom() {
+type ShowCartPageProps = {
+    currentProduct: ProductInformation
+}
+const ShowCartPageCom: React.FC<ShowCartPageProps> = (props) => {
         return(
             <div>
                 ShowCartPageCom
-                <PaymentPageCom />
+                <PaymentPageCom currentProduct={props.currentProduct}/>
             </div>
         )
     }

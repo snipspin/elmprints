@@ -8,7 +8,7 @@ import SignUpCom from './SignUpCom'
 import ProfilePageCom from './ProfilePageCom'
 import SignInWindowCom from './SignInWindowCom'
 import ShowCartPageCom from './ShowCartPageCom'
-import PaymentPageCom from './PaymentPageCom.js'
+import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import {green} from '@material-ui/core/colors'
@@ -43,9 +43,9 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
-									<Route path="/cart/payment" render={() => <PaymentPageCom />} />
+									<Route path="/cart/payment" render={() => <PaymentPageCom currentProduct={currentProduct} />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom />} />
-									<Route path="/cart" render={() => <ShowCartPageCom />} />
+									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>
