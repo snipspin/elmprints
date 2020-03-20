@@ -1,9 +1,10 @@
 import React from 'react'
+type ReceiptPageComProps = {}
 
-    function ReceiptPageCom() {
+const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
         return(
             <div>
-                Receipt page
+                ReceiptPageCom
             </div>
         )
     }
