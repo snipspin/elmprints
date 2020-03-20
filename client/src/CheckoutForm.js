@@ -72,7 +72,8 @@ export default function CheckoutForm(props) {
     <Grid
       container
       spacing={1}
-      justify="space-between"
+      justify="space-evenly"
+      alignConten="center"
     >
       <Grid item xs={6}>
         <ProductTile imageURL={props.currentProduct.imagePath} />
