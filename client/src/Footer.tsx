@@ -1,17 +1,18 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function Footer() {
     return(
         <>
             <div className="footerTop">
-                <h5>Elm Prints</h5>
-                <a>Poster</a>
-                <a>Art</a>
-                <a>FAQ</a>
-                <a>Profile</a>
+                <Link to="/" className="footerLink">Elm Prints</Link>
+                <Link to="/posters" className="footerLink">Posters</Link>
+                <Link to="/art" className="footerLink">Art</Link>
+                <Link to="/faq" className="footerLink">FAQ</Link>
+                <Link to="/profile" className="footerLink">Profile</Link>
             </div>
             <div className="footerBottom">
-                <p>Copyright</p>
+                <p>Copyright 2020</p>
             </div>
         </>
     )
