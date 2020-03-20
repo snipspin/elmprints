@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     },
     buttonRoot: {
       borderRadius: 3,
-      background: 'white',
+      background: 'rgb(228, 225, 225)',
       color: 'black',
       border: '2px solid black',
       height: 36,

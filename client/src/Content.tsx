@@ -43,9 +43,9 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
-									<Route path="/cart/payment" render={() => <PaymentPageCom currentProduct={currentProduct} />} />
+									<Route path="/cart/payment" render={() => <PaymentPageCom currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom currentProduct={currentProduct} user={props.user} />} />
-									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} />} />
+									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 								</Switch>

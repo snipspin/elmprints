@@ -78,7 +78,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 
 		<Grid
 			container
-			spacing={2}
+			spacing={1}
 			direction="column"
 			justify="space-evenly"
 			alignItems="center"
