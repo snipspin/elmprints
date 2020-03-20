@@ -13,9 +13,9 @@ const useStyles = makeStyles(theme => ({
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.black, 0.25),
+        backgroundColor: fade(theme.palette.common.white, 0.45),
         '&:hover': {
-          backgroundColor: fade(theme.palette.common.black, 0.15),
+          backgroundColor: fade(theme.palette.common.white, 0.55),
         },
         marginRight: theme.spacing(2),
         marginLeft: 0,
@@ -47,6 +47,8 @@ const useStyles = makeStyles(theme => ({
     },
     buttonRoot: {
       borderRadius: 3,
+      background: 'white',
+      color: 'black',
       border: '2px solid black',
       height: 36,
       width: 95
@@ -80,7 +82,11 @@ const Header: React.FC<HeaderProps> =(props) => {
     return(
         <div className="headerDiv">
             <div className="brandingDiv">
-                <img src={Tree} alt="Tree Icon"></img>
+                <img className="brandingIcon" src={Tree} alt="Tree Icon"></img>
+                <div className="brandingName">
+                    <h1>ELM</h1>
+                    <h1>PRINTS</h1>
+                </div>
             </div>
             <div className="headerMain">
                 <header className="mdc-top-app-bar primary">
