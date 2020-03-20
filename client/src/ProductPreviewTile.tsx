@@ -22,7 +22,7 @@ const ProductPreviewTile: React.FC<ProductPreviewTileProps> = (props) => {
     return(
         <Link to={link}>
         	<div className="posterDiv">
-        		<img src={props.image.imagePath} height="200px" onClick={(e: MouseEvent<HTMLImageElement>) => handleProductClick(e)} />
+        		<img className="posterImg" src={props.image.imagePath} height="200px" onClick={(e: MouseEvent<HTMLImageElement>) => handleProductClick(e)} />
         	</div>
         </Link>
     

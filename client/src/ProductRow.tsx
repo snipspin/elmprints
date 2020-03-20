@@ -47,14 +47,14 @@ const ProductRow: React.FC<ProductRowProps> = (props) => {
     },[])
 
     return(
-        <div>
-            <h3 className="posterRowH3">{props.rowCategory}</h3>
-            <div className="postersDiv">
+        <div className="productsMainRowDiv">
+            <h3 className="productRowH3">{props.rowCategory}</h3>
+            <div className="productsDiv">
                 {
                 imageArray.map((image,i) => (
-                    <div key={i} className="posterRow">
+                    <div key={i} className="productRow">
                         <ProductPreviewTile currentProduct={props.currentProduct} image={image} setCurrentProduct={props.setCurrentProduct} />
-                <h3 className="posterRowPrices">$ {image.price || 100}</h3>
+                <h3 className="productRowPrices">$ {image.price || 100}</h3>
                     </div>
                     ))
                 }

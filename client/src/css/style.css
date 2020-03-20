@@ -110,24 +110,32 @@ nav a:last-child {
   min-height: 79vh;
 }
 
-.postersDiv {
+.productsMainRowDiv {
+  max-width: 1000px;
+  margin: 50px auto;
+  border: 1px solid black;
+  box-shadow: 8px 7px 7px #888888;
+}
+
+.productsDiv {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
 
-.posterRow {
+.productRow {
   display: block;
   margin-top: 0;
+  min-width: 25%;
 }
 
-.posterRowH3 {
+.productRowH3 {
   text-align: left;
-  margin: 58px;
+  margin: 41px;
   margin-bottom: 20px;
 }
 
-.posterRowPrices {
+.productRowPrices {
   margin-bottom: 50px;
 }
 
@@ -163,7 +171,11 @@ nav a:last-child {
 }
 
 .posterDiv {
-  margin: 0 30px;
+  margin: 0 auto;
+}
+
+.posterImg {
+  box-shadow: 8px 7px 7px #888888;
 }
 
 .posterPreviewImg {
