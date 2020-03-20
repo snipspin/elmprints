@@ -94,7 +94,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
         <div className="posterDetail">
             <ProductTile imageURL={props.currentProduct.imagePath} />
             <div className="posterDetailRight">
-         
+              <h1>{props.currentProduct.title}</h1>
                 <div className="priceDiv">
                     <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
                     <FormControl className={classes.margin}>
@@ -116,7 +116,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
                 {purchaseButton}
                 </div>
                 <h2>Description</h2>
-           
+                <p>This poster is 1 foot by 3 feet</p>
             </div>
         </div>
     )

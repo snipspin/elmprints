@@ -25,7 +25,7 @@ const getServerImageInformation = async (productCategory: string):Promise<AxiosS
   } catch (err) {
     if (err && err.response) {
       const axiosError = err as AxiosError<AxiosServerError>
-      return ({statusCode: `${axiosError.code}`, responseObject: [{sourceID:'', imageID:'', imagePath:'', price: 0}]})
+      return ({statusCode: `${axiosError.code}`, responseObject: [{title: '', sourceID:'', imageID:'', imagePath:'', price: 0}]})
     }
     throw err;
   }

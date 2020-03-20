@@ -46,6 +46,7 @@ const artDataTransformer = (inputData) => {
       {
         let outputData = inputData.map((element) => {
           return {
+            title: element.renditionnumber,
             sourceID:2, 
             imageID: element.id, 
             imagePath: element.baseimageurl,

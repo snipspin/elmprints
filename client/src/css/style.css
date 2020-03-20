@@ -166,4 +166,8 @@ nav a:last-child {
   margin: 0 30px;
 }
 
+.posterPreviewImg {
+  max-width: 70vw;
+}
+
 /*# sourceMappingURL=style.css.map */
