@@ -11,4 +11,5 @@ const SearchResultsCom: React.FC<SearchResultsComProps> = (props) => {
             </div>
         )
     }
+    
 export default SearchResultsCom
