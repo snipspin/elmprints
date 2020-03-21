@@ -70,9 +70,8 @@ const Header: React.FC<HeaderProps> =(props) => {
         props.updateUser(null)
     }
 
-    const handleSearchTermChange = (value:string):any => {
+    const handleSearchTermChange = (value:string):void => {
         props.setSearchTerm(value)
-        setRedirect(true)
     }
 
     let variableButton = (
@@ -87,9 +86,6 @@ const Header: React.FC<HeaderProps> =(props) => {
         )
     }
 
-    if (redirect) {
-        return <Redirect to="/search" />
-    }
     return(
         <div className="headerDiv">
             <div className="brandingDiv">
