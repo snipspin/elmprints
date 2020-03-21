@@ -10,44 +10,44 @@ import {Redirect, Link} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
 
 const useStyles = makeStyles(theme => ({
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.45),
-        '&:hover': {
-          backgroundColor: fade(theme.palette.common.white, 0.55),
-        },
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-          marginLeft: theme.spacing(3),
-          width: 'auto',
-        }
-    },
-    searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-          width: 200,
-        }
-    },
+    // search: {
+    //     position: 'relative',
+    //     borderRadius: theme.shape.borderRadius,
+    //     backgroundColor: 'white',
+    //     '&:hover': {
+    //       backgroundColor: fade(theme.palette.common.white, 1),
+    //     },
+    //     marginRight: theme.spacing(2),
+    //     marginLeft: 0,
+    //     width: '100%',
+    //     [theme.breakpoints.up('sm')]: {
+    //       marginLeft: theme.spacing(3),
+    //       width: 'auto',
+    //     }
+    // },
+    // searchIcon: {
+    //     width: theme.spacing(7),
+    //     height: '100%',
+    //     position: 'absolute',
+    //     pointerEvents: 'none',
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    // },
+    // inputRoot: {
+    //     color: 'inherit',
+    // },
+    // inputInput: {
+    //     padding: theme.spacing(1, 1, 1, 7),
+    //     transition: theme.transitions.create('width'),
+    //     width: '100%',
+    //     [theme.breakpoints.up('md')]: {
+    //       width: 200,
+    //     }
+    // },
     buttonRoot: {
       borderRadius: 3,
-      background: 'rgb(228, 225, 225)',
+      background: 'rgba(228, 225, 225, .90)',
       color: 'black',
       border: '2px solid black',
       height: 36,
@@ -99,27 +99,29 @@ const Header: React.FC<HeaderProps> =(props) => {
                     <h1>PRINTS</h1>
                 </div>
             </div>
-            <div className="headerMain">
-                <header className="mdc-top-app-bar primary">
-                    <div className="mdc-top-app-bar__row">
-                        <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start header-top">
-                            <SearchBarCom onChange={handleSearchTermChange} />
-                            
-                            {variableButton}
-                            <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-                                <ShoppingCart />
-                            </Button>
-                            <Link to="/profile">
-                                <AccountCircleOutlined fontSize="large" />
-                            </Link>
-                        </section>
-                    </div>
-                </header>
-                <nav>
-                    <Link to="/posters">Posters</Link>
-                    <Link to="/art">Art</Link>
-                    <Link to="/faq">FAQ</Link>
-                </nav>
+            <div className="headerSuperMain">
+                <div className="headerMain">
+                    <header className="mdc-top-app-bar primary">
+                        <div className="mdc-top-app-bar__row">
+                            <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start header-top">
+                                <SearchBarCom onChange={handleSearchTermChange} />
+                                
+                                {variableButton}
+                                <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+                                    <ShoppingCart stroke={"black"} stroke-width={1} style={{color: "rgba(255, 255, 255, .90)"}} />
+                                </Button>
+                                <Link to="/profile">
+                                    <AccountCircleOutlined stroke={"black"} stroke-width={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
+                                </Link>
+                            </section>
+                        </div>
+                    </header>
+                    <nav>
+                        <Link to="/posters">Posters</Link>
+                        <Link to="/art">Art</Link>
+                        <Link to="/faq">FAQ</Link>
+                    </nav>
+                </div>
             </div>
         </div>
     )
