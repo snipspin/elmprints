@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import {fade, makeStyles} from '@material-ui/core/styles'
 import Search from '@material-ui/icons/Search'
 import {InputBase} from '@material-ui/core'
+import {useHistory} from 'react-router-dom'
 
 type SearchBarComProps = {
-    onChange: any //React.ChangeEvent<HTMLInputElement>
+    onChange:(value: string) => void
 }
 
 const useStyles = makeStyles(theme => ({
@@ -48,35 +49,38 @@ const useStyles = makeStyles(theme => ({
 const SearchBarCom: React.FC<SearchBarComProps> = (props) => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const classes = useStyles();
+    const history = useHistory();
 
+    // uplift search term, it has changed
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setSearchTerm(e.target.value)
     }
 
-    const handleOnSubmit = (e: any):void  => {
+    // search term is submitted
+    const handleOnSubmit = (e: React.FormEvent):any  => {
         e.preventDefault()
         props.onChange(searchTerm)
+        history.push('/search')
     }
 
         return(
-                <form onSubmit={(e: any): void => handleOnSubmit(e)}>
+        <form onSubmit={(e: React.FormEvent): void => handleOnSubmit(e)}>
             <div className={classes.search} >
-                                <div className={classes.searchIcon}>
-                                    <Search />
-                                </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput
-                                    }}
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOnChange(e)}
-                                    />
-                                
-                            </div>
-                                    </form>
+                <div className={classes.searchIcon}>
+                    <Search />
+                </div>
+                <InputBase
+                placeholder="Search…"
+                classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleOnChange(e)}
+                />
+            </div>
+        </form>
         )
     }
 export default SearchBarCom
