@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import {ProductInformation} from './dec'
 import {Decoded} from './App'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
 // Notes from Pete on May 17 2020:
 // interface below created to test showing more information than the Poster interface in the declaration file (as used in postergallery)
@@ -19,6 +19,7 @@ import {Link} from 'react-router-dom'
 // import { Poster } from './dec';
 export interface PosterProps {
   user: Decoded | null,
+  updateUser: (newToken: string | null) => void,
   currentProduct: ProductInformation
 }
 
@@ -84,12 +85,56 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
       e.preventDefault();
       return (<Link to="/cart/payment" className="loginLinkProduct">Purchase</Link>)
     }
+    const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
+      if(props.user) {
+        //console.log(props.currentProduct.imagePath)
+        let email: string = props.user.email
+        let item: string = props.currentProduct.title
+        let price: string = props.currentProduct.price
+        let imgUrl: string = props.currentProduct.imagePath
+        let imageID: string = props.currentProduct.imageID
+        let sourceID: string = props.currentProduct.sourceID
+        let data: object = {
+          email,
+          item,
+          price,
+          imgUrl,
+          imageID,
+          sourceID
+        }
+        fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type' : 'application/json'
+          }
+        })
+        .then((response: Response) => {
+          response.json().then(result => {
+            if(response.ok) {
+              props.updateUser(result.token)
+            } else {
+              console.log(`${response.status} ${response.statusText}: ${result.message}`)
+            }
+          }).catch((err: Error) => console.log(err))
+        }).catch((err: Error) => {
+          console.log(`Error: ${err.toString()}`)
+        })
+
+
+      }
+    }
     const purchaseButton = (props.user)? (
       <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"><Link to="/cart/payment" className="loginLinkProduct">Buy</Link></Button>
     ) :
     (
       <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
     )
+
+    if(!props.user) {
+      return <Redirect to="/" />
+    }
     return(
         <div className="posterDetail">
             <ProductTile imageURL={props.currentProduct.imagePath} />
@@ -113,6 +158,8 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
                     </FormControl>
                 </div>
                 <div>
+                <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+                 onClick={(e: MouseEvent<HTMLButtonElement>) => handleAddToCart(e)}>Add to cart</Button>
                 {purchaseButton}
                 </div>
                 <h2>Description</h2>

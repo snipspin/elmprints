@@ -38,8 +38,49 @@ router.get('/payment', (req, res) => {
 })
 
 // ? POST /cart for paying - Unclear how Stripe will need payment at the moment
-router.post('/', (req, res) => {
-  res.send({ message: 'This route was from submitting a payment and should deliver confirmation of purchase and redirect to receipt page' })
+router.put('/', (req, res) => {
+  db.User.findOneAndUpdate({email: req.body.email}, { $push: 
+    {shoppingCart:
+      {
+        item: req.body.item,
+        price: req.body.price,
+        imgUrl: req.body.imgUrl,
+        imageID: req.body.imageID,
+        sourceID: req.body.sourceID
+      }
+
+  }}, {new: true}).then(updateUser => {
+    console.log(updateUser)
+    let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+      expiresIn: 60 * 60 * 8
+    })
+    res.status(200).send({token})
+  })
+  .catch(err=> {
+    console.log(err)
+    res.status(500).send(err)
+  })
+})
+router.put('/delete', (req, res) => {
+  console.log(req.body)
+  let idArray = []
+  req.body.cartID.forEach(item => {
+    idArray.push(item._id)
+  })
+  console.log(idArray)
+  db.User.findOneAndUpdate(
+    {email: req.body.email}, 
+    {$pullAll: {shoppingCart: req.body.cartID}},
+    {new: true}).then(updateUser => {
+      let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8
+      })
+      res.status(200).send({token})
+    })
+    .catch(err=> {
+    console.log(err)
+    res.status(500).send(err)
+  })
 })
 
 // Get route for receipt page

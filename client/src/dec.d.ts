@@ -9,7 +9,7 @@ export interface User {
 	password: string,
 	billingAddress: Address,
 	shippingAddress: Address,
-	shoppingCart: Cart,
+	shoppingCart: Item[],
 	orderHistory: Item[],
 	wishList: Item[]
 	_v: number,
@@ -23,16 +23,14 @@ export interface Address {
 	state: string,
 	zipcode: string
 }
-export interface Cart {
-	_id: string,
-	items: Item[]
-}
 
 export interface Item {
 	_id: string,
 	item: string,
-	price: number,
-	imageUrl: string
+	price: string,
+	imgUrl: string,
+	imageID: string,
+	sourceID: string
 }
 
 export type AxiosServerError = { 
