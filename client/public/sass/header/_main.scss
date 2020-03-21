@@ -1,6 +1,11 @@
+header {
+  margin-top: 5px;
+}
+
 .headerDiv {
   box-shadow: 10px 5px 9px #888888;
-  background: #947758;
+  // background: #947758;
+  background: #6b5742;
   padding-top: 2px;
   display: flex;
 }
@@ -11,9 +16,9 @@
   justify-content: center;
 }
 
-.searchBar {
-  background-color: rgb(155, 154, 154);
-}
+// .searchBar {
+//   background-color: rgb(155, 154, 154);
+// }
 
 .loginBtn {
   border-radius: 3px;
@@ -21,8 +26,9 @@
   height: 36px;
   width: 95px;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.80);
   &:hover {
-    background-color: rgba(0,0,0,.15);
+    background-color: rgba(255, 255, 255, 0.90);
   }
 }
 
@@ -39,10 +45,16 @@
 .brandingDiv {
   display: flex;
   left: 10px;
+  background-color: white;
+  border-top: 1px solid black;
+  box-shadow: black 12px -20px 12px -11px;
+  z-index: 1;
+  border-left: 1px solid black;
 }
 
 .brandingName {
   line-height: 0.5em;
+  padding-right: 10px;
 }
 
 .brandingIcon {
@@ -53,4 +65,16 @@
 
 .headerMain {
   flex: 1;
+  position: relative;
+  height: inherit;
 }
+
+.headerSuperMain {
+  position: absolute;
+  width: 100vw;
+  height: 81.33px;
+}
+
+// .searchBar {
+//   background-color: white;
+// }

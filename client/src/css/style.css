@@ -1,6 +1,10 @@
+header {
+  margin-top: 5px;
+}
+
 .headerDiv {
   box-shadow: 10px 5px 9px #888888;
-  background: #947758;
+  background: #6b5742;
   padding-top: 2px;
   display: flex;
 }
@@ -11,19 +15,16 @@
   justify-content: center;
 }
 
-.searchBar {
-  background-color: #9b9a9a;
-}
-
 .loginBtn {
   border-radius: 3px;
   border: 2px solid black;
   height: 36px;
   width: 95px;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .loginBtn:hover {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .loginLink {
@@ -39,10 +40,16 @@
 .brandingDiv {
   display: flex;
   left: 10px;
+  background-color: white;
+  border-top: 1px solid black;
+  box-shadow: black 12px -20px 12px -11px;
+  z-index: 1;
+  border-left: 1px solid black;
 }
 
 .brandingName {
   line-height: 0.5em;
+  padding-right: 10px;
 }
 
 .brandingIcon {
@@ -53,26 +60,37 @@
 
 .headerMain {
   flex: 1;
+  position: relative;
+  height: inherit;
+}
+
+.headerSuperMain {
+  position: absolute;
+  width: 100vw;
+  height: 81.33px;
 }
 
 nav {
   display: flex;
-  justify-content: space-evenly;
-  margin: 10px auto;
-  width: 75%;
-  margin-top: 5px;
+  justify-content: center;
+  margin: 5px auto;
+  width: 100%;
+  margin-bottom: 0px;
+  background-color: white;
+  bottom: 0px;
+  position: absolute;
 }
 
 nav a {
-  background-color: #e4e1e1;
-  width: 32%;
-  height: 21px;
   color: black;
   text-decoration: none;
-  margin-bottom: 5px;
+  height: 25px;
+  font-size: 20px;
+  max-width: 200px;
+  width: 33.3%;
 }
 nav a:hover {
-  background-color: #908e8e;
+  background-color: #cfc7be;
 }
 
 nav a:first-child {
@@ -85,6 +103,26 @@ nav a:last-child {
   border-bottom-right-radius: 3px;
 }
 
+@media (max-width: 1000px) {
+  .headerDiv {
+    display: block;
+    height: 168px;
+  }
+
+  .brandingDiv {
+    justify-content: center;
+  }
+}
+@media (max-width: 600px) {
+  .headerDiv {
+    display: block;
+    height: 168px;
+  }
+
+  .brandingDiv {
+    justify-content: center;
+  }
+}
 .sign-up-box {
   height: 80vh;
   text-align: center;
