@@ -7,6 +7,7 @@ type ShowCartPageProps = {
     currentProduct: ProductInformation,
     user: Decoded | null
 }
+
 const ShowCartPageCom: React.FC<ShowCartPageProps> = (props) => {
         return(
             <div>

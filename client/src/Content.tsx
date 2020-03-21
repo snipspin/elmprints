@@ -41,7 +41,7 @@ const Content: React.FC<ContentProps> = (props) => {
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
-									<Route path="/posters/:id" render={() => <PosterDetail user={props.user} currentProduct={currentProduct} />} />
+									<Route path="/posters/:id" render={() => <PosterDetail user={props.user} updateUser={props.updateUser} currentProduct={currentProduct} />} />
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />

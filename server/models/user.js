@@ -22,12 +22,10 @@ let addressSchema = new mongoose.Schema({
 
 let itemSchema = new mongoose.Schema({
   item: String,
-  price: Number,
-  imgUrl: String
-})
-
-let cartSchema = new mongoose.Schema({
-  items: [itemSchema]
+  price: String,
+  imgUrl: String,
+  imageID: String,
+  sourceID: String
 })
 
 let userSchema = new mongoose.Schema({
@@ -52,7 +50,7 @@ let userSchema = new mongoose.Schema({
   },
   billingAddress: addressSchema,
   shippingAddress: addressSchema,
-  shoppingCart: cartSchema,
+  shoppingCart: [itemSchema],
   orderHistory: [itemSchema],
   wishList: [itemSchema]
 })
