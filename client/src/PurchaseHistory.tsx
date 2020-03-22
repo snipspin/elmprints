@@ -12,13 +12,13 @@ const PurchaseHistory: React.FC<PurchaseHistoryProps> = (props) => {
 		<Grid
 			container
 			spacing={1}
-			direction="column-reverse"
+			direction="column"
 			justify="space-between"
 			alignItems="center"
 		>
-        	<Grid item xs={12}>
-            	<Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={() => {return <Redirect to="/" />}}>Continue Browsing</Button>
-        	</Grid>
+            <Grid item xs={12}>
+                <h3>Purchase History</h3>
+            </Grid>
            	{props.user && 
            		<div className="ShoppingCartDiv">
             	{props.user.orderHistory.map((currItem,i) => (  
@@ -35,6 +35,9 @@ const PurchaseHistory: React.FC<PurchaseHistoryProps> = (props) => {
             ))}
 			</div>
             }
+            <Grid item xs={12}>
+                <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={() => {return <Redirect to="/" />}}>Continue Browsing</Button>
+            </Grid>            
     		<Grid item xs={12}>
             	<h3>Purchase History</h3>
            	</Grid>
