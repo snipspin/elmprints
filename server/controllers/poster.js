@@ -66,7 +66,15 @@ const movieDataTransformer = (inputData) => {
 
       if (inputData !== null) 
       {
-        let outputData = inputData.map((element) => {
+        let posters = inputData.filter((poster) => {
+          if (
+            poster.hasOwnProperty('poster_path') 
+            && poster.poster_path != null
+          ){
+            return true
+          }
+        })
+        let outputData = posters.map((element) => {
           return {
             title: element.title,
             sourceID:1, 
