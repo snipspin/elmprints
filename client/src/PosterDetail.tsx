@@ -80,7 +80,8 @@ const useStyles = makeStyles(theme => ({
 const PosterDetail: React.FC<PosterProps> = (props) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState('1');
-    const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
+      console.log(event.target.value)
       setQuantity(event.target.value as string);
     };
     const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
@@ -90,41 +91,42 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
       if(props.user) {
+
+        for(let i: number = 1; i <= parseInt(quantity); i++) {
         //console.log(props.currentProduct.imagePath)
-        let email: string = props.user.email
-        let item: string = props.currentProduct.title
-        let price: string = props.currentProduct.price
-        let imgUrl: string = props.currentProduct.imagePath
-        let imageID: string = props.currentProduct.imageID
-        let sourceID: string = props.currentProduct.sourceID
-        let data: object = {
-          email,
-          item,
-          price,
-          imgUrl,
-          imageID,
-          sourceID
-        }
-        fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
-          method: 'PUT',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type' : 'application/json'
+          let email: string = props.user.email
+          let item: string = props.currentProduct.title
+          let price: string = props.currentProduct.price
+          let imgUrl: string = props.currentProduct.imagePath
+          let imageID: string = props.currentProduct.imageID
+          let sourceID: string = props.currentProduct.sourceID
+          let data: object = {
+            email,
+            item,
+            price,
+            imgUrl,
+            imageID,
+            sourceID
           }
-        })
-        .then((response: Response) => {
-          response.json().then(result => {
-            if(response.ok) {
-              props.updateUser(result.token)
-            } else {
-              console.log(`${response.status} ${response.statusText}: ${result.message}`)
+          fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type' : 'application/json'
             }
-          }).catch((err: Error) => console.log(err))
-        }).catch((err: Error) => {
-          console.log(`Error: ${err.toString()}`)
-        })
-
-
+          })
+          .then((response: Response) => {
+            response.json().then(result => {
+              if(response.ok) {
+                props.updateUser(result.token)
+              } else {
+                console.log(`${response.status} ${response.statusText}: ${result.message}`)
+              }
+            }).catch((err: Error) => console.log(err))
+          }).catch((err: Error) => {
+            console.log(`Error: ${err.toString()}`)
+          })
+        }
       }
     }
     const purchaseButton = (props.user)? (

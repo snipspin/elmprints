@@ -70,10 +70,10 @@ const Header: React.FC<HeaderProps> =(props) => {
                                 
                                 {variableButton}
                                 <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
-                                    <ShoppingCart stroke={"black"} stroke-width={1} style={{color: "rgba(255, 255, 255, .90)"}} />
+                                    <ShoppingCart stroke={"black"} strokeWidth={1} style={{color: "rgba(255, 255, 255, .90)"}} />
                                 </Button>
                                 <Link to="/profile">
-                                    <AccountCircleOutlined stroke={"black"} stroke-width={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
+                                    <AccountCircleOutlined stroke={"black"} strokeWidth={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
                                 </Link>
                             </section>
                         </div>
