@@ -30,24 +30,3 @@ nav a:last-child {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-
-@media (max-width: 1000px) {
-  .headerDiv {
-    display: block;
-    height: 168px;
-  }
-  .brandingDiv {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 600px) {
-  // hamburger Icon
-  .headerDiv {
-    display: block;
-    height: 168px;
-  }
-  .brandingDiv {
-    justify-content: center;
-  }
-}
