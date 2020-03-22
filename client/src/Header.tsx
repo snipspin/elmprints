@@ -3,10 +3,11 @@ import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
-import Tree from '../public/treeTrial.png'
+import Tree from './img/treeTrial.png'
 import {Decoded} from './App'
 import {Link, NavLink} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
+import HeaderMobile from './HeaderMobile'
 
 const useStyles = makeStyles(theme => ({
     buttonRoot: {
@@ -60,6 +61,9 @@ const Header: React.FC<HeaderProps> =(props) => {
                     <h1>ELM</h1>
                     <h1>PRINTS</h1>
                 </div>
+            </div>
+            <div className="headerMobile">
+                <HeaderMobile />
             </div>
             <div className="headerSuperMain">
                 <div className="headerMain">

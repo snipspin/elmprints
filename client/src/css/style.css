@@ -68,6 +68,23 @@ header {
   height: 81.33px;
 }
 
+.headerMobile {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .headerMobile {
+    display: block;
+  }
+
+  .headerSuperMain {
+    display: none;
+  }
+
+  .brandingDiv {
+    justify-content: center;
+  }
+}
 nav {
   display: flex;
   justify-content: center;
@@ -101,26 +118,6 @@ nav a:last-child {
   border-bottom-right-radius: 3px;
 }
 
-@media (max-width: 1000px) {
-  .headerDiv {
-    display: block;
-    height: 168px;
-  }
-
-  .brandingDiv {
-    justify-content: center;
-  }
-}
-@media (max-width: 600px) {
-  .headerDiv {
-    display: block;
-    height: 168px;
-  }
-
-  .brandingDiv {
-    justify-content: center;
-  }
-}
 .sign-up-box {
   height: 80vh;
   text-align: center;
