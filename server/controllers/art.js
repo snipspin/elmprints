@@ -3,7 +3,7 @@ let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
 const axios = require('axios');
-let artUrl = `https://api.harvardartmuseums.org/object?q=width:>500&apikey=${process.env.HAM_API_KEY}`
+let artUrl = `https://api.harvardartmuseums.org/object?apikey=${process.env.HAM_API_KEY}`
 let searchArtUrl = `https://api.harvardartmuseums.org/object?apikey=${process.env.HAM_API_KEY}&fields=primaryimageurl,baseimageurl,id,title,renditionnumber&size=20&title=`
 
 // If user is logged in, req.user has user data
