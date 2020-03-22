@@ -36,7 +36,22 @@ router.get('/', (req, res) => {
 router.get('/payment', (req, res) => {
   res.send({ message: 'Show payment page for current cart' })
 })
+router.post('/payment/cart', (req, res) => {
+  let totalAmount = 0
+  console.log(req.body)
 
+  for(let i = 0; i < req.body.cart.length; i++) {
+    totalAmount += (parseInt(req.body.cart[i].price) * 100)
+  }
+ (async () => {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: totalAmount.toString(),
+      currency: 'usd',
+      metadata: {integration_check: 'accept_a_payment'},
+    })
+    res.send(paymentIntent)
+  })()
+})
 // ? POST /cart for paying - Unclear how Stripe will need payment at the moment
 router.put('/', (req, res) => {
   db.User.findOneAndUpdate({email: req.body.email}, { $push: 
@@ -60,6 +75,25 @@ router.put('/', (req, res) => {
     console.log(err)
     res.status(500).send(err)
   })
+})
+router.put('/purchased', (req,res) => {
+  console.log(req.body)
+  let items = [...req.body.cartContent]
+  console.log(items)
+  db.User.findOneAndUpdate (
+    {email: req.body.email},
+    {$push: {orderHistory: {$each: [...items]}}},
+    {new: true}).then(updatedUser => {
+      console.log(updatedUser)
+      let token = jwt.sign(updatedUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8
+      })
+      res.status(200).send({token})
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
 })
 router.put('/delete', (req, res) => {
   console.log(req.body)

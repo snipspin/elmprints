@@ -4,6 +4,7 @@ import {Box, Button, Grid, Checkbox, FormControlLabel, Input, FormControl, Input
 import Snackbar from '@material-ui/core/Snackbar'
 import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
+import CartItem from './CartItem'
 import ProductTile from './ProductTile'
 import CardSection from './CardSection'
 import MuiAlert from '@material-ui/lab/Alert'
@@ -43,6 +44,7 @@ export default function CartCheckOutPage(props) {
   useEffect(() => {
 
   }, [fullName, purchaseSuccess])
+  const space= "  " 
   const stripe = useStripe();
   const elements = useElements();
   const handleClose = (event, reason) => {
@@ -51,6 +53,62 @@ export default function CartCheckOutPage(props) {
     }
     setErrorAlert(false)
   }
+  const handleAddToPurchased = () => {
+ 	if(props.user) {
+ 		let email = props.user.email
+ 		let cartContent = [...props.user.shoppingCart]
+ 		let data = {
+ 			email,
+ 			cartContent
+ 		}
+ 	
+ 	fetch(`${process.env.REACT_APP_SERVER_URL}/cart/purchased`, {
+ 		method: 'PUT',
+ 		body: JSON.stringify(data),
+ 		headers: {
+ 			'Content-Type': 'application/json'
+ 		}
+ 	})
+ 	.then(response => {
+ 		response.json().then(result => {
+ 			if(response.ok) {
+ 				props.updateUser(result.token)
+ 			} else {
+ 				console.log(`${response.status} ${response.statusText}: ${result.message}`)
+ 			}
+ 		}).catch(err => console.log(err))
+ 	}).catch(err => console.log(err.toString()))
+  }}
+  const handleDeleteCart = (e) => {
+  	e.preventDefault()
+    if(props.user){
+   		let email = props.user.email
+        let cartID = props.user.shoppingCart    
+        let data = {
+          email,
+          cartID
+        }          
+            
+        fetch(`${process.env.REACT_APP_SERVER_URL}/cart/delete`, {
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+          	'Content-Type' : 'application/json'
+          }
+        })
+        .then((response) => {
+          response.json().then(result => {
+            if(response.ok) {
+               props.updateUser(result.token)                   
+            } else {
+               console.log(`${response.status} ${response.statusText}: ${result.message}`)
+            }
+          }).catch(err => console.log(err))
+        }).catch(err => {
+       	  console.log(`Error: ${err.toString()}`)
+        })
+    }               
+  }   
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -63,7 +121,7 @@ export default function CartCheckOutPage(props) {
     }
 
     const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
-    { cart: [props.currentProduct]})
+    { cart: [...props.user.shoppingCart]})
     //{amount: 1500, cardType: "card"}) 
     // We pay 15€ with a credit card
     console.log(data.data.client_secret)
@@ -101,6 +159,7 @@ export default function CartCheckOutPage(props) {
     }
   }
   if(purchaseSuccess) {
+  	handleAddToPurchased()
     return <Redirect to="/cart/receipt" />
   }
   const nameLabel = `Name for order: ${props.user.firstname} ${props.user.lastname}`
@@ -111,6 +170,97 @@ export default function CartCheckOutPage(props) {
       justify="space-evenly"
       alignContent="center"
     >
+    	<Grid item md={6} xs={6}>
+            <div className="shoppingCartDiv">
+            	<h3>Shopping Cart</h3>
+                	{props.user.shoppingCart.map((currItem,i) => (
+                        
+                    <CartItem
+                        key={i} 
+                        item={currItem.item}
+                        imgUrl={currItem.imgUrl}
+                        price={currItem.price}
+                        imageID={currItem.imageID}
+                        sourceID={currItem.sourceID}
+                    />
+                   ))}   
+                        
+
+                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
+            </div>
+        </Grid>
+        <Grid item md={6} xs={6}>
+        <Grid container 
+              spacing={1}
+              justify="space-between"
+              direction="column"
+              alignContent="center"
+              style={{border: "2px solid black", maxWidth: "40vw", paddingBottom: "20px", margin: "50px auto"}}
+        >
+          <div>
+            <Grid marginTop="10px" item xs={12}>Shipping address:</Grid>
+            <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
+            {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
+            <Grid item xs={12}>
+              {props.user.shippingAddress.city}<span>{space}</span>
+              {props.user.shippingAddress.state}<span>{space}</span>
+              {props.user.shippingAddress.zipcode}
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel label="Confirm Shipping Address:" value="start" 
+              control={<Checkbox value="name-confirm-checkbox" 
+              inputProps={{'aria-label': 'Confirm name for order'}} />}
+              labelPlacement="start" />
+            </Grid>
+          </div>
+          <div>
+            <Grid item xs={12}>Billing address:</Grid>
+            <Grid item xs={12}>{props.user.billingAddress.streetOne}</Grid>
+            {props.user.billingAddress.streetTwo && <Grid item xs={12}>{props.user.billingAddress.streetTwo}</Grid>}
+            <Grid item xs={12}>
+              {props.user.billingAddress.city}<span>{space}</span>
+              {props.user.billingAddress.state}<span>{space}</span>
+              {props.user.billingAddress.zipcode}
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel label="Confirm Billing Address:" value="start" 
+              control={<Checkbox value="name-confirm-checkbox" 
+              inputProps={{'aria-label': 'Confirm name for order'}} />}
+              labelPlacement="start" />
+            </Grid>
+          </div>
+          <div>
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel htmlFor="fullName">Full Name</InputLabel>
+                <Input name="fullName" onChange={(e) => setFullName(e.target.value)} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Snackbar open={errorAlert} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                  Payment Failed
+                </Alert>
+              </Snackbar>
+              <form onSubmit={handleSubmit}> 
+                  <h4>Card details</h4>
+                  <label htmlFor="cardNumber">Card Number</label>
+                  <CardNumberElement id="name" options={CARD_ELEMENT_OPTIONS} />
+                  <label htmlFor="expiry">Expiration Date</label>
+                  <CardExpiryElement id="expiry" options={CARD_ELEMENT_OPTIONS} />
+                  <label htmlFor="cvc">CVC</label>
+                  <CardCvcElement id="cvc" options={CARD_ELEMENT_OPTIONS} />
+                  <label htmlFor="postal">Postal Code</label>
+                  <input name="postal" />              
+                  <button type="submit" disabled={!stripe}>
+                  Pay
+                  </button>
+              </form>
+            </Grid>
+          </div>
+   
+        </Grid>
+        </Grid>
     </Grid>
   )
 }

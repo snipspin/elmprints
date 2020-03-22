@@ -5,14 +5,15 @@ import {Decoded} from './App'
 
 type ShowCartPageProps = {
     currentProduct: ProductInformation,
-    user: Decoded | null
+    user: Decoded | null,
+    updateUser: (newToken: string | null) => void
 }
 
 const ShowCartPageCom: React.FC<ShowCartPageProps> = (props) => {
         return(
             <div>
                 ShowCartPageCom
-                <PaymentPageCom currentProduct={props.currentProduct} user={props.user} />
+                <PaymentPageCom updateUser={props.updateUser} currentProduct={props.currentProduct} user={props.user} />
             </div>
         )
     }

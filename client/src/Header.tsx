@@ -5,7 +5,7 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import Tree from './img/treeTrial.png'
 import {Decoded} from './App'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
 
 const useStyles = makeStyles(theme => ({
@@ -69,9 +69,9 @@ const Header: React.FC<HeaderProps> =(props) => {
                                 <SearchBarCom onChange={handleSearchTermChange} />
                                 
                                 {variableButton}
-                                <Button className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
+                                <Link to="/cart" className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">
                                     <ShoppingCart stroke={"black"} strokeWidth={1} style={{color: "rgba(255, 255, 255, .90)"}} />
-                                </Button>
+                                </Link>
                                 <Link to="/profile">
                                     <AccountCircleOutlined stroke={"black"} strokeWidth={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
                                 </Link>

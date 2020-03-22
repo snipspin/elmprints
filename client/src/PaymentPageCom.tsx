@@ -10,7 +10,8 @@ const stripePromise = loadStripe('pk_test_Q4YXjg3hCRD07OqrEqj9g7wf00vVQBzKb9');
 
 export interface PaymentPageProps {
     currentProduct: ProductInformation,
-    user: Decoded | null
+    user: Decoded | null,
+    updateUser: (newToken: string | null) => void
 }
 
 const PaymentPageCom: React.FC<PaymentPageProps> = (props) => {
@@ -18,11 +19,11 @@ const PaymentPageCom: React.FC<PaymentPageProps> = (props) => {
         <div>
         	<h3>Payment Page</h3>
             <Elements stripe={stripePromise}>
-                {(props.user && props.user.shoppingCart.length > 0) &&
+                {(props.user && props.user.shoppingCart.length == 0) &&
                     <CheckoutForm currentProduct={props.currentProduct} user={props.user} />}
-                }
+                
                 {(props.user && props.user.shoppingCart.length >= 1) &&
-                    <CartCheckOutPage user={props.user} />
+                    <CartCheckOutPage user={props.user} updateUser={props.updateUser} />
                 }
             </Elements>
         </div>

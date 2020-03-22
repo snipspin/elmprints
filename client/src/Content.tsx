@@ -11,6 +11,7 @@ import ShowCartPageCom from './ShowCartPageCom'
 import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
 import SearchResultsCom from './SearchResultsCom'
+import PurchaseHistory from './PurchaseHistory'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 // import {brown} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
@@ -45,12 +46,13 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
-									<Route path="/cart/payment" render={() => <PaymentPageCom currentProduct={currentProduct} user={props.user} />} />
-									<Route path="/cart/receipt" render={() => <ReceiptPageCom currentProduct={currentProduct} user={props.user} />} />
-									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} user={props.user} />} />
+									<Route path="/cart/payment" render={() => <PaymentPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
+									<Route path="/cart/receipt" render={() => <ReceiptPageCom currentProduct={currentProduct} user={props.user} updateUser={props.updateUser} />} />
+									<Route path="/cart" render={() => <ShowCartPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
 									<Route path="/search" render={() => <SearchResultsCom currentProduct={currentProduct} searchTerm={props.searchTerm} setCurrentProduct={setCurrentProduct} />} />
+									<Route path="/purchases" render={() => <PurchaseHistory user={props.user} />} />
 								</Switch>
 						</MuiThemeProvider>
 				</div>
