@@ -1,0 +1,16 @@
+@media (min-width: 960px) {
+  .shoppingCartDiv {
+    border: 2px solid black;
+    min-height: 500px;
+    margin: 15px auto;
+    max-width: 49vw;
+  }
+}
+
+@media (max-width: 960px) {
+  .shoppingCartDiv {
+    border: 2px solid black;
+    min-height: 400px;
+    margin: 15px 0;
+  }
+}

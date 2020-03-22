@@ -7,12 +7,20 @@
 	align-items: center;
 	color: black;	
 }
-.sign-up-box span {
-	color: white;
-}
 
 .sign-up-to-sign-in {
 	position: relative;
 	left: 10px;
-	color: white;
+}
+
+p.login {
+	margin-top: 0.5em;
+}
+
+h2.signup {
+	margin-bottom: 0;
+}
+
+span.italic {
+  font-style: italic;
 }

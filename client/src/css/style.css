@@ -131,16 +131,67 @@ nav a:last-child {
   color: black;
 }
 
-.sign-up-box span {
-  color: white;
-}
-
 .sign-up-to-sign-in {
   position: relative;
   left: 10px;
-  color: white;
 }
 
+p.login {
+  margin-top: 0.5em;
+}
+
+h2.signup {
+  margin-bottom: 0;
+}
+
+span.italic {
+  font-style: italic;
+}
+
+p.signup {
+  margin-top: 0.5em;
+}
+
+h2.login {
+  margin-bottom: 0;
+}
+
+span.italic {
+  font-style: italic;
+}
+
+@media (min-width: 960px) {
+  .shoppingCartDiv {
+    border: 2px solid black;
+    min-height: 500px;
+    margin: 15px auto;
+    max-width: 49vw;
+  }
+}
+@media (max-width: 960px) {
+  .shoppingCartDiv {
+    border: 2px solid black;
+    min-height: 400px;
+    margin: 15px 0;
+  }
+}
+@media (min-width: 960px) {
+  .userInfo {
+    align-items: center;
+    border: 2px solid black;
+    width: 49vw;
+    min-height: 500px;
+    margin: 21% auto;
+  }
+}
+@media (max-width: 960px) {
+  .userInfo {
+    align-items: center;
+    border: 2px solid black;
+    min-height: 400px;
+    margin: 15px 0;
+  }
+}
 .footerTop {
   background-color: #bdbaba;
   color: black;

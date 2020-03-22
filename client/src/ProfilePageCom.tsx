@@ -55,23 +55,25 @@ import {User, Item} from './dec'
         		justify="space-evenly"
         		alignItems="center"
         	>   
-                <Grid item xs={6}>
+                <Grid item md={6} xs={12}>
                     <ProfileUserInfo user={props.user} updateUser={props.updateUser} />
         		</Grid>
-                <Grid item xs={6} style={{border: "2px solid black", minHeight: "500px", margin: "0 auto", maxWidth: "49vw"}}>
-                    <h3>Shopping Cart</h3>
-                    {props.user.shoppingCart.map((currItem,i) => (
-                    
-                        <CartItem
-                            key={i} 
-                            item={currItem.item}
-                            imgUrl={currItem.imgUrl}
-                            price={currItem.price}
-                            imageID={currItem.imageID}
-                            sourceID={currItem.sourceID}
-                        />
-                    ))}   
-                    <Button variant="contained" color="primary" onClick={(e: MouseEvent<HTMLButtonElement>) => handleDeleteCart(e)}>Clear Cart</Button>
+                <Grid item md={6} xs={12}>
+                    <div className="shoppingCartDiv">
+                        <h3>Shopping Cart</h3>
+                        {props.user.shoppingCart.map((currItem,i) => (
+                        
+                            <CartItem
+                                key={i} 
+                                item={currItem.item}
+                                imgUrl={currItem.imgUrl}
+                                price={currItem.price}
+                                imageID={currItem.imageID}
+                                sourceID={currItem.sourceID}
+                            />
+                        ))}   
+                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={(e: MouseEvent<HTMLButtonElement>) => handleDeleteCart(e)}>Clear Cart</Button>
+                    </div>
                 </Grid>
         	</Grid>
         )
