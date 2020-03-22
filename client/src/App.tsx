@@ -19,6 +19,7 @@ const App: React.FC = () => {
 	useEffect(() => {
 		decodeToken(null)
 	}, [])
+
 	const updateUser = (newToken: string | null) => {
 		if(newToken) {
 			localStorage.setItem('mernToken', newToken)

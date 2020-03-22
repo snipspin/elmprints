@@ -1,50 +1,14 @@
-import React, { MouseEvent, useState, useEffect } from 'react'
+import React, { MouseEvent, useState} from 'react'
 import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
-import Search from '@material-ui/icons/Search'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import Tree from './img/treeIconTestSmallGreen.png'
 import {Decoded} from './App'
-import {Redirect, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
 
 const useStyles = makeStyles(theme => ({
-    // search: {
-    //     position: 'relative',
-    //     borderRadius: theme.shape.borderRadius,
-    //     backgroundColor: 'white',
-    //     '&:hover': {
-    //       backgroundColor: fade(theme.palette.common.white, 1),
-    //     },
-    //     marginRight: theme.spacing(2),
-    //     marginLeft: 0,
-    //     width: '100%',
-    //     [theme.breakpoints.up('sm')]: {
-    //       marginLeft: theme.spacing(3),
-    //       width: 'auto',
-    //     }
-    // },
-    // searchIcon: {
-    //     width: theme.spacing(7),
-    //     height: '100%',
-    //     position: 'absolute',
-    //     pointerEvents: 'none',
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    // },
-    // inputRoot: {
-    //     color: 'inherit',
-    // },
-    // inputInput: {
-    //     padding: theme.spacing(1, 1, 1, 7),
-    //     transition: theme.transitions.create('width'),
-    //     width: '100%',
-    //     [theme.breakpoints.up('md')]: {
-    //       width: 200,
-    //     }
-    // },
     buttonRoot: {
       borderRadius: 3,
       background: 'rgba(228, 225, 225, .90)',
@@ -61,7 +25,6 @@ export interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> =(props) => {
-    const [redirect, setRedirect] = useState<boolean>(false)
     const classes = useStyles()
     
     const handleLogout = (e: MouseEvent<HTMLButtonElement>) => {
@@ -70,9 +33,8 @@ const Header: React.FC<HeaderProps> =(props) => {
         props.updateUser(null)
     }
 
-    const handleSearchTermChange = (value:string):any => {
+    const handleSearchTermChange = (value:string):void => {
         props.setSearchTerm(value)
-        setRedirect(true)
     }
 
     let variableButton = (
@@ -87,9 +49,6 @@ const Header: React.FC<HeaderProps> =(props) => {
         )
     }
 
-    if (redirect) {
-        return <Redirect to="/search" />
-    }
     return(
         <div className="headerDiv">
             <div className="brandingDiv">
