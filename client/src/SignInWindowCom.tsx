@@ -53,10 +53,12 @@ const SignInWindowCom: React.FC<SigninProps> = (props) => {
    	return(
    		<Box className="sign-up-box">
    			<Box>
-   				 Don't have an accout? Create one here:<span>  </span>
-   				<Button onClick={(e: MouseEvent<HTMLButtonElement>) => handleRedirect(e)} variant="contained" color="primary" className="sign-up-button">Sign up</Button>
+   				 <span className="italic">Don't have an account?</span>
+					 <p className="signup">Create one here: &nbsp;
+   					<Button onClick={(e: MouseEvent<HTMLButtonElement>) => handleRedirect(e)} variant="contained" color="primary" className="sign-up-button">Sign up</Button>
+					 </p>
    			</Box>
-
+				<h2 className="login">Login:</h2>
    			<FormControl>
    				<InputLabel htmlFor="email">Email:</InputLabel>
    				<Input name="email" aria-describedby="email form"
@@ -67,7 +69,7 @@ const SignInWindowCom: React.FC<SigninProps> = (props) => {
    				<Input name="password" type="password" aria-describedby="password email"
    				onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} required />
    			</FormControl>
-   			<Button onClick={(e: MouseEvent<HTMLButtonElement>)  => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign In</Button>
+   			<Button style={{marginTop: "20px"}} onClick={(e: MouseEvent<HTMLButtonElement>)  => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign In</Button>
    		</Box>
     )
 }

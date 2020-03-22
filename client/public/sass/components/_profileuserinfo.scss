@@ -1,0 +1,18 @@
+@media (min-width: 960px) {
+  .userInfo {
+    align-items: center;
+    border: 2px solid black;
+    width: 49vw;
+    min-height: 500px;
+    margin: 21% auto
+  }
+}
+
+@media (max-width: 960px) {
+  .userInfo {
+    align-items: center;
+    border: 2px solid black;
+    min-height: 400px;
+    margin: 15px 0;
+  }
+}

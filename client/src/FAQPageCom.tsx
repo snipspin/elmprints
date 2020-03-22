@@ -38,12 +38,13 @@ function FAQPageCom() {
             container 
     		direction="row"
     		justify="space-evenly"
-    		alignItems="center"
+            alignItems="center"
+            className="faqContainer"
         >
             {
                 faqArray.map((faq,i) => (
                     <Grid item xs={8} key={i}>
-                        <ExpansionPanel expanded={expanded === `faq${i}`} onChange={handleChange(`faq${i}`)}>
+                        <ExpansionPanel className="faqItem" expanded={expanded === `faq${i}`} onChange={handleChange(`faq${i}`)}>
                             <ExpansionPanelSummary 
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls={`faq${i}-content`}

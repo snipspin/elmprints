@@ -3,7 +3,7 @@ import {fade, makeStyles} from '@material-ui/core/styles'
 import {Button, InputBase} from '@material-ui/core'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
-import Tree from './img/treeIconTestSmallGreen.png'
+import Tree from './img/treeTrial.png'
 import {Decoded} from './App'
 import {Link} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
@@ -11,7 +11,10 @@ import SearchBarCom from './SearchBarCom'
 const useStyles = makeStyles(theme => ({
     buttonRoot: {
       borderRadius: 3,
-      background: 'rgba(228, 225, 225, .90)',
+      background: 'rgba(228, 225, 225, .80)',
+      '&:hover': {
+        background: 'rgba(228, 225, 225, .90)',
+      },
       color: 'black',
       border: '2px solid black',
       height: 36,

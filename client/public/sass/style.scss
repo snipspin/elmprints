@@ -1,6 +1,9 @@
 @import 'header/main';
 @import 'header/nav';
 @import 'components/signupcom';
+@import 'components/signinwindowcom';
+@import 'components/profilepagecom';
+@import 'components/profileuserinfo';
 @import 'footer/main';
 
 .body {
@@ -18,3 +21,4 @@
 @import 'components/posterdetail';
 @import 'components/poster';
 @import 'components/producttile';
+@import 'components/faq';

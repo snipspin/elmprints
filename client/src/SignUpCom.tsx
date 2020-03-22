@@ -61,9 +61,12 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
     return(
         <Box className="sign-up-box">
             <Box className="sign-in-from-sign-up">
-                Already have an account? Login here:
-                <Button onClick={(e: MouseEvent<HTMLButtonElement>) => handleRedirect(e)} variant="contained" color="primary" className="sign-up-to-sign-in">Sign In</Button>
+                <span className="italic">Already have an account?</span>
+                <p className="login">Login here:
+                    <Button onClick={(e: MouseEvent<HTMLButtonElement>) => handleRedirect(e)} variant="contained" color="primary" className="sign-up-to-sign-in">Sign In</Button>
+                </p>
             </Box>
+            <h2 className="signup">Create an Account:</h2>
             <FormControl>
                 <InputLabel htmlFor="firstname">First Name:</InputLabel>
                 <Input id="first-name" name="firstname" aria-describedby="first-name-form" 
@@ -84,7 +87,7 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
                 <Input type="password" name="password" aria-describedby="password-form" 
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} required/>
             </FormControl>
-            <Button onClick={e => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign Up</Button>
+            <Button style={{marginTop: "20px"}} onClick={e => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign Up</Button>
         </Box>
     )
 }
