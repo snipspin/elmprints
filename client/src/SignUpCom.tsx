@@ -1,26 +1,58 @@
 import React, {useEffect, useState, ChangeEvent, MouseEvent} from 'react'
-import {Box, FormControl, Input, InputLabel, Button} from '@material-ui/core'
+import {Box, FormControl, Input, InputLabel, Button, BoxProps} from '@material-ui/core'
 import {Decoded} from './App'
 import {Redirect} from 'react-router-dom'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+
 export interface SignupProps {
     user: Decoded | null,
     updateUser: (newToken: string | null) => void
 }
 
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
 const SignUpCom: React.FC<SignupProps> = (props) => {
-    let [email, setEmail] = useState('')
-    let [firstname, setFirstname] = useState('')
-    let [lastname, setLastname] = useState('')
-    let [message, setMessage] = useState('')
-    let [password, setPassword] = useState('')
-    let [redirect, setRedirect] = useState(false)
+    const [email, setEmail] = useState<string>('')
+    const [firstname, setFirstname] = useState<string>('')
+    const [lastname, setLastname] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [redirect, setRedirect] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false);
+    const [passwordInfo, setPasswordInfo] = useState<boolean>(false)
 
     useEffect(() => {
         setMessage('')
     }, [firstname, lastname, email, password])
+    
+    const handleOpen = ():void => {
+        setOpen(true)
+    }
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+          return
+        }
+    
+        setOpen(false);
+      }
+    
+    const checkLength = (event: React.FocusEvent,
+        minLen: number):void => {
+        let target = event.target as HTMLInputElement
+            if (target.value.length < minLen ) {
+                setMessage('Password has to be 12 characters long')
+            handleOpen();
+        }
+    }
+
+
+
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log('in handle submit function')
         let data: object = {
             email,
             firstname,
@@ -85,9 +117,22 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
             <FormControl>
                 <InputLabel htmlFor="password">Password:</InputLabel>
                 <Input type="password" name="password" aria-describedby="password-form" 
+                onBlur={(e) =>{
+                    checkLength(e, 12)
+                    setPasswordInfo(false)
+                }}
+                onFocus={(e) => setPasswordInfo(true)}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} required/>
             </FormControl>
+            <Box className="password-info">
+            <span>{passwordInfo ? 'Password is required to be 12 characters long':''}</span>
+            </Box>
             <Button style={{marginTop: "20px"}} onClick={e => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign Up</Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {message}
+        </Alert>
+      </Snackbar>
         </Box>
     )
 }
