@@ -50,7 +50,7 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/cart" render={() => <ShowCartPageCom currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/profile" render={() => <ProfilePageCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/faq" component={FAQPageCom} />
-									<Route path="/search" render={() => <SearchResultsCom searchTerm={props.searchTerm} />} />
+									<Route path="/search" render={() => <SearchResultsCom currentProduct={currentProduct} searchTerm={props.searchTerm} setCurrentProduct={setCurrentProduct} />} />
 								</Switch>
 						</MuiThemeProvider>
 				</div>
