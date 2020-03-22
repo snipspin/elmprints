@@ -3,8 +3,8 @@ let db = require('../models')
 let jwt = require('jsonwebtoken')
 let router = require('express').Router()
 const axios = require('axios');
-let artUrl = `https://api.harvardartmuseums.org/image?q=width:>500&apikey=${process.env.HAM_API_KEY}`
-let searchArtUrl = `https://api.harvardartmuseums.org/image?apikey=${process.env.HAM_API_KEY}&fields=primaryimageurl,baseimageurl,id,title,renditionnumber&title=`
+let artUrl = `https://api.harvardartmuseums.org/object?q=width:>500&apikey=${process.env.HAM_API_KEY}`
+let searchArtUrl = `https://api.harvardartmuseums.org/object?apikey=${process.env.HAM_API_KEY}&fields=primaryimageurl,baseimageurl,id,title,renditionnumber&size=20&title=`
 
 // If user is logged in, req.user has user data
 // NOTE: This is the user data from the time the token was issued
@@ -61,15 +61,25 @@ router.post('/search', (req, res) => {
 
 const artDataTransformer = (inputData) => {
   return new Promise ( (then, caught) => {
-
       if (inputData !== null) 
       {
-        let outputData = inputData.map((element) => {
+        let searchRecords = inputData.filter((record) => {
+          if (
+            (record.hasOwnProperty('baseimageurl') || record.hasOwnProperty('primaryimageurl'))
+            && (record.baseimageurl != null || record.primaryimageurl != null)
+            && record.hasOwnProperty('id')
+            && (record.hasOwnProperty('renditionnumber') || record.hasOwnProperty('title')) 
+          ) 
+          {
+            return true
+          }
+        })
+        let outputData = searchRecords.map((element) => {
           return {
-            title: element.renditionnumber,
+            title: (element.hasOwnProperty('renditionnumber'))? element.renditionnumber : element.title,
             sourceID:2, 
             imageID: element.id, 
-            imagePath: element.baseimageurl,
+            imagePath: (element.hasOwnProperty('baseimageurl'))? element.baseimageurl : element.primaryimageurl,
             price: calculatePrice(1)
           }
         })
