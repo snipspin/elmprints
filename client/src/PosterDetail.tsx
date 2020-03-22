@@ -68,7 +68,9 @@ const useStyles = makeStyles(theme => ({
     border: '2px solid black',
     height: 60,
     width: 250,
-    fontSize: 20
+    fontSize: 20,
+    display: 'block',
+    margin: '10px auto'
   },
   margin: {
     margin: theme.spacing(1)

@@ -58,7 +58,7 @@ import {User, Item} from './dec'
                 <Grid item xs={6}>
                     <ProfileUserInfo user={props.user} updateUser={props.updateUser} />
         		</Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} style={{border: "2px solid black", minHeight: "500px", margin: "0 auto", maxWidth: "49vw"}}>
                     <h3>Shopping Cart</h3>
                     {props.user.shoppingCart.map((currItem,i) => (
                     

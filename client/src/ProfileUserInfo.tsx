@@ -81,11 +81,15 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 			spacing={1}
 			direction="column"
 			justify="space-evenly"
-			alignItems="center"
+			style={{alignItems: "center",
+			border: "2px solid black",
+			maxWidth: "49vw",
+			minHeight: "500px",
+			margin: "21% auto"}}
 
-		>	<Grid item xs={12}></Grid>
+		>
 			<Grid item xs={12}>
-				<h2>{props.user.firstname}  {props.user.lastname}</h2>
+				<h1>{props.user.firstname}  {props.user.lastname}</h1>
 			</Grid>
 			<Grid item xs={12}>
 				<h3>{props.user.email}</h3>
@@ -142,7 +146,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
             	<Box>
                 	{shippingAddressForm ? 
                 		<ProfileAddressForm display={shippingAddressForm} onSubmit={handleShippingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : 
-                		<Button variant="contained" color="primary" onClick={handleShippingButtonClick}>Edit shipping address</Button>
+                		<Button variant="contained" color="primary" style={{marginBottom: "20px"}} onClick={handleShippingButtonClick}>Edit shipping address</Button>
                 	}
                 </Box>
             </Grid>
@@ -152,7 +156,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
             	<Box>
                 	{shippingAddressForm ? 
                 		<ProfileAddressForm display={shippingAddressForm} onSubmit={handleShippingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : 
-                		<Button variant="contained" color="primary" onClick={handleShippingButtonClick}>Add shipping address</Button>
+                		<Button variant="contained" color="primary" style={{marginBottom: "20px"}} onClick={handleShippingButtonClick}>Add shipping address</Button>
                 	}
                 </Box>
             </Grid>

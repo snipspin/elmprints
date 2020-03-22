@@ -75,7 +75,7 @@ export default function CheckoutForm(props) {
       justify="space-evenly"
       alignContent="center"
     >
-      <Grid item xs={6}>
+      <Grid style={{marginBottom: "20px"}} item xs={6}>
         <ProductTile imageURL={props.currentProduct.imagePath} />
       </Grid>
       <Grid item xs={6}>
@@ -84,50 +84,54 @@ export default function CheckoutForm(props) {
               justify="space-between"
               direction="column"
               alignContent="center"
-             
+              style={{border: "2px solid black", maxWidth: "40vw", paddingBottom: "20px", margin: "50px auto"}}
         >
-          <Grid item xs={12}>Shipping address:</Grid>
-          <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
-          {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
-          <Grid item xs={12}>
-            {props.user.shippingAddress.city}<span>{space}</span>
-            {props.user.shippingAddress.state}<span>{space}</span>
-            {props.user.shippingAddress.zipcode}
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel label="Confirm Shipping Address:" value="start" 
-            control={<Checkbox value="name-confirm-checkbox" 
-            inputProps={{'aria-label': 'Confirm name for order'}} />}
-             labelPlacement="start" />
-          </Grid>
-          <Grid item xs={12}>Billing address:</Grid>
-          <Grid item xs={12}>{props.user.billingAddress.streetOne}</Grid>
-          {props.user.billingAddress.streetTwo && <Grid item xs={12}>{props.user.billingAddress.streetTwo}</Grid>}
-          <Grid item xs={12}>
-            {props.user.billingAddress.city}<span>{space}</span>
-            {props.user.billingAddress.state}<span>{space}</span>
-            {props.user.billingAddress.zipcode}
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel label="Confirm Billing Address:" value="start" 
-            control={<Checkbox value="name-confirm-checkbox" 
-            inputProps={{'aria-label': 'Confirm name for order'}} />}
-             labelPlacement="start" />
-          </Grid>          
-
-          <Grid item xs={12}>
-            <FormControl>
-              <InputLabel htmlFor="fullName">Full Name</InputLabel>
-              <Input name="fullName" onChange={(e) => setFullName(e.target.value)} />
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>  
-            <form onSubmit={handleSubmit}>
-              <CardSection />
-               <button disabled={!stripe}>Confirm order</button>
-            </form>
-          </Grid>
-   
+          <div>
+            <Grid marginTop="10px" item xs={12}>Shipping address:</Grid>
+            <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
+            {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
+            <Grid item xs={12}>
+              {props.user.shippingAddress.city}<span>{space}</span>
+              {props.user.shippingAddress.state}<span>{space}</span>
+              {props.user.shippingAddress.zipcode}
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel label="Confirm Shipping Address:" value="start" 
+              control={<Checkbox value="name-confirm-checkbox" 
+              inputProps={{'aria-label': 'Confirm name for order'}} />}
+              labelPlacement="start" />
+            </Grid>
+          </div>
+          <div>
+            <Grid item xs={12}>Billing address:</Grid>
+            <Grid item xs={12}>{props.user.billingAddress.streetOne}</Grid>
+            {props.user.billingAddress.streetTwo && <Grid item xs={12}>{props.user.billingAddress.streetTwo}</Grid>}
+            <Grid item xs={12}>
+              {props.user.billingAddress.city}<span>{space}</span>
+              {props.user.billingAddress.state}<span>{space}</span>
+              {props.user.billingAddress.zipcode}
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel label="Confirm Billing Address:" value="start" 
+              control={<Checkbox value="name-confirm-checkbox" 
+              inputProps={{'aria-label': 'Confirm name for order'}} />}
+              labelPlacement="start" />
+            </Grid>
+          </div>
+          <div>
+            <Grid item xs={12}>
+              <FormControl>
+                <InputLabel htmlFor="fullName">Full Name</InputLabel>
+                <Input name="fullName" onChange={(e) => setFullName(e.target.value)} />
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>  
+              <form onSubmit={handleSubmit}>
+                <CardSection />
+                <button disabled={!stripe}>Confirm order</button>
+              </form>
+            </Grid>
+          </div>
         </Grid>
       </Grid>
     </Grid>

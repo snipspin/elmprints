@@ -12,7 +12,7 @@ import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
 import SearchResultsCom from './SearchResultsCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
-import {green} from '@material-ui/core/colors'
+// import {brown} from '@material-ui/core/colors'
 import { makeStyles }from '@material-ui/core/styles'
 import styles from './styles';
 import {Decoded} from './App'
@@ -25,7 +25,7 @@ export interface ContentProps {
 const contentTheme = createMuiTheme({
 	palette: {
 		primary: {
-			main: green['A700']
+			main: "rgb(225, 221, 217)",
 		}
 	}
 })

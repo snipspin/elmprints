@@ -39,12 +39,10 @@ header {
 
 .brandingDiv {
   display: flex;
-  left: 10px;
   background-color: white;
   border-top: 1px solid black;
   box-shadow: black 12px -20px 12px -11px;
   z-index: 1;
-  border-left: 1px solid black;
 }
 
 .brandingName {
@@ -229,10 +227,10 @@ nav a:last-child {
 
 .posterDetailRight {
   margin-top: 50px;
+  margin-left: 50px;
 }
 
 .loginLinkProduct {
-  position: absolute;
   text-align: center;
   text-decoration: none;
   color: black;
@@ -249,7 +247,15 @@ nav a:last-child {
 }
 
 .posterPreviewImg {
-  max-width: 70vw;
+  max-width: 100%;
+}
+
+.faqContainer {
+  margin-top: 20px;
+}
+
+.faqItem {
+  margin: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
