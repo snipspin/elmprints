@@ -1,20 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom'
 import {Box, Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
-import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import Snackbar from '@material-ui/core/Snackbar'
+import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
 import ProductTile from './ProductTile'
-
 import CardSection from './CardSection';
+import MuiAlert from '@material-ui/lab/Alert'
+
+const CARD_ELEMENT_OPTIONS = {
+  style: {
+    base: {
+      color: "#32325d",
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: "antialiased",
+      iconColor: "black",
+      fontSize: "16px",
+      textAlign: "center",
+      "::placeholder": {
+        color: "#aab7c4",
+      },
+    },
+    complete: {
+      color: "#05a81b",
+      iconColor: "#05a81b"
+    },
+    invalid: {
+      color: "#fa0c0c",
+      iconColor: "#fa0c0c",
+    },
+  },
+};
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
 export default function CheckoutForm(props) {
   const [purchaseSuccess, setPurchaseSuccess] = useState(false)
   const [fullName, setFullName] = useState('')
-
+  const [errorAlert, setErrorAlert] = useState(false)
   useEffect(() => {
 
   }, [fullName, purchaseSuccess])
   const stripe = useStripe();
   const elements = useElements();
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setErrorAlert(false)
+  }
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -31,9 +66,10 @@ export default function CheckoutForm(props) {
     //{amount: 1500, cardType: "card"}) 
     // We pay 15€ with a credit card
     console.log(data.data.client_secret)
+    const cardElement = elements.getElement(CardNumberElement)
     const result = await stripe.confirmCardPayment(data.data.client_secret , {
       payment_method: {
-        card: elements.getElement(CardElement),
+        card: cardElement,
         billing_details: {
           name: fullName,
           address: {
@@ -51,12 +87,15 @@ export default function CheckoutForm(props) {
 
     if (result.error) {
       // Show error to your customer (e.g., insufficient funds)
+      setErrorAlert(true)
       console.log(result.error.message);
     } else {
       // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
        // Successfully purchased
-      setPurchaseSuccess(true)
+        setPurchaseSuccess(true)
+      } else {
+        setErrorAlert(true)
       }
     }
   };
@@ -116,17 +155,33 @@ export default function CheckoutForm(props) {
           </Grid>          
 
           <Grid item xs={12}>
+
             <FormControl>
               <InputLabel htmlFor="fullName">Full Name</InputLabel>
               <Input name="fullName" onChange={(e) => setFullName(e.target.value)} />
             </FormControl>
           </Grid>
-          <Grid item xs={12}>  
-            <form onSubmit={handleSubmit}>
-              <CardSection />
-               <button disabled={!stripe}>Confirm order</button>
-            </form>
-          </Grid>
+          <Grid item xs={12}>
+            <Snackbar open={errorAlert} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error">
+                Payment Failed
+              </Alert>
+            </Snackbar>
+             <form onSubmit={handleSubmit}> 
+                <h4>Card details</h4>
+                <label htmlFor="cardNumber">Card Number</label>
+                <CardNumberElement id="name" options={CARD_ELEMENT_OPTIONS} />
+                <label htmlFor="expiry">Expiration Date</label>
+                <CardExpiryElement id="expiry" options={CARD_ELEMENT_OPTIONS} />
+                <label htmlFor="cvc">CVC</label>
+                <CardCvcElement id="cvc" options={CARD_ELEMENT_OPTIONS} />
+                <label htmlFor="postal">Postal Code</label>
+                <input name="postal" />              
+                <button type="submit" disabled={!stripe}>
+                Pay
+                </button>
+             </form>
+          </Grid>  
    
         </Grid>
       </Grid>
