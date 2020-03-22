@@ -50,6 +50,32 @@ export default function CheckoutForm(props) {
     }
     setErrorAlert(false)
   }
+  const handleAddToPurchased = () => {
+   if(props.user) {
+     let email = props.user.email
+     let cartContent = [props.currentProduct]
+     let data = {
+       email,
+       cartContent
+     }
+   
+   fetch(`${process.env.REACT_APP_SERVER_URL}/cart/purchased`, {
+     method: 'PUT',
+     body: JSON.stringify(data),
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   })
+   .then(response => {
+     response.json().then(result => {
+       if(response.ok) {
+         props.updateUser(result.token)
+       } else {
+         console.log(`${response.status} ${response.statusText}: ${result.message}`)
+       }
+     }).catch(err => console.log(err))
+   }).catch(err => console.log(err.toString()))
+  }}
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -94,6 +120,7 @@ export default function CheckoutForm(props) {
       if (result.paymentIntent.status === 'succeeded') {
        // Successfully purchased
         setPurchaseSuccess(true)
+        handleAddToPurchased()
       } else {
         setErrorAlert(true)
       }

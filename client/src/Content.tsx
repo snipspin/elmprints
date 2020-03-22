@@ -11,6 +11,7 @@ import ShowCartPageCom from './ShowCartPageCom'
 import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
 import SearchResultsCom from './SearchResultsCom'
+import PaymentPageOneCom from './PaymentPageOneCom'
 import PurchaseHistory from './PurchaseHistory'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 // import {brown} from '@material-ui/core/colors'
@@ -42,10 +43,12 @@ const Content: React.FC<ContentProps> = (props) => {
 								<Switch>
 									<Route exact path="/" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
+									<Route path="/posters/cart/payment" render={() => <PaymentPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/posters/:id" render={() => <PosterDetail user={props.user} updateUser={props.updateUser} currentProduct={currentProduct} />} />
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={PosterDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
+									<Route path="/cart/payment/one" render={() => <PaymentPageOneCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/cart/payment" render={() => <PaymentPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom currentProduct={currentProduct} user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/cart" render={() => <ShowCartPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
