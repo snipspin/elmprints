@@ -85,6 +85,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState('1');
     const [goCheckout, setGoCheckout] = React.useState(false)
+    const [addedToCart, setAddedToCart] = useState<boolean>(false)
     const [open, setOpen] = useState<boolean>(false)
     const position: SnackbarOrigin = {
       vertical: 'top',
@@ -179,6 +180,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
               if(response.ok) {
                 props.updateUser(result.token)
                 handleOpen()
+                setAddedToCart(true)
               } else {
                 console.log(`${response.status} ${response.statusText}: ${result.message}`)
               }
@@ -189,11 +191,11 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
         }
       }
     }
-    const purchaseButton = (props.user)? (
+    const purchaseButton = (!addedToCart)? (
       <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Buy</Button>
     ) :
     (
-      <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
+      <Button classes={{root: classes.buttonRoot}} onClick={() => setGoCheckout(true)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Go to Checkout</Button>
     )
 
     if(!props.user) {
