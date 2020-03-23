@@ -1,7 +1,7 @@
-import React, {useState, useEffect, MouseEvent} from 'react'
+import React, {useState, MouseEvent} from 'react'
 import ProductTile from './ProductTile'
 import {Button} from '@material-ui/core'
-import {createStyles, makeStyles, withStyles, Theme, fade} from '@material-ui/core/styles';
+import {createStyles, makeStyles, withStyles, Theme} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import {ProductInformation} from './dec'
 import {Decoded} from './App'
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import Snackbar, {SnackbarOrigin} from '@material-ui/core/Snackbar'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 
@@ -84,10 +84,11 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
       vertical: 'top',
       horizontal: 'center'
     }
+
     const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
-      console.log(event.target.value)
-      setQuantity(event.target.value as string);
-    };
+      setQuantity(event.target.value as string)
+    }
+
     const handleOpen = ():void => {
         setOpen(true)
     }
@@ -100,7 +101,7 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
         setOpen(false);
     }    
     const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+      e.preventDefault()
       if(props.user) {
 
         for(let i: number = 1; i <= parseInt(quantity); i++) {
@@ -140,6 +141,7 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
         }
       }
     }
+
     const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
       if(props.user) {
