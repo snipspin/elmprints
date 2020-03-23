@@ -12,6 +12,7 @@ import ReceiptPageCom from './ReceiptPageCom'
 import SearchResultsCom from './SearchResultsCom'
 import PaymentPageOneCom from './PaymentPageOneCom'
 import PurchaseHistory from './PurchaseHistory'
+import SignUpCom from './SignUpCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
 import { makeStyles }from '@material-ui/core/styles'
 import styles from './styles';
@@ -46,6 +47,7 @@ const Content: React.FC<ContentProps> = (props) => {
 						<MuiThemeProvider theme={contentTheme}>
 								<Switch>
 									<Route exact path="/" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
+									<Route path="/signup" render={() => <SignUpCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/login" render={() => <SignInWindowCom user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/posters/cart/payment" render={() => <PaymentPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/posters/:id" render={() => <ProductDetail user={props.user} updateUser={props.updateUser} currentProduct={currentProduct} />} />
