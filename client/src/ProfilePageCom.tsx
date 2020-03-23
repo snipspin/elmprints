@@ -21,7 +21,7 @@ import {User, Item} from './dec'
         const [userCart, setUserCart] = useState<Array<Item>>([])
         const [viewHistory, setViewHistory] = useState<boolean>(false)
         if(!props.user) {
-            return <Redirect to="/posters" />
+            return <Redirect to="/login" />
         }
         const handlePurchaseHistory = (e: MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
