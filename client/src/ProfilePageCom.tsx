@@ -1,14 +1,11 @@
 import React, {useState, MouseEvent} from 'react'
 import { Redirect, Link, LinkProps } from 'react-router-dom'
-import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
+import {Grid, Button} from '@material-ui/core'
 import ProfileUserInfo from './ProfileUserInfo'
 import {Omit} from '@material-ui/types'
 import CartItem from './CartItem'
-import {CartItemProps} from './CartItem'
-import styles from './styles';
 import {Decoded} from './App'
-import {User, Item} from './dec'  
+import {User, Item} from './dec'
     
     export interface ProfilePageComProps {
         user: Decoded | null,

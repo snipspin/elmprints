@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import {Redirect} from 'react-router-dom'
-import {Box, Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
+import {Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar'
 import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
 import CartItem from './CartItem'
-import ProductTile from './ProductTile'
-import CardSection from './CardSection'
 import MuiAlert from '@material-ui/lab/Alert'
 
 const CARD_ELEMENT_OPTIONS = {
@@ -199,10 +197,10 @@ export default function CartCheckOutPage(props) {
               direction="column"
               alignContent="center"
               className="checkOutCustomerInfo"
-              style={{backgroundColor: "#f1e2d6", border: "2px solid black", maxWidth: "40vw", padding: "20px", margin: "15px auto"}}
+              style={{backgroundColor: "#f1e2d6", border: "2px solid black", padding: "20px", margin: "15px auto"}}
         >
           <div className="shippingAdd">
-            <Grid marginTop="10px" item xs={12}><h4>Shipping address:</h4></Grid>
+            <Grid item xs={12}><h4>Shipping address:</h4></Grid>
             <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
             {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
             <Grid item xs={12}>

@@ -1,7 +1,5 @@
 import React from 'react'
-import {Grid, Button} from '@material-ui/core'
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
-import {Decoded} from './App'
+import {Grid} from '@material-ui/core'
 export interface ReceiptItemProps {
 
 	item: string,
@@ -21,7 +19,7 @@ const ReceiptItem: React.FC<ReceiptItemProps> = (props) => {
 			alignItems="center"
 		>
 			<Grid item xs={4}>
-				<img className="posterImg" src={props.imgUrl} height="200px" />	
+				<img className="posterImg" alt="Poster" src={props.imgUrl} height="200px" />	
 			</Grid>
 			<Grid item xs={4}>
 				<h3>{props.item}</h3>

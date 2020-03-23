@@ -353,11 +353,20 @@ span.italic {
   text-align: left;
 }
 
+.checkOutCustomerInfo {
+  max-width: 48vw;
+}
+
 .cartItemDiv:after {
   content: "";
   width: 90%;
   border-bottom: 1px solid black;
   margin: 10px;
+}
+
+.posterImg {
+  max-width: 120px;
+  height: auto;
 }
 
 @media (max-width: 1000px) {

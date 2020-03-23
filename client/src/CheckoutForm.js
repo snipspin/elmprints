@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {Redirect} from 'react-router-dom'
-import {Box, Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
+import {Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar'
 import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
 import ProductTile from './ProductTile'
-import CardSection from './CardSection';
 import MuiAlert from '@material-ui/lab/Alert'
 
 const CARD_ELEMENT_OPTIONS = {
