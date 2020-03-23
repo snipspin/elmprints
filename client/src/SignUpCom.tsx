@@ -39,7 +39,6 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
         if (reason === 'clickaway') {
           return
         }
-    
         setOpen(false);
     }
     
@@ -51,8 +50,6 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
             handleOpen();
         }
     }
-
-
 
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
