@@ -68,35 +68,6 @@ header {
   height: 81.33px;
 }
 
-.headerMobile {
+.headerMobileDiv {
   display: none;
 }
-
-@media (max-width: 960px) {
-  .headerMobile {
-    display: block;
-  }
-
-  // .brandingDiv {
-  //   display: none;
-  // }
-
-  .headerSuperMain {
-    display: none
-  }
-  
-  .brandingDiv {
-    justify-content: center;
-  }
-}
-
-// @media (max-width: 600px) {
-//   hamburger Icon
-//   .headerDiv {
-//     display: block;
-//     height: 168px;
-//   }
-//   .brandingDiv {
-//     justify-content: center;
-//   }
-// }

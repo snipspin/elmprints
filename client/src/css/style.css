@@ -68,23 +68,10 @@ header {
   height: 81.33px;
 }
 
-.headerMobile {
+.headerMobileDiv {
   display: none;
 }
 
-@media (max-width: 960px) {
-  .headerMobile {
-    display: block;
-  }
-
-  .headerSuperMain {
-    display: none;
-  }
-
-  .brandingDiv {
-    justify-content: center;
-  }
-}
 nav {
   display: flex;
   justify-content: center;
@@ -304,6 +291,31 @@ span.italic {
 
 .faqItem {
   margin: 10px;
+}
+
+@media (max-width: 1000px) {
+  .headerMobileDiv {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .headerDiv {
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .headerSuperMain {
+    display: none;
+  }
+
+  .brandingDiv {
+    justify-content: center;
+    border-top: none;
+  }
+
+  .brandingName {
+    padding-right: 74px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
