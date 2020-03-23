@@ -1,11 +1,10 @@
 import React, {MouseEvent} from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import {Omit} from '@material-ui/types'
-// import Divider from '@material-ui/core/Divider';
 import {Link, LinkProps} from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,7 +12,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
-import IconButton from '@material-ui/core/IconButton';
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import MenuIcon from '@material-ui/icons/Menu';

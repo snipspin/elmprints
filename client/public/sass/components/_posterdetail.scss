@@ -28,3 +28,12 @@
   height: 36px;
   width: 95px;
 }
+
+@media (max-width: "1000px") {
+  .posterDetail {
+    display: block;
+  }
+  .posterDetailRight {
+    margin-left: 0px;
+  }
+}

@@ -1,6 +1,6 @@
 import React, {useState, MouseEvent} from 'react'
 import ProductTile from './ProductTile'
-import {Button} from '@material-ui/core'
+import {Button, Grid} from '@material-ui/core'
 import {createStyles, makeStyles, withStyles, Theme} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -204,34 +204,42 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
               Added to cart!
             </Alert>
           </Snackbar>
-            <ProductTile imageURL={props.currentProduct.imagePath} />
-            <div className="posterDetailRight">
-              <h1>{props.currentProduct.title}</h1>
-                <div className="priceDiv">
-                    <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
-                    <FormControl className={classes.margin}>
-                        <InputLabel id="demo-customized-select-label">Qty</InputLabel>
-                        <Select
-                            labelId="demo-customized-select-label"
-                            id="demo-customized-select"
-                            value={quantity}
-                            onChange={handleChange}
-                            input={<BootstrapInput />}
-                        >
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                <div>
-                <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
-                 onClick={(e: MouseEvent<HTMLButtonElement>) => handleAddToCart(e)}>Add to cart</Button>
-                {purchaseButton}
-                </div>
-                <h2>Description</h2>
-                <p>This poster is 1 foot by 3 feet</p>
-            </div>
+          <Grid container>
+            <Grid item md={6} xs={12}>
+                <ProductTile imageURL={props.currentProduct.imagePath} />
+              </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={6} xs={12}>
+              <div className="posterDetailRight">
+                <h1>{props.currentProduct.title}</h1>
+                  <div className="priceDiv">
+                      <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
+                      <FormControl className={classes.margin}>
+                          <InputLabel id="demo-customized-select-label">Qty</InputLabel>
+                          <Select
+                              labelId="demo-customized-select-label"
+                              id="demo-customized-select"
+                              value={quantity}
+                              onChange={handleChange}
+                              input={<BootstrapInput />}
+                          >
+                              <MenuItem value={1}>1</MenuItem>
+                              <MenuItem value={2}>2</MenuItem>
+                              <MenuItem value={3}>3</MenuItem>
+                          </Select>
+                      </FormControl>
+                  </div>
+                  <div>
+                  <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+                  onClick={(e: MouseEvent<HTMLButtonElement>) => handleAddToCart(e)}>Add to cart</Button>
+                  {purchaseButton}
+                  </div>
+                  <h2>Description</h2>
+                  <p>This poster is 1 foot by 3 feet</p>
+              </div>
+            </Grid>
+          </Grid>
         </div>
     )
 }
