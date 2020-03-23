@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,6 +15,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import IconButton from '@material-ui/core/IconButton';
 import HelpOutline from '@material-ui/icons/HelpOutline';
+import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchBarMobile from './SearchBarMobile'
 import {Decoded} from './App'
@@ -58,6 +59,11 @@ export interface HeaderMobileProps {
 const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({top: false});
+  const handleLogout = (e: MouseEvent<any>) => {
+    e.preventDefault()
+    localStorage.removeItem('mernToken')
+    props.updateUser(null)
+  }
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,
@@ -88,10 +94,16 @@ const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
         <ListItemLink to="/posters" primary="Posters" icon={<ExitToAppIcon />} />
         <ListItemLink to="/art" primary="Art" icon={<ExitToAppIcon />} />
         <ListItemLink to="/faq" primary="FAQ" icon={<HelpOutline />} />
+        {props.user && 
+          <ListItem button onClick={(e: MouseEvent<any>) => handleLogout(e)}>
+            <ListItemIcon><HighlightOffOutlinedIcon /></ListItemIcon>
+            <ListItemText>Log Out</ListItemText>
+          </ListItem>
+
+        }
       </List>
     </div>
   );
-
   const handleSearchTermChange = (value:string):void => {
     props.setSearchTerm(value)
   }
@@ -99,14 +111,11 @@ const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
   return (
     <div className="headerMobileDiv">
         <div className="hamburgerDiv">
-          <Button onClick={toggleDrawer('top', true)}>{
-                <IconButton
-                  style={{color: "rgb(255, 255, 255)"}}
-                  aria-label="open drawer"
-                  edge="start"
-                >
-                  <MenuIcon />
-                </IconButton>
+          <Button onClick={toggleDrawer('top', true)}> { 
+            <MenuIcon
+              style={{color: "rgb(255, 255, 255)", marginTop: "5px"}}
+              aria-label="open drawer"
+            />
           }</Button>
         </div>
         <SearchBarMobile onChange={handleSearchTermChange} />

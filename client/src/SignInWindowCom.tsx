@@ -73,7 +73,7 @@ const SignInWindowCom: React.FC<SigninProps> = (props) => {
 		return <Redirect to="/profile" />
 	}
 	if(redirect) {
-		return <Redirect to="/" />
+		return <Redirect to="/signup" />
 	}
    	return(
    		<Box className="sign-up-box">
