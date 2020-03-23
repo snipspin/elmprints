@@ -155,7 +155,8 @@ span.italic {
   .shoppingCartDiv {
     border: 2px solid black;
     min-height: 400px;
-    margin: 15px 0;
+    margin: 15px auto;
+    width: 98vw;
   }
 }
 .userInfo {
@@ -277,6 +278,15 @@ span.italic {
   width: 95px;
 }
 
+@media (max-width: 1000px) {
+  .posterDetail {
+    display: block;
+  }
+
+  .posterDetailRight {
+    margin-left: 0px;
+  }
+}
 .posterDiv {
   margin: 0 auto;
 }

@@ -56,7 +56,7 @@ const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
             	justify="space-between"
             	alignItems="center"
             >	
-            	<Grid item xs={6}>
+            	<Grid item md={6} xs={12}>
                     <Grid container
                           spacing={1}
                           justify="space-between"
@@ -82,7 +82,7 @@ const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
                    </div>
                    </Grid>
             	</Grid>
-            	<Grid item xs={6}>
+            	<Grid item md={6} xs={12}>
                     <Grid container
                           spacing={1}
                           justify="space-between"
