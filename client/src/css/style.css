@@ -365,7 +365,8 @@ span.italic {
 }
 
 .cartImg {
-  max-width: 120px;
+  max-width: 15vw;
+  min-width: 150px;
   height: auto;
 }
 
