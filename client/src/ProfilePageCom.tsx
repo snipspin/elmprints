@@ -1,5 +1,5 @@
 import React, {useState, MouseEvent} from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ProfileUserInfo from './ProfileUserInfo'
@@ -7,15 +7,24 @@ import CartItem from './CartItem'
 import {CartItemProps} from './CartItem'
 import styles from './styles';
 import {Decoded} from './App'
-import {User, Item} from './dec'    
+import {User, Item} from './dec'  
+
     export interface ProfilePageComProps {
         user: Decoded | null,
         updateUser: (newToken: string | null) => void
     }    
     const ProfilePageCom: React.FC<ProfilePageComProps> = (props) => {
         const [userCart, setUserCart] = useState<Array<Item>>([])
+        const [viewHistory, setViewHistory] = useState<boolean>(false)
         if(!props.user) {
             return <Redirect to="/posters" />
+        }
+        const handlePurchaseHistory = (e: MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault()
+            setViewHistory(true)
+        }
+        if(viewHistory){
+            return <Redirect to="/purchases" />
         }
         const handleDeleteCart = (e: MouseEvent<HTMLButtonElement>) => {
             e.preventDefault()
@@ -47,6 +56,10 @@ import {User, Item} from './dec'
                 })
             }
                     
+        }
+         if(viewHistory){
+            setViewHistory(false)
+            return <Redirect to="/purchases" />
         }        
         return(
         	<Grid 
@@ -63,17 +76,21 @@ import {User, Item} from './dec'
                         <h3>Shopping Cart</h3>
                         {props.user.shoppingCart.map((currItem,i) => (
                         
-                            <CartItem
-                                key={i} 
-                                item={currItem.item}
-                                imgUrl={currItem.imgUrl}
-                                price={currItem.price}
-                                imageID={currItem.imageID}
-                                sourceID={currItem.sourceID}
-                            />
+                        <CartItem
+                            key={i} 
+                            item={currItem.item}
+                            imgUrl={currItem.imgUrl}
+                            price={currItem.price}
+                            imageID={currItem.imageID}
+                            sourceID={currItem.sourceID}
+                        />
                         ))}   
-                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={(e: MouseEvent<HTMLButtonElement>) => handleDeleteCart(e)}>Clear Cart</Button>
+                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
+                        <Link to="/cart/payment">Proceed To Checkout</Link>
                     </div>
+                </Grid>
+                <Grid item md={6} xs={12}>
+                    <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handlePurchaseHistory(e)}>View Purchase History</Button>
                 </Grid>
         	</Grid>
         )

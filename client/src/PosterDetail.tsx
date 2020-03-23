@@ -80,13 +80,52 @@ const useStyles = makeStyles(theme => ({
 const PosterDetail: React.FC<PosterProps> = (props) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState('1');
+    const [goCheckout, setGoCheckout] = React.useState(false)
     const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
       console.log(event.target.value)
       setQuantity(event.target.value as string);
     };
     const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      return (<Link to="/cart/payment" className="loginLinkProduct">Purchase</Link>)
+      if(props.user) {
+
+        for(let i: number = 1; i <= parseInt(quantity); i++) {
+        //console.log(props.currentProduct.imagePath)
+          let email: string = props.user.email
+          let item: string = props.currentProduct.title
+          let price: string = props.currentProduct.price
+          let imgUrl: string = props.currentProduct.imagePath
+          let imageID: string = props.currentProduct.imageID
+          let sourceID: string = props.currentProduct.sourceID
+          let data: object = {
+            email,
+            item,
+            price,
+            imgUrl,
+            imageID,
+            sourceID
+          }
+          fetch(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+            method: 'PUT',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type' : 'application/json'
+            }
+          })
+          .then((response: Response) => {
+            response.json().then(result => {
+              if(response.ok) {
+                props.updateUser(result.token)
+                setGoCheckout(true)
+              } else {
+                console.log(`${response.status} ${response.statusText}: ${result.message}`)
+              }
+            }).catch((err: Error) => console.log(err))
+          }).catch((err: Error) => {
+            console.log(`Error: ${err.toString()}`)
+          })
+        }
+      }
     }
     const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
@@ -130,7 +169,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
       }
     }
     const purchaseButton = (props.user)? (
-      <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"><Link to="/cart/payment" className="loginLinkProduct">Buy</Link></Button>
+      <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Buy</Button>
     ) :
     (
       <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
@@ -138,6 +177,9 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
 
     if(!props.user) {
       return <Redirect to="/" />
+    }
+    if(goCheckout) {
+      return <Redirect to="cart/payment" />
     }
     return(
         <div className="posterDetail">
