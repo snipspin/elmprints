@@ -17,7 +17,6 @@ export interface PaymentPageOneProps {
 const PaymentPageOneCom: React.FC<PaymentPageOneProps> = (props) => {
     return(
         <div>
-        	<h3>Payment Page</h3>
             <Elements stripe={stripePromise}>
                 <CheckoutForm currentProduct={props.currentProduct} user={props.user} />}
             </Elements>
