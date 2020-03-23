@@ -12,7 +12,6 @@ type ShowCartPageProps = {
 const ShowCartPageCom: React.FC<ShowCartPageProps> = (props) => {
         return(
             <div>
-                ShowCartPageCom
                 <PaymentPageCom updateUser={props.updateUser} currentProduct={props.currentProduct} user={props.user} />
             </div>
         )

@@ -44,7 +44,7 @@ function FAQPageCom() {
             {
                 faqArray.map((faq,i) => (
                     <Grid item xs={8} key={i}>
-                        <ExpansionPanel className="faqItem" expanded={expanded === `faq${i}`} onChange={handleChange(`faq${i}`)}>
+                        <ExpansionPanel style={{backgroundColor: "#f1e2d6"}} className="faqItem" expanded={expanded === `faq${i}`} onChange={handleChange(`faq${i}`)}>
                             <ExpansionPanelSummary 
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls={`faq${i}-content`}

@@ -15,6 +15,8 @@ const CartItem: React.FC<CartItemProps> = (props) => {
 			direction="row"
 			justify="space-evenly"
 			alignItems="center"
+			// style={{borderBottom: "2px solid black"}}
+			className="cartItemDiv"
 		>
 			<Grid item xs={4} offset-xs={1}>
 				<img className="posterImg" src={props.imgUrl} height="200px" />	

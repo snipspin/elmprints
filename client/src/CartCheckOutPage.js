@@ -17,7 +17,7 @@ const CARD_ELEMENT_OPTIONS = {
       fontSmoothing: "antialiased",
       iconColor: "black",
       fontSize: "16px",
-      textAlign: "center",
+      textAlign: "left",
       "::placeholder": {
         color: "#aab7c4",
       },
@@ -170,7 +170,7 @@ export default function CartCheckOutPage(props) {
       justify="space-evenly"
       alignContent="center"
     >
-    	<Grid item md={6} xs={6}>
+    	<Grid item md={6} xs={12}>
             <div className="shoppingCartDiv">
             	<h3>Shopping Cart</h3>
                 	{props.user.shoppingCart.map((currItem,i) => (
@@ -189,16 +189,17 @@ export default function CartCheckOutPage(props) {
                         <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
             </div>
         </Grid>
-        <Grid item md={6} xs={6}>
+        <Grid item md={6} xs={12}>
         <Grid container 
               spacing={1}
               justify="space-between"
               direction="column"
               alignContent="center"
-              style={{border: "2px solid black", maxWidth: "40vw", paddingBottom: "20px", margin: "50px auto"}}
+              className="checkOutCustomerInfo"
+              style={{backgroundColor: "#f1e2d6", border: "2px solid black", maxWidth: "40vw", padding: "20px", margin: "15px auto"}}
         >
-          <div>
-            <Grid marginTop="10px" item xs={12}>Shipping address:</Grid>
+          <div className="shippingAdd">
+            <Grid marginTop="10px" item xs={12}><h4>Shipping address:</h4></Grid>
             <Grid item xs={12}>{props.user.shippingAddress.streetOne}</Grid>
             {props.user.shippingAddress.streetTwo && <Grid item xs={12}>{props.user.shippingAddress.streetTwo}</Grid>}
             <Grid item xs={12}>
@@ -213,8 +214,8 @@ export default function CartCheckOutPage(props) {
               labelPlacement="start" />
             </Grid>
           </div>
-          <div>
-            <Grid item xs={12}>Billing address:</Grid>
+          <div className="billingAdd">
+            <Grid item xs={12}><h4>Billing address:</h4></Grid>
             <Grid item xs={12}>{props.user.billingAddress.streetOne}</Grid>
             {props.user.billingAddress.streetTwo && <Grid item xs={12}>{props.user.billingAddress.streetTwo}</Grid>}
             <Grid item xs={12}>
@@ -229,11 +230,12 @@ export default function CartCheckOutPage(props) {
               labelPlacement="start" />
             </Grid>
           </div>
-          <div>
+          <div className="cardDetailsDiv">
             <Grid item xs={12}>
+              <h2 className="cardDetails">Card Details:</h2>
               <FormControl>
-                <InputLabel htmlFor="fullName">Full Name</InputLabel>
-                <Input name="fullName" onChange={(e) => setFullName(e.target.value)} />
+                <InputLabel className="fullNameLabel" htmlFor="fullName">Full Name</InputLabel>
+                <Input className="fullName" name="fullName" onChange={(e) => setFullName(e.target.value)} />
               </FormControl>
             </Grid>
             <Grid item xs={12}>
@@ -243,16 +245,15 @@ export default function CartCheckOutPage(props) {
                 </Alert>
               </Snackbar>
               <form onSubmit={handleSubmit}> 
-                  <h4>Card details</h4>
                   <label htmlFor="cardNumber">Card Number</label>
-                  <CardNumberElement id="name" options={CARD_ELEMENT_OPTIONS} />
+                  <CardNumberElement className="cardNumber" id="name" options={CARD_ELEMENT_OPTIONS} />
                   <label htmlFor="expiry">Expiration Date</label>
-                  <CardExpiryElement id="expiry" options={CARD_ELEMENT_OPTIONS} />
+                  <CardExpiryElement className="expiry" id="expiry" options={CARD_ELEMENT_OPTIONS} />
                   <label htmlFor="cvc">CVC</label>
-                  <CardCvcElement id="cvc" options={CARD_ELEMENT_OPTIONS} />
-                  <label htmlFor="postal">Postal Code</label>
-                  <input name="postal" />              
-                  <button type="submit" disabled={!stripe}>
+                  <CardCvcElement className="cvc" id="cvc" options={CARD_ELEMENT_OPTIONS} />
+                  <label className="postalLabel" htmlFor="postal">Postal Code</label>
+                  <input className="postal" placeholder="Postal Code" name="postal" />              
+                  <button className="payBtn" type="submit" disabled={!stripe}>
                   Pay
                   </button>
               </form>

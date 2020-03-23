@@ -22,11 +22,12 @@
 @import 'components/poster';
 @import 'components/producttile';
 @import 'components/faq';
+@import 'components/cartcheckoutpage';
+@import 'components/cartitem';
 
 
 @media (max-width: 1000px) {
   .headerMobileDiv {
-    // display: block;
     display: flex;
     justify-content: space-between;
   }
@@ -47,5 +48,9 @@
 
   .brandingName {
     padding-right: 74px;
+  }
+  
+  .checkOutCustomerInfo {
+    max-width: 100%
   }
 }
