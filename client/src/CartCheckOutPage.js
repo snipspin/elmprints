@@ -178,7 +178,8 @@ export default function CartCheckOutPage(props) {
                     <CartItem
                         key={i}
                         user={props.user}
-                        updateUser={props.updateUser} 
+                        updateUser={props.updateUser}
+                        id={currItem._id} 
                         item={currItem.item}
                         imgUrl={currItem.imgUrl}
                         price={currItem.price}

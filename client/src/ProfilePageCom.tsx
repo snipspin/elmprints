@@ -79,7 +79,8 @@ import {User, Item} from './dec'
                         <CartItem
                             user={props.user}
                             updateUser={props.updateUser}
-                            key={i} 
+                            key={i}
+                            id={currItem._id} 
                             item={currItem.item}
                             imgUrl={currItem.imgUrl}
                             price={currItem.price}

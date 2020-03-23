@@ -3,7 +3,7 @@ import {Grid, Button} from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import {Decoded} from './App'
 export interface CartItemProps {
-
+	id: string,
 	item: string,
 	price: string,
 	imageID: string,
@@ -19,11 +19,11 @@ const CartItem: React.FC<CartItemProps> = (props) => {
         if(props.user){
             let email = props.user.email
             let cartID = props.user.shoppingCart
-            let imageID = props.imageID    
+            let productID = props.id    
             let data: object = {
                 email,
                 cartID,
-                imageID
+                productID
             }          
             
         fetch(`${process.env.REACT_APP_SERVER_URL}/cart/remove`, {
