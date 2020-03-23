@@ -28,6 +28,9 @@ const contentTheme = createMuiTheme({
 	palette: {
 		primary: {
 			main: "rgb(225, 221, 217)",
+		},
+		secondary: {
+			main: "rgb(0, 0, 0)"
 		}
 	}
 })

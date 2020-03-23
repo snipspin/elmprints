@@ -4,14 +4,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import IconButton from '@material-ui/core/IconButton';
+import HelpOutline from '@material-ui/icons/HelpOutline';
 import MenuIcon from '@material-ui/icons/Menu';
+import SearchBarMobile from './SearchBarMobile'
+import {Decoded} from './App'
 
 const useStyles = makeStyles({
   list: {
@@ -24,7 +28,13 @@ const useStyles = makeStyles({
 
 type Anchor = 'top';
 
-export default function TemporaryDrawer() {
+export interface HeaderMobileProps {
+  user: Decoded | null,
+  updateUser: (newToken: string | null) => void,
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+}
+
+const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({top: false});
 
@@ -52,42 +62,52 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button key={'Home'}>
+          <ListItemIcon><HomeIcon /></ListItemIcon>
+          <ListItemText primary={'Home'} />
+        </ListItem>
+        <ListItem button key={'Profile'}>
+          <ListItemIcon><AccountCircleOutlined /></ListItemIcon>
+          <ListItemText primary={'Profile'} />
+        </ListItem>
+        <ListItem button key={'Posters'}>
+          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+          <ListItemText primary={'Posters'} />
+        </ListItem>
+        <ListItem button key={'Art'}>
+          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+          <ListItemText primary={'Art'} />
+        </ListItem>
+        <ListItem button key={'FAQ'}>
+          <ListItemIcon><HelpOutline /></ListItemIcon>
+          <ListItemText primary={'FAQ'} />
+        </ListItem>
       </List>
     </div>
   );
 
+  const handleSearchTermChange = (value:string):void => {
+    props.setSearchTerm(value)
+  }
+
   return (
-    <div>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          // onClick={handleDrawerOpen}
-          edge="start"
-          // className={clsx(classes.menuButton, open && classes.hide)}
-        >
-          <MenuIcon />
-        </IconButton>
-        <React.Fragment>
-          <Button onClick={toggleDrawer('top', true)}>{'top'}</Button>
-          <Drawer anchor={'top'} open={state['top']} onClose={toggleDrawer('top', false)}>
-            {list('top')}
-          </Drawer>
-        </React.Fragment>
+    <div className="headerMobileDiv">
+        <div className="hamburgerDiv">
+          <Button onClick={toggleDrawer('top', true)}>{
+                <IconButton
+                  style={{color: "rgb(255, 255, 255)"}}
+                  aria-label="open drawer"
+                  edge="start"
+                >
+                  <MenuIcon />
+                </IconButton>
+          }</Button>
+        </div>
+        <SearchBarMobile onChange={handleSearchTermChange} />
+        <Drawer anchor={'top'} open={state['top']} onClose={toggleDrawer('top', false)}>
+          {list('top')}
+        </Drawer>
     </div>
   );
 }
+export default HeaderMobile

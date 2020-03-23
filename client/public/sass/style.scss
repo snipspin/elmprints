@@ -22,3 +22,30 @@
 @import 'components/poster';
 @import 'components/producttile';
 @import 'components/faq';
+
+
+@media (max-width: 1000px) {
+  .headerMobileDiv {
+    // display: block;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .headerDiv {
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .headerSuperMain {
+    display: none
+  }
+  
+  .brandingDiv {
+    justify-content: center;
+    border-top: none;
+  }
+
+  .brandingName {
+    padding-right: 74px;
+  }
+}
