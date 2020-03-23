@@ -59,7 +59,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
             >
                 <Grid container>
                     <Grid item xs={5} className="posterImgDiv">
-                        <img className="posterImg" src={props.imgUrl} height="200px" />	
+                        <img className="cartImg" src={props.imgUrl} height="200px" />	
                     </Grid>
                     <Grid item xs={4}>
                         <h3>{props.item}</h3>
