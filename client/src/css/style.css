@@ -88,8 +88,7 @@ nav a {
   text-decoration: none;
   height: 25px;
   font-size: 20px;
-  max-width: 200px;
-  width: 33.3%;
+  width: 183px;
 }
 nav a:hover {
   background-color: #cfc7be;
@@ -159,13 +158,17 @@ span.italic {
     margin: 15px 0;
   }
 }
+.userInfo {
+  background-color: #f1e2d6;
+}
+
 @media (min-width: 960px) {
   .userInfo {
     align-items: center;
     border: 2px solid black;
     width: 49vw;
     min-height: 500px;
-    margin: 21% auto;
+    margin: 15px auto;
   }
 }
 @media (max-width: 960px) {
@@ -218,6 +221,7 @@ span.italic {
   margin: 50px auto;
   border: 1px solid black;
   box-shadow: 8px 7px 7px #888888;
+  background-color: #f1e2d6;
 }
 
 .productsDiv {
@@ -293,6 +297,69 @@ span.italic {
   margin: 10px;
 }
 
+.shoppingCartDiv {
+  background-color: #f1e2d6;
+}
+
+.billingAdd {
+  margin-top: 10px;
+}
+
+.shippingAdd {
+  border-bottom: 2px solid black;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.cardDetails {
+  margin-bottom: 0;
+}
+
+.fullName {
+  margin: 10px;
+  margin-left: 0;
+}
+
+.cardNumber, .expiry, .cvc {
+  margin-bottom: 10px;
+}
+
+.cardDetailsDiv {
+  border: 2px solid black;
+  padding: 15px;
+  text-align: left;
+  border-radius: 10%;
+  padding-left: 70px;
+  padding-right: 70px;
+  background-color: white;
+}
+
+.payBtn {
+  display: block;
+  margin: 10px auto;
+  font-size: 20px;
+  width: 100px;
+  height: 35px;
+}
+
+.postalLabel {
+  display: block;
+}
+
+.postal {
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  text-align: left;
+}
+
+.cartItemDiv:after {
+  content: "";
+  width: 90%;
+  border-bottom: 1px solid black;
+  margin: 10px;
+}
+
 @media (max-width: 1000px) {
   .headerMobileDiv {
     display: flex;
@@ -315,6 +382,10 @@ span.italic {
 
   .brandingName {
     padding-right: 74px;
+  }
+
+  .checkOutCustomerInfo {
+    max-width: 100%;
   }
 }
 

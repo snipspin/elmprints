@@ -1,0 +1,55 @@
+.shoppingCartDiv {
+  background-color: #f1e2d6;
+}
+
+.billingAdd {
+  margin-top: 10px;
+}
+
+.shippingAdd {
+  border-bottom: 2px solid black;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.cardDetails {
+  margin-bottom: 0;
+}
+
+.fullName {
+  margin: 10px;
+  margin-left: 0;
+}
+
+.cardNumber, .expiry, .cvc {
+  margin-bottom: 10px
+}
+
+.cardDetailsDiv {
+  border: 2px solid black;
+  padding: 15px;
+  text-align: left;
+  border-radius: 10%;
+  padding-left: 70px;
+  padding-right: 70px;
+  background-color: white;
+}
+
+.payBtn {
+  display: block;
+  margin: 10px auto;
+  font-size: 20px;
+  width: 100px;
+  height: 35px;
+}
+
+.postalLabel {
+  display: block;
+}
+
+.postal {
+  border: none;
+  font-size: 15px;
+  padding: 0;
+  text-align: left;
+}

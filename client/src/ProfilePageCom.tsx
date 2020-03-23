@@ -66,7 +66,7 @@ import {User, Item} from './dec'
         		container 
         		direction="row"
         		justify="space-evenly"
-        		alignItems="center"
+        		// alignItems="center"
         	>   
                 <Grid item md={6} xs={12}>
                     <ProfileUserInfo user={props.user} updateUser={props.updateUser} />
@@ -89,7 +89,7 @@ import {User, Item} from './dec'
                         />                        
                         ))}   
                         <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
-                        <Link to="/cart/payment">Proceed To Checkout</Link>
+                        <Link style={{marginLeft: "10px"}} to="/cart/payment">Proceed To Checkout</Link>
                     </div>
                 </Grid>
                 <Grid item md={6} xs={12}>
