@@ -95,6 +95,21 @@ router.put('/purchased', (req,res) => {
       res.status(500).send(err)
     })
 })
+router.put('/remove', (req,res) => {
+  db.User.findOneAndUpdate(
+    {email: req.body.email},
+    {$pull: {shoppingCart: {imageID: req.body.imageID}}},
+    {new: true}).then(updateUser => {
+      let token = jwt.sign(updateUser.toJSON(), process.env.JWT_SECRET, {
+        expiresIn: 60 * 60 * 8 
+      })
+      res.status(200).send({token})
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    })
+})
 router.put('/delete', (req, res) => {
   console.log(req.body)
   let idArray = []

@@ -2,8 +2,8 @@ import React, {useEffect, useState, ChangeEvent, MouseEvent} from 'react'
 import {Box, FormControl, Input, InputLabel, Button, BoxProps} from '@material-ui/core'
 import {Decoded} from './App'
 import {Redirect} from 'react-router-dom'
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import Snackbar, {SnackbarOrigin} from '@material-ui/core/Snackbar'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 
 export interface SignupProps {
     user: Decoded | null,
@@ -11,8 +11,8 @@ export interface SignupProps {
 }
 
 function Alert(props: AlertProps) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+    return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 const SignUpCom: React.FC<SignupProps> = (props) => {
     const [email, setEmail] = useState<string>('')
@@ -21,9 +21,12 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
     const [message, setMessage] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [redirect, setRedirect] = useState<boolean>(false)
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false)
     const [passwordInfo, setPasswordInfo] = useState<boolean>(false)
-
+    const position: SnackbarOrigin = {
+        vertical: 'top',
+        horizontal: 'center'
+    }
     useEffect(() => {
         setMessage('')
     }, [firstname, lastname, email, password])
@@ -38,7 +41,7 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
         }
     
         setOpen(false);
-      }
+    }
     
     const checkLength = (event: React.FocusEvent,
         minLen: number):void => {
@@ -128,7 +131,7 @@ const SignUpCom: React.FC<SignupProps> = (props) => {
             <span>{passwordInfo ? 'Password is required to be 12 characters long':''}</span>
             </Box>
             <Button style={{marginTop: "20px"}} onClick={e => handleSubmit(e)} variant="contained" color="primary" className="submit-button">Sign Up</Button>
-        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Snackbar anchorOrigin={position} open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
           {message}
         </Alert>

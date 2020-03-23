@@ -3,7 +3,7 @@ import {Grid, Button} from '@material-ui/core'
 import {ProductInformation} from './dec'
 import {Decoded} from './App'
 import {Link, Redirect} from 'react-router-dom'
-import CartItem from './CartItem'
+import ReceiptItem from './ReceiptItem'
 export interface ReceiptPageComProps {
     user: Decoded | null,
     currentProduct: ProductInformation,
@@ -69,7 +69,7 @@ const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
                     <Grid item xs={12}>
                     {props.user.shoppingCart.map((currItem,i) => (
                         
-                    <CartItem
+                    <ReceiptItem
                         key={i} 
                         item={currItem.item}
                         imgUrl={currItem.imgUrl}

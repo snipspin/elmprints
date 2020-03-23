@@ -10,6 +10,8 @@ import InputBase from '@material-ui/core/InputBase';
 import {ProductInformation} from './dec'
 import {Decoded} from './App'
 import {Link, Redirect} from 'react-router-dom'
+import Snackbar, {SnackbarOrigin} from '@material-ui/core/Snackbar'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 
 // Notes from Pete on May 17 2020:
 // interface below created to test showing more information than the Poster interface in the declaration file (as used in postergallery)
@@ -76,15 +78,33 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   }
 }))
-
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const PosterDetail: React.FC<PosterProps> = (props) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState('1');
     const [goCheckout, setGoCheckout] = React.useState(false)
+    const [open, setOpen] = useState<boolean>(false)
+    const position: SnackbarOrigin = {
+      vertical: 'top',
+      horizontal: 'center'
+    }
     const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
       console.log(event.target.value)
       setQuantity(event.target.value as string);
     };
+    const handleOpen = ():void => {
+        setOpen(true)
+    }
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+          return
+        }
+    
+        setOpen(false);
+    }    
     const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       if(props.user) {
@@ -158,6 +178,7 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
             response.json().then(result => {
               if(response.ok) {
                 props.updateUser(result.token)
+                handleOpen()
               } else {
                 console.log(`${response.status} ${response.statusText}: ${result.message}`)
               }
@@ -181,8 +202,13 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     if(goCheckout) {
       return <Redirect to="cart/payment" />
     }
-    return(
+    return(  
         <div className="posterDetail">
+          <Snackbar anchorOrigin={position} open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Added to cart!
+            </Alert>
+          </Snackbar>
             <ProductTile imageURL={props.currentProduct.imagePath} />
             <div className="posterDetailRight">
               <h1>{props.currentProduct.title}</h1>
