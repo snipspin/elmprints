@@ -1,10 +1,14 @@
+.userInfo {
+  background-color: #f1e2d6;
+}
+
 @media (min-width: 960px) {
   .userInfo {
     align-items: center;
     border: 2px solid black;
     width: 49vw;
     min-height: 500px;
-    margin: 21% auto
+    margin: 15px auto
   }
 }
 
