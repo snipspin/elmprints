@@ -176,7 +176,10 @@ export default function CartCheckOutPage(props) {
                 	{props.user.shoppingCart.map((currItem,i) => (
                         
                     <CartItem
-                        key={i} 
+                        key={i}
+                        user={props.user}
+                        updateUser={props.updateUser}
+                        id={currItem._id} 
                         item={currItem.item}
                         imgUrl={currItem.imgUrl}
                         price={currItem.price}

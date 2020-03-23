@@ -1,7 +1,7 @@
-import React, {useState, useEffect, MouseEvent} from 'react'
+import React, {useState, MouseEvent} from 'react'
 import ProductTile from './ProductTile'
 import {Button} from '@material-ui/core'
-import {createStyles, makeStyles, withStyles, Theme, fade} from '@material-ui/core/styles';
+import {createStyles, makeStyles, withStyles, Theme} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,20 +9,15 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import {ProductInformation} from './dec'
 import {Decoded} from './App'
-import {Link, Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
+import Snackbar, {SnackbarOrigin} from '@material-ui/core/Snackbar'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 
-// Notes from Pete on May 17 2020:
-// interface below created to test showing more information than the Poster interface in the declaration file (as used in postergallery)
-// should another declaration be created for displaying this poster?
-// my guess is we would be best off having a second interface similar to the one below
-// if this is moved to dec file, then this import could be used as 
-// import { Poster } from './dec';
-export interface PosterProps {
+export interface ProductProps {
   user: Decoded | null,
   updateUser: (newToken: string | null) => void,
   currentProduct: ProductInformation
 }
-
 
 const BootstrapInput = withStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +34,6 @@ const BootstrapInput = withStyles((theme: Theme) =>
       fontSize: 16,
       padding: '10px 26px 10px 12px',
       transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
       fontFamily: [
         '-apple-system',
         'BlinkMacSystemFont',
@@ -61,7 +55,6 @@ const BootstrapInput = withStyles((theme: Theme) =>
   }),
 )(InputBase)
 
-
 const useStyles = makeStyles(theme => ({
   buttonRoot: {
     borderRadius: 3,
@@ -77,20 +70,41 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const PosterDetail: React.FC<PosterProps> = (props) => {
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const PosterDetail: React.FC<ProductProps> = (props) => {
     const classes = useStyles();
     const [quantity, setQuantity] = React.useState('1');
     const [goCheckout, setGoCheckout] = React.useState(false)
+    const [addedToCart, setAddedToCart] = useState<boolean>(false)
+    const [open, setOpen] = useState<boolean>(false)
+    const position: SnackbarOrigin = {
+      vertical: 'top',
+      horizontal: 'center'
+    }
+
     const handleChange = (event: React.ChangeEvent<{ value: any }>) => {
-      console.log(event.target.value)
-      setQuantity(event.target.value as string);
-    };
+      setQuantity(event.target.value as string)
+    }
+
+    const handleOpen = ():void => {
+        setOpen(true)
+    }
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+          return
+        }
+    
+        setOpen(false);
+    }    
     const handlePurchase = (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
+      e.preventDefault()
       if(props.user) {
 
         for(let i: number = 1; i <= parseInt(quantity); i++) {
-        //console.log(props.currentProduct.imagePath)
           let email: string = props.user.email
           let item: string = props.currentProduct.title
           let price: string = props.currentProduct.price
@@ -127,12 +141,12 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
         }
       }
     }
+
     const handleAddToCart = (e: MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
       if(props.user) {
 
         for(let i: number = 1; i <= parseInt(quantity); i++) {
-        //console.log(props.currentProduct.imagePath)
           let email: string = props.user.email
           let item: string = props.currentProduct.title
           let price: string = props.currentProduct.price
@@ -158,6 +172,8 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
             response.json().then(result => {
               if(response.ok) {
                 props.updateUser(result.token)
+                handleOpen()
+                setAddedToCart(true)
               } else {
                 console.log(`${response.status} ${response.statusText}: ${result.message}`)
               }
@@ -168,11 +184,11 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
         }
       }
     }
-    const purchaseButton = (props.user)? (
+    const purchaseButton = (!addedToCart)? (
       <Button classes={{root: classes.buttonRoot}} onClick={(e: MouseEvent<HTMLButtonElement>) => handlePurchase(e)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Buy</Button>
     ) :
     (
-      <Button classes={{root: classes.buttonRoot}} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button "><Link to="/login" className="loginLinkProduct">Sign In</Link>  </Button>
+      <Button classes={{root: classes.buttonRoot}} onClick={() => setGoCheckout(true)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Go to Checkout</Button>
     )
 
     if(!props.user) {
@@ -181,8 +197,13 @@ const PosterDetail: React.FC<PosterProps> = (props) => {
     if(goCheckout) {
       return <Redirect to="cart/payment" />
     }
-    return(
+    return(  
         <div className="posterDetail">
+          <Snackbar anchorOrigin={position} open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              Added to cart!
+            </Alert>
+          </Snackbar>
             <ProductTile imageURL={props.currentProduct.imagePath} />
             <div className="posterDetailRight">
               <h1>{props.currentProduct.title}</h1>

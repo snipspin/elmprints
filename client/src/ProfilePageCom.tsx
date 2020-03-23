@@ -77,13 +77,16 @@ import {User, Item} from './dec'
                         {props.user.shoppingCart.map((currItem,i) => (
                         
                         <CartItem
-                            key={i} 
+                            user={props.user}
+                            updateUser={props.updateUser}
+                            key={i}
+                            id={currItem._id} 
                             item={currItem.item}
                             imgUrl={currItem.imgUrl}
                             price={currItem.price}
                             imageID={currItem.imageID}
                             sourceID={currItem.sourceID}
-                        />
+                        />                        
                         ))}   
                         <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
                         <Link style={{marginLeft: "10px"}} to="/cart/payment">Proceed To Checkout</Link>

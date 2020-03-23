@@ -1,11 +1,11 @@
-import React, { MouseEvent, useState} from 'react'
-import {fade, makeStyles} from '@material-ui/core/styles'
-import {Button, InputBase} from '@material-ui/core'
+import React, { MouseEvent} from 'react'
+import {makeStyles} from '@material-ui/core/styles'
+import {Button} from '@material-ui/core'
 import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import Tree from './img/treeTrial.png'
 import {Decoded} from './App'
-import {Link, NavLink} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import SearchBarCom from './SearchBarCom'
 import HeaderMobile from './HeaderMobile'
 
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
       width: 95
     }
 }));
+
 export interface HeaderProps {
     user: Decoded | null,
     updateUser: (newToken: string | null) => void,
@@ -46,6 +47,7 @@ const Header: React.FC<HeaderProps> =(props) => {
             <Link to="/login" className="loginLink">Sign In</Link>        
         </div>
     )
+    
     if(props.user) {
         variableButton = (
             <Button classes={{root: classes.buttonRoot}} className="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" 
@@ -90,4 +92,5 @@ const Header: React.FC<HeaderProps> =(props) => {
         </div>
     )
 }
+
 export default Header
