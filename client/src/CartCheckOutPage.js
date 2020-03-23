@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import {Redirect} from 'react-router-dom'
 import {Box, Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar'
 import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
+import CartItem from './CartItem'
 import ProductTile from './ProductTile'
-import CardSection from './CardSection';
+import CardSection from './CardSection'
 import MuiAlert from '@material-ui/lab/Alert'
 
 const CARD_ELEMENT_OPTIONS = {
@@ -31,17 +32,19 @@ const CARD_ELEMENT_OPTIONS = {
     },
   },
 };
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-export default function CheckoutForm(props) {
+export default function CartCheckOutPage(props) {
   const [purchaseSuccess, setPurchaseSuccess] = useState(false)
   const [fullName, setFullName] = useState('')
   const [errorAlert, setErrorAlert] = useState(false)
   useEffect(() => {
 
   }, [fullName, purchaseSuccess])
+  const space= "  " 
   const stripe = useStripe();
   const elements = useElements();
   const handleClose = (event, reason) => {
@@ -51,31 +54,61 @@ export default function CheckoutForm(props) {
     setErrorAlert(false)
   }
   const handleAddToPurchased = () => {
-   if(props.user) {
-     let email = props.user.email
-     let cartContent = [props.currentProduct]
-     let data = {
-       email,
-       cartContent
-     }
-   
-   fetch(`${process.env.REACT_APP_SERVER_URL}/cart/purchased`, {
-     method: 'PUT',
-     body: JSON.stringify(data),
-     headers: {
-       'Content-Type': 'application/json'
-     }
-   })
-   .then(response => {
-     response.json().then(result => {
-       if(response.ok) {
-         props.updateUser(result.token)
-       } else {
-         console.log(`${response.status} ${response.statusText}: ${result.message}`)
-       }
-     }).catch(err => console.log(err))
-   }).catch(err => console.log(err.toString()))
+ 	if(props.user) {
+ 		let email = props.user.email
+ 		let cartContent = [...props.user.shoppingCart]
+ 		let data = {
+ 			email,
+ 			cartContent
+ 		}
+ 	
+ 	fetch(`${process.env.REACT_APP_SERVER_URL}/cart/purchased`, {
+ 		method: 'PUT',
+ 		body: JSON.stringify(data),
+ 		headers: {
+ 			'Content-Type': 'application/json'
+ 		}
+ 	})
+ 	.then(response => {
+ 		response.json().then(result => {
+ 			if(response.ok) {
+ 				props.updateUser(result.token)
+ 			} else {
+ 				console.log(`${response.status} ${response.statusText}: ${result.message}`)
+ 			}
+ 		}).catch(err => console.log(err))
+ 	}).catch(err => console.log(err.toString()))
   }}
+  const handleDeleteCart = (e) => {
+  	e.preventDefault()
+    if(props.user){
+   		let email = props.user.email
+        let cartID = props.user.shoppingCart    
+        let data = {
+          email,
+          cartID
+        }          
+            
+        fetch(`${process.env.REACT_APP_SERVER_URL}/cart/delete`, {
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+          	'Content-Type' : 'application/json'
+          }
+        })
+        .then((response) => {
+          response.json().then(result => {
+            if(response.ok) {
+               props.updateUser(result.token)                   
+            } else {
+               console.log(`${response.status} ${response.statusText}: ${result.message}`)
+            }
+          }).catch(err => console.log(err))
+        }).catch(err => {
+       	  console.log(`Error: ${err.toString()}`)
+        })
+    }               
+  }   
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -87,8 +120,8 @@ export default function CheckoutForm(props) {
       return;
     }
 
-    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment`,
-    { cart: [props.currentProduct]})
+    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
+    { cart: [...props.user.shoppingCart]})
     //{amount: 1500, cardType: "card"}) 
     // We pay 15€ with a credit card
     console.log(data.data.client_secret)
@@ -109,7 +142,7 @@ export default function CheckoutForm(props) {
           email: props.user.email
         },
       }
-    });
+    })
 
     if (result.error) {
       // Show error to your customer (e.g., insufficient funds)
@@ -120,31 +153,43 @@ export default function CheckoutForm(props) {
       if (result.paymentIntent.status === 'succeeded') {
        // Successfully purchased
         setPurchaseSuccess(true)
-        handleAddToPurchased()
       } else {
         setErrorAlert(true)
       }
     }
-  };
-  if(!props.user) {
-    return <Redirect to="/" />
   }
   if(purchaseSuccess) {
+  	handleAddToPurchased()
     return <Redirect to="/cart/receipt" />
   }
-  const space = '  '
   const nameLabel = `Name for order: ${props.user.firstname} ${props.user.lastname}`
   return (
-    <Grid
+  	<Grid
       container
       spacing={1}
       justify="space-evenly"
       alignContent="center"
     >
-      <Grid style={{marginBottom: "20px"}} item xs={6}>
-        <ProductTile imageURL={props.currentProduct.imagePath} />
-      </Grid>
-      <Grid item xs={6}>
+    	<Grid item md={6} xs={6}>
+            <div className="shoppingCartDiv">
+            	<h3>Shopping Cart</h3>
+                	{props.user.shoppingCart.map((currItem,i) => (
+                        
+                    <CartItem
+                        key={i} 
+                        item={currItem.item}
+                        imgUrl={currItem.imgUrl}
+                        price={currItem.price}
+                        imageID={currItem.imageID}
+                        sourceID={currItem.sourceID}
+                    />
+                   ))}   
+                        
+
+                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
+            </div>
+        </Grid>
+        <Grid item md={6} xs={6}>
         <Grid container 
               spacing={1}
               justify="space-between"
@@ -215,7 +260,7 @@ export default function CheckoutForm(props) {
           </div>
    
         </Grid>
-      </Grid>
+        </Grid>
     </Grid>
-  );
+  )
 }
