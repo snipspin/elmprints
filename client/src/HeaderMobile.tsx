@@ -104,14 +104,6 @@ const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
       </List>
     </div>
   );
-/*
-                <IconButton
-                  style={{color: "rgb(255, 255, 255)"}}
-                  aria-label="open drawer"
-                  edge="start"
-                >
-                </IconButton>
-*/
   const handleSearchTermChange = (value:string):void => {
     props.setSearchTerm(value)
   }
