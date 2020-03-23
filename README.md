@@ -42,10 +42,44 @@
 ![ReceiptPage](https://i.imgur.com/FdcSF0f.jpg)
 
 ## Planning
+![](https://i.imgur.com/JsXqLT6.png)
 
 ## APIs 
 
+[The Movie Database (TMDb)](https://www.themoviedb.org/)
+
+[The Harvard Art Museums API](https://www.harvardartmuseums.org/collections/api)
+
 ## Technologies
+
+### Backend
+
+* Node.js
+* axios
+* cors
+* express
+* jsonwebtoken
+* Mongo DB
+* mongoose
+* stripe
+
+### Frontend
+
+* React.js
+* TypeScript
+* axios
+* Material-UI
+* Sass
+
+---
+
+[stripe](https://stripe.com/)
+
+Stripe is used to route credit card payments through our provided service.
+
+[Material-UI](https://material-ui.com/)
+
+Offers ready to use and styleable UI components based on Material Design.
 
 ## Resources
 
