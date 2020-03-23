@@ -1,18 +1,22 @@
 import React, {useState, MouseEvent} from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect, Link, LinkProps } from 'react-router-dom'
 import {Grid, Button, Checkbox, TextField, IconButton, FormControl, InputLabel, Select } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ProfileUserInfo from './ProfileUserInfo'
+import {Omit} from '@material-ui/types'
 import CartItem from './CartItem'
 import {CartItemProps} from './CartItem'
 import styles from './styles';
 import {Decoded} from './App'
 import {User, Item} from './dec'  
-
+    
     export interface ProfilePageComProps {
         user: Decoded | null,
         updateUser: (newToken: string | null) => void
-    }    
+    }
+    const LinkBehavior = React.forwardRef<any, Omit<LinkProps, 'to'>>((props,ref) => (
+        <Link ref={ref} to="/cart/payment" {...props} />
+    ))     
     const ProfilePageCom: React.FC<ProfilePageComProps> = (props) => {
         const [userCart, setUserCart] = useState<Array<Item>>([])
         const [viewHistory, setViewHistory] = useState<boolean>(false)
@@ -70,6 +74,7 @@ import {User, Item} from './dec'
         	>   
                 <Grid item md={6} xs={12}>
                     <ProfileUserInfo user={props.user} updateUser={props.updateUser} />
+
         		</Grid>
                 <Grid item md={6} xs={12}>
                     <div className="shoppingCartDiv">
@@ -88,12 +93,11 @@ import {User, Item} from './dec'
                             sourceID={currItem.sourceID}
                         />                        
                         ))}   
-                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
-                        <Link style={{marginLeft: "10px"}} to="/cart/payment">Proceed To Checkout</Link>
+                        <Button style={{marginTop: "20px", marginBottom: "20px", marginRight: "10px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
+                        <Button component={LinkBehavior} style={{marginTop: "20px", marginBottom: "20px", marginLeft: "10px"}} variant="contained" color="primary">Checkout</Button>
+                        <br />
+                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handlePurchaseHistory(e)}>View Purchase History</Button>
                     </div>
-                </Grid>
-                <Grid item md={6} xs={12}>
-                    <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handlePurchaseHistory(e)}>View Purchase History</Button>
                 </Grid>
         	</Grid>
         )
