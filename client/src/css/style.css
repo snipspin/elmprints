@@ -374,8 +374,9 @@ span.italic {
   margin: 10px;
 }
 
-.posterImg {
-  max-width: 120px;
+.cartImg {
+  max-width: 15vw;
+  min-width: 150px;
   height: auto;
 }
 

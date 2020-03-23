@@ -19,7 +19,7 @@ const ReceiptItem: React.FC<ReceiptItemProps> = (props) => {
 			alignItems="center"
 		>
 			<Grid item xs={4}>
-				<img className="posterImg" alt="Poster" src={props.imgUrl} height="200px" />	
+				<img className="cartImg" alt="Poster" src={props.imgUrl} height="200px" />	
 			</Grid>
 			<Grid item xs={4}>
 				<h3>{props.item}</h3>
