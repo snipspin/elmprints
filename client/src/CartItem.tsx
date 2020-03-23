@@ -49,29 +49,35 @@ const CartItem: React.FC<CartItemProps> = (props) => {
     }
 
 	return (
-		<Grid
-			container
-			direction="row"
-			justify="space-evenly"
-			alignItems="center"
-			// style={{borderBottom: "2px solid black"}}
-			className="cartItemDiv"
-		>
-			<Grid item xs={4} offset-xs={1}>
-				<img className="posterImg" src={props.imgUrl} height="200px" />	
-			</Grid>
-			<Grid item xs={3}>
-				<h3>{props.item}</h3>
-			</Grid>
-			<Grid item xs={2}>
-				<h3>${props.price}</h3>
-			</Grid>
-			<Grid item xs={2}>
-				<Button variant="contained" color="primary"  onClick={(e: MouseEvent<HTMLButtonElement>) => handleDeleteItem(e)}>
-					<DeleteOutlinedIcon stroke={"black"} strokeWidth={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
-				</Button>
-			</Grid>
-		</Grid>
+        <>
+            <Grid
+                container
+                direction="row"
+                justify="space-evenly"
+                alignItems="center"
+                className="cartItemDiv"
+            >
+                <Grid container>
+                    <Grid item xs={5} className="posterImgDiv">
+                        <img className="posterImg" src={props.imgUrl} height="200px" />	
+                    </Grid>
+                    <Grid item xs={4}>
+                        <h3>{props.item}</h3>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <h3>${props.price}</h3>
+                    </Grid>
+                </Grid>
+                <Grid container>
+                    <Grid item xs={9}></Grid>
+                    <Grid item xs={3}>
+                        <Button variant="contained" color="primary"  onClick={(e: MouseEvent<HTMLButtonElement>) => handleDeleteItem(e)}>
+                            <DeleteOutlinedIcon stroke={"black"} strokeWidth={0.5} style={{color: "rgba(255, 255, 255, .90)"}} fontSize="large" />
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </>
 	)
 }
 export default CartItem
