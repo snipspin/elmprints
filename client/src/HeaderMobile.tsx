@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
+import {Omit} from '@material-ui/types'
 // import Divider from '@material-ui/core/Divider';
+import {Link, LinkProps} from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,13 +29,32 @@ const useStyles = makeStyles({
 });
 
 type Anchor = 'top';
-
+export interface ListItemLinkProps {
+  icon?: React.ReactElement
+  primary: string
+  to: string
+}
+function ListItemLink(props: ListItemLinkProps) {
+  const {icon, primary, to} = props
+  const renderLink = React.useMemo (
+    () =>
+      React.forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref) => (
+        <Link to={to} ref={ref} {...itemProps} />
+      )),
+    [to],   
+  )
+  return (
+    <ListItem button component={renderLink}>
+      {icon? <ListItemIcon>{icon}</ListItemIcon> : null}
+      <ListItemText primary={primary} />
+    </ListItem>
+  )
+}
 export interface HeaderMobileProps {
   user: Decoded | null,
   updateUser: (newToken: string | null) => void,
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
 }
-
 const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
   const classes = useStyles();
   const [state, setState] = React.useState({top: false});
@@ -62,26 +83,11 @@ const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem button key={'Home'}>
-          <ListItemIcon><HomeIcon /></ListItemIcon>
-          <ListItemText primary={'Home'} />
-        </ListItem>
-        <ListItem button key={'Profile'}>
-          <ListItemIcon><AccountCircleOutlined /></ListItemIcon>
-          <ListItemText primary={'Profile'} />
-        </ListItem>
-        <ListItem button key={'Posters'}>
-          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-          <ListItemText primary={'Posters'} />
-        </ListItem>
-        <ListItem button key={'Art'}>
-          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
-          <ListItemText primary={'Art'} />
-        </ListItem>
-        <ListItem button key={'FAQ'}>
-          <ListItemIcon><HelpOutline /></ListItemIcon>
-          <ListItemText primary={'FAQ'} />
-        </ListItem>
+        <ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
+        <ListItemLink to="/profile" primary="Profile" icon={<AccountCircleOutlined />} />
+        <ListItemLink to="/posters" primary="Posters" icon={<ExitToAppIcon />} />
+        <ListItemLink to="/art" primary="Art" icon={<ExitToAppIcon />} />
+        <ListItemLink to="/faq" primary="FAQ" icon={<HelpOutline />} />
       </List>
     </div>
   );
