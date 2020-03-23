@@ -62,9 +62,7 @@ const Header: React.FC<HeaderProps> =(props) => {
                     <h1>PRINTS</h1>
                 </div>
             </div>
-            <div className="headerMobile">
-                <HeaderMobile />
-            </div>
+            <HeaderMobile updateUser={props.updateUser} user={props.user} setSearchTerm={props.setSearchTerm} />
             <div className="headerSuperMain">
                 <div className="headerMain">
                     <header className="mdc-top-app-bar primary">
