@@ -15,6 +15,7 @@ import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined'
 import HelpOutline from '@material-ui/icons/HelpOutline';
 import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
 import MenuIcon from '@material-ui/icons/Menu';
+import ShoppingCart from '@material-ui/icons/ShoppingCart'
 import SearchBarMobile from './SearchBarMobile'
 import {Decoded} from './App'
 
@@ -89,9 +90,11 @@ const HeaderMobile: React.FC<HeaderMobileProps> =(props) => {
       <List>
         <ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
         <ListItemLink to="/profile" primary="Profile" icon={<AccountCircleOutlined />} />
+        <ListItemLink to="/cart" primary="Cart" icon={<ShoppingCart />} />
         <ListItemLink to="/posters" primary="Posters" icon={<ExitToAppIcon />} />
         <ListItemLink to="/art" primary="Art" icon={<ExitToAppIcon />} />
         <ListItemLink to="/faq" primary="FAQ" icon={<HelpOutline />} />
+
         {props.user && 
           <ListItem button onClick={(e: MouseEvent<any>) => handleLogout(e)}>
             <ListItemIcon><HighlightOffOutlinedIcon /></ListItemIcon>
