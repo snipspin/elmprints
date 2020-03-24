@@ -23,7 +23,8 @@ const PurchaseHistory: React.FC<PurchaseHistoryProps> = (props) => {
 			spacing={1}
             direction="column"
             justify="space-evenly"
-		>
+            style={{backgroundColor: '#f1e2d6', border: '2px solid black', margin: '20px auto', width: '95vw'}}
+		>    
             <Grid item xs={12}>
                 <h3>Purchase History</h3>
             </Grid>

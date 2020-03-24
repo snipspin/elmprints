@@ -204,12 +204,21 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
               Added to cart!
             </Alert>
           </Snackbar>
-          <Grid container>
+          <Grid container
+                justify="space-between"
+                alignItems="center"
+                spacing={1}
+          >
             <Grid item md={6} xs={12}>
                 <ProductTile imageURL={props.currentProduct.imagePath} />
               </Grid>
           </Grid>
-          <Grid container>
+          <Grid container
+                justify="space-between"
+                alignItems="center"
+                spacing={1}
+                className="posterDetailGrid"
+            >
             <Grid item md={6} xs={12}>
               <div className="posterDetailRight">
                 <h1>{props.currentProduct.title}</h1>
