@@ -103,7 +103,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 								<Grid item xs={12}>
 									{props.user.billingAddress && 
 										<Box>
-										{billingAddressForm ? <ProfileAddressForm display={billingAddressForm} onSubmit={handleBillingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : <Button variant="contained" color="primary" onClick={handleBillingButtonClick}>Edit billing address</Button>}
+										{billingAddressForm ? <ProfileAddressForm display={billingAddressForm} onSubmit={handleBillingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : <Button style={{margin: "15px"}} variant="contained" color="primary" onClick={handleBillingButtonClick}>Edit billing address</Button>}
 										</Box>
 									}
 								</Grid>             
@@ -112,7 +112,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 							<Grid item xs={12}>
 								{!props.user.billingAddress && 
 									<Box>
-									{billingAddressForm ? <ProfileAddressForm display={billingAddressForm} onSubmit={handleBillingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : <Button variant="contained" color="primary" onClick={handleBillingButtonClick}>Add billing address</Button>}
+									{billingAddressForm ? <ProfileAddressForm display={billingAddressForm} onSubmit={handleBillingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : <Button style={{margin: "15px"}} variant="contained" color="primary" onClick={handleBillingButtonClick}>Add billing address</Button>}
 									</Box>
 								}
 							</Grid>
@@ -141,7 +141,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 								<Box>
 										{shippingAddressForm ? 
 											<ProfileAddressForm display={shippingAddressForm} onSubmit={handleShippingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : 
-											<Button variant="contained" color="primary" style={{marginBottom: "20px"}} onClick={handleShippingButtonClick}>Edit shipping address</Button>
+											<Button variant="contained" color="primary" style={{margin: "15px", marginBottom: "20px"}} onClick={handleShippingButtonClick}>Edit shipping address</Button>
 										}
 									</Box>
 							</Grid>
@@ -151,7 +151,7 @@ const ProfileUserInfo: React.FC<ProfileUserInfoProps> = (props) => {
 								<Box>
 										{shippingAddressForm ? 
 											<ProfileAddressForm display={shippingAddressForm} onSubmit={handleShippingButtonClick} updateUser={props.updateUser} user={props.user} addressType={billingOrShipping} /> : 
-											<Button variant="contained" color="primary" style={{marginBottom: "20px"}} onClick={handleShippingButtonClick}>Add shipping address</Button>
+											<Button variant="contained" color="primary" style={{margin: "15px", marginBottom: "20px"}} onClick={handleShippingButtonClick}>Add shipping address</Button>
 										}
 									</Box>
 							</Grid>

@@ -16,6 +16,8 @@ const ReceiptItem: React.FC<ReceiptItemProps> = (props) => {
 			direction="row"
 			spacing={1}
 			justify="space-evenly"
+			alignItems="center"
+			className="cartItemDiv"
 		>
 			<Grid item xs={5}>
 				<img className="cartImg" alt="Poster" src={props.imgUrl} height="200px" />	
