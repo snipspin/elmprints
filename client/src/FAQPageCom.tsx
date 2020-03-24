@@ -27,12 +27,12 @@ const FAQPageCom: React.FC = () => {
     
     useEffect(() => {
         let faqs: Array<FaqItem> = []
-        for (let index = 0; index < 10; index++) {
-            faqs.push({title: `FAQ ${index+1}`, content: `Answer ${index+1}`});
-        }
-        console.log(faqs)
+        faqs.push({title: 'Do I have to create an account to make purchases?', content: 'Yes. We have plans to allow guest purchasing in the future, but at the moment all purchases must be made through an account.'})
+        faqs.push({title: 'How can I view my purchase history?', content: 'Your purchase history can be found on your profile page.'})
+        faqs.push({title: 'Do I need to enter in my shipping and billing address on my profile before making a purchase?', content: 'Yes. You can enter in your billing and shipping address on your profile page. Please do so before proceeding to make a purchase.'})
+        // console.log(faqs)
         setfaqArray(faqs);  
-        console.log(faqArray);
+        // console.log(faqArray);
     },[])
 
     return(
