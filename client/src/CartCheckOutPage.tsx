@@ -43,8 +43,6 @@ function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-
-
 const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
 
   const [purchaseSuccess, setPurchaseSuccess] = useState<boolean>(false)
@@ -95,6 +93,7 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
  		}).catch(err => console.log(err))
  	}).catch(err => console.log(err.toString()))
   }}
+  
   const handleDeleteCart = (e:React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
   	e.preventDefault()
     if(props.user){
