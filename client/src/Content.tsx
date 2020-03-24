@@ -10,7 +10,6 @@ import ShowCartPageCom from './ShowCartPageCom'
 import PaymentPageCom from './PaymentPageCom'
 import ReceiptPageCom from './ReceiptPageCom'
 import SearchResultsCom from './SearchResultsCom'
-import PaymentPageOneCom from './PaymentPageOneCom'
 import PurchaseHistory from './PurchaseHistory'
 import SignUpCom from './SignUpCom'
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core'
@@ -54,7 +53,6 @@ const Content: React.FC<ContentProps> = (props) => {
 									<Route path="/posters" render={() => <PosterGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
 									<Route path="/art/:id" component={ProductDetail} />
 									<Route path="/art" render={() => <ArtGalleryCom currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />} />
-									<Route path="/cart/payment/one" render={() => <PaymentPageOneCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/cart/payment" render={() => <PaymentPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
 									<Route path="/cart/receipt" render={() => <ReceiptPageCom currentProduct={currentProduct} user={props.user} updateUser={props.updateUser} />} />
 									<Route path="/cart" render={() => <ShowCartPageCom updateUser={props.updateUser} currentProduct={currentProduct} user={props.user} />} />
