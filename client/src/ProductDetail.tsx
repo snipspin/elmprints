@@ -212,7 +212,7 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
           </Grid>
           <Grid container
                 direction="column"
-                justify="space-between"
+                justify="center"
                 alignItems="center"
                 spacing={1}
                 className="posterDetailGrid"
