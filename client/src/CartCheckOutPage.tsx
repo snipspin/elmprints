@@ -7,7 +7,7 @@ import axios, { AxiosResponse } from 'axios'
 import CartItem from './CartItem'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 import {Decoded} from './App'
-import Error from './Error'
+import {Error, ErrorWithLink} from './Error'
 import {StripeCardNumberElement} from '@stripe/stripe-js';
 
 type CartCheckOutPageProps = {
@@ -58,6 +58,28 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
   if (props.user === null) {
     return (
       <Error title="Not logged in" body="You need to be logged in to see this content" />
+    )
+  }
+
+  if (props.user.shippingAddress == null
+    || props.user.shippingAddress.city == ''
+    || props.user.shippingAddress.state == ''
+    || props.user.shippingAddress.streetOne == ''
+    ) {
+    console.log('Error')
+    return (
+      <ErrorWithLink title="No shipping address found" body="You need to provide shipping information in your profile" linkTo={{title:'Profile', to:'/profile'}} />
+    )
+  }
+
+  if (props.user.billingAddress == null
+    || props.user.billingAddress.city == ''
+    || props.user.billingAddress.state == ''
+    || props.user.billingAddress.streetOne == ''
+    ) {
+    console.log('Error')
+    return (
+      <ErrorWithLink title="No billing address found" body="You need to provide billing information in your profile" linkTo={{title:'Profile', to:'/profile'}} />
     )
   }
   
