@@ -191,9 +191,6 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
       <Button classes={{root: classes.buttonRoot}} onClick={() => setGoCheckout(true)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Go to Checkout</Button>
     )
 
-    if(!props.user) {
-      return <Redirect to="/" />
-    }
     if(goCheckout) {
       return <Redirect to="cart/payment" />
     }
@@ -205,7 +202,7 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
             </Alert>
           </Snackbar>
           <Grid container
-                justify="space-between"
+                justify="space-around"
                 alignItems="center"
                 spacing={1}
           >
@@ -214,13 +211,13 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
               </Grid>
           </Grid>
           <Grid container
-                justify="space-between"
+                direction="column"
+                justify="center"
                 alignItems="center"
                 spacing={1}
                 className="posterDetailGrid"
             >
             <Grid item md={6} xs={12}>
-              <div className="posterDetailRight">
                 <h1>{props.currentProduct.title}</h1>
                   <div className="priceDiv">
                       <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
@@ -246,7 +243,6 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
                   </div>
                   <h2>Description</h2>
                   <p>This poster is 1 foot by 3 feet</p>
-              </div>
             </Grid>
           </Grid>
         </div>

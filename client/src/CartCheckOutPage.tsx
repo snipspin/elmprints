@@ -135,7 +135,12 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
+    if(props.user) {
+      if(props.user.shoppingCart.length < 1) {
+        setErrorAlert(true)
+        return
+      }
+    }
     if (props.user?.shoppingCart != null) {
       const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
       { cart: [...props.user.shoppingCart]})
