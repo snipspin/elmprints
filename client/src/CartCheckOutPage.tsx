@@ -48,13 +48,27 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
   const [purchaseSuccess, setPurchaseSuccess] = useState<boolean>(false)
   const [fullName, setFullName] = useState<string>('')
   const [errorAlert, setErrorAlert] = useState<boolean>(false)
+  const [cartTotal, setCartTotal] = useState<number>(0)
   useEffect(() => {
     
   }, [fullName, purchaseSuccess])
+  useEffect(() => {
+    let total: number  = 0
+    if(props.user){
+      if(props.user.shoppingCart.length >= 0) {
+        props.user.shoppingCart.forEach(item => {
+          total += parseFloat(item.price)
+        })
+        let totalAmount: string = total.toFixed(2)
+        setCartTotal(parseFloat(totalAmount))
+      }
+    }
+  }, [cartTotal, props.user])
   const space= "  " 
   const stripe = useStripe();
   const elements = useElements();
   
+ 
   if (props.user === null) {
     return (
       <Error title="Not logged in" body="You need to be logged in to see this content" />
@@ -89,6 +103,7 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
     }
     setErrorAlert(false);
 }
+
   const handleAddToPurchased = ():void => {
  	if(props.user) {
  		let email = props.user.email
@@ -136,7 +151,8 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
         .then((response) => {
           response.json().then(result => {
             if(response.ok) {
-               props.updateUser(result.token)                   
+               props.updateUser(result.token)  
+               setCartTotal(0)                 
             } else {
                console.log(`${response.status} ${response.statusText}: ${result.message}`)
             }
@@ -232,6 +248,8 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
               sourceID={currItem.sourceID}
               />
             ))}
+            <h3>Total: ${cartTotal}</h3>
+            <br />
           <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
         </div>
       </Grid>
