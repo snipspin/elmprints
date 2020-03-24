@@ -13,6 +13,7 @@ export interface Decoded extends User {
 }
 
 const App: React.FC = () => {
+
 	let [user, setUser] = useState<Decoded | null>(null)
 	const [searchTerm, setSearchTerm] = useState<string>('')
 
@@ -28,13 +29,12 @@ const App: React.FC = () => {
 			setUser(null)
 		}
 	}
+
 	const decodeToken = (existingToken: string | null) => {
 		let token = existingToken || localStorage.getItem('mernToken')
 		if (token) {
 			let decoded : Decoded = jwtDecode(token)
-		
 			if(!decoded || Date.now() >= decoded.exp * 1000) {
-				console.log('expired')
 				setUser(null)
 			} else {
 				setUser(decoded)
@@ -43,6 +43,7 @@ const App: React.FC = () => {
 			setUser(null)
 		}
 	}
+	
     return (
         <BrowserRouter>
             <div className="App body">

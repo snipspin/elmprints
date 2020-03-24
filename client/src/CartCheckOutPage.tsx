@@ -3,12 +3,12 @@ import {Redirect} from 'react-router-dom'
 import {Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar'
 import {useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import CartItem from './CartItem'
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
 import {Decoded} from './App'
 import Error from './Error'
-import { Stripe, StripeCardNumberElement, StripeError, PaymentIntent } from '@stripe/stripe-js';
+import {StripeCardNumberElement} from '@stripe/stripe-js';
 
 type CartCheckOutPageProps = {
   user: Decoded | null,
@@ -42,8 +42,6 @@ const CARD_ELEMENT_OPTIONS = {
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />
 }
-
-
 
 const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
 
@@ -95,6 +93,7 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
  		}).catch(err => console.log(err))
  	}).catch(err => console.log(err.toString()))
   }}
+  
   const handleDeleteCart = (e:React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
   	e.preventDefault()
     if(props.user){
@@ -135,13 +134,16 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
+    if(props.user) {
+      if(props.user.shoppingCart.length < 1) {
+        setErrorAlert(true)
+        return
+      }
+    }
     if (props.user?.shoppingCart != null) {
-      const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
+      const data: AxiosResponse<any> = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
       { cart: [...props.user.shoppingCart]})
     
-    //{amount: 1500, cardType: "card"}) 
-    // We pay 15€ with a credit card
     console.log(data.data.client_secret)
     const cardElement: StripeCardNumberElement|null = elements.getElement(CardNumberElement)
     if (cardElement != null) {
@@ -185,7 +187,6 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
     return <Redirect to="/cart/receipt" />
   }
 
-  const nameLabel = `Name for order: ${props.user.firstname} ${props.user.lastname}`
   return (
   	<Grid
       container
@@ -193,36 +194,33 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
       justify="space-evenly"
       alignContent="center"
     >
-    	<Grid item md={6} xs={12}>
-            <div className="shoppingCartDiv">
-            	<h3>Shopping Cart</h3>
-                	{props.user.shoppingCart.map((currItem,i) => (
-                        
-                    <CartItem
-                        key={i}
-                        user={props.user}
-                        updateUser={props.updateUser}
-                        id={currItem._id} 
-                        item={currItem.item}
-                        imgUrl={currItem.imgUrl}
-                        price={currItem.price}
-                        imageID={currItem.imageID}
-                        sourceID={currItem.sourceID}
-                    />
-                   ))}   
-                        
-
-                        <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
-            </div>
-        </Grid>
-        <Grid item md={6} xs={12}>
+      <Grid item md={6} xs={12}>
+        <div className="shoppingCartDiv">
+        	<h3>Shopping Cart</h3>
+            {props.user.shoppingCart.map((currItem,i) => (
+              <CartItem
+              key={i}
+              user={props.user}
+              updateUser={props.updateUser}
+              id={currItem._id} 
+              item={currItem.item}
+              imgUrl={currItem.imgUrl}
+              price={currItem.price}
+              imageID={currItem.imageID}
+              sourceID={currItem.sourceID}
+              />
+            ))}
+          <Button style={{marginTop: "20px", marginBottom: "20px"}} variant="contained" color="primary" onClick={e => handleDeleteCart(e)}>Clear Cart</Button>
+        </div>
+      </Grid>
+      <Grid item md={6} xs={12}>
         <Grid container 
-              spacing={1}
-              justify="space-between"
-              direction="column"
-              alignContent="center"
-              className="checkOutCustomerInfo"
-              style={{backgroundColor: "#f1e2d6", border: "2px solid black", padding: "20px", margin: "15px auto"}}
+        spacing={1}
+        justify="space-between"
+        direction="column"
+        alignContent="center"
+        className="checkOutCustomerInfo"
+        style={{backgroundColor: "#f1e2d6", border: "2px solid black", padding: "20px", margin: "15px auto"}}
         >
           <div className="shippingAdd">
             <Grid item xs={12}><h4>Shipping address:</h4></Grid>
@@ -285,9 +283,8 @@ const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
               </form>
             </Grid>
           </div>
-   
         </Grid>
-        </Grid>
+      </Grid>
     </Grid>
   )
 }
