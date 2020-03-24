@@ -191,9 +191,6 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
       <Button classes={{root: classes.buttonRoot}} onClick={() => setGoCheckout(true)} className="posterDetailBuyBtn material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">Go to Checkout</Button>
     )
 
-    if(!props.user) {
-      return <Redirect to="/" />
-    }
     if(goCheckout) {
       return <Redirect to="cart/payment" />
     }
