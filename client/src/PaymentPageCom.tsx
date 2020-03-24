@@ -17,7 +17,6 @@ export interface PaymentPageProps {
 const PaymentPageCom: React.FC<PaymentPageProps> = (props) => {
     return(
         <div>
-        	<h3>Payment Page</h3>
             <Elements stripe={stripePromise}>
                 {props.user &&
                     <CartCheckOutPage user={props.user} updateUser={props.updateUser} />

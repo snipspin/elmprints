@@ -55,20 +55,13 @@ const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
             	spacing={1}
             	justify="space-between"
             	alignItems="center"
+                style={{backgroundColor: '#f1e2d6', border: '2px solid black', margin: '20px auto', width: '95vw'}}
             >	
-            	<Grid item md={6} xs={12}>
-                    <Grid container
-                          spacing={1}
-                          justify="space-between"
-                          alignItems="center"
-                    >
-                    <div className="shoppingCartDiv">
-                    <Grid item xs={12}>
+                <Grid item md={12} xs={12}>
                     <h3>Purchased Items</h3>
-                    </Grid>
-                    <Grid item xs={12}>
-                    {props.user.shoppingCart.map((currItem,i) => (
-                        
+                </Grid>
+                {props.user.shoppingCart.map((currItem,i) => (
+                    <Grid item md={12} xs={12} >     
                     <ReceiptItem
                         key={i} 
                         item={currItem.item}
@@ -77,12 +70,9 @@ const ReceiptPageCom: React.FC<ReceiptPageComProps> = (props) => {
                         imageID={currItem.imageID}
                         sourceID={currItem.sourceID}
                     />
-                   ))}
-                   </Grid> 
-                   </div>
-                   </Grid>
-            	</Grid>
-            	<Grid item md={6} xs={12}>
+                    </Grid>
+                   ))}            
+            	<Grid item md={12} xs={12}>
                     <Grid container
                           spacing={1}
                           justify="space-between"

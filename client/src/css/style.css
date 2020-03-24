@@ -257,6 +257,11 @@ span.italic {
   margin-bottom: 50px;
 }
 
+.posterDetailGrid {
+  margin-left: 150px;
+  min-width: 35vw;
+}
+
 .posterDetailBuyBtn {
   display: block;
 }
@@ -289,6 +294,11 @@ span.italic {
 }
 .posterDiv {
   margin: 0 auto;
+}
+
+.posterDetailDiv {
+  margin: 0 auto;
+  min-width: 30vw;
 }
 
 .posterImg {
@@ -376,7 +386,7 @@ span.italic {
 
 .cartImg {
   max-width: 15vw;
-  min-width: 150px;
+  min-width: 110px;
   height: auto;
 }
 
