@@ -2,10 +2,18 @@ import React, { useState, useEffect } from 'react'
 import {Redirect} from 'react-router-dom'
 import {Button, Grid, Checkbox, FormControlLabel, Input, FormControl, InputLabel} from '@material-ui/core'
 import Snackbar from '@material-ui/core/Snackbar'
-import {useStripe, Elements, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
+import {useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement} from '@stripe/react-stripe-js';
 import axios from 'axios'
 import CartItem from './CartItem'
-import MuiAlert from '@material-ui/lab/Alert'
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert'
+import {Decoded} from './App'
+import Error from './Error'
+import { Stripe, StripeCardNumberElement, StripeError, PaymentIntent } from '@stripe/stripe-js';
+
+type CartCheckOutPageProps = {
+  user: Decoded | null,
+  updateUser: (newToken: string | null) => void
+}
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -31,27 +39,37 @@ const CARD_ELEMENT_OPTIONS = {
   },
 };
 
-function Alert(props) {
+function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
-export default function CartCheckOutPage(props) {
-  const [purchaseSuccess, setPurchaseSuccess] = useState(false)
-  const [fullName, setFullName] = useState('')
-  const [errorAlert, setErrorAlert] = useState(false)
-  useEffect(() => {
 
+
+const CartCheckOutPage: React.FC<CartCheckOutPageProps> = (props) => {
+
+  const [purchaseSuccess, setPurchaseSuccess] = useState<boolean>(false)
+  const [fullName, setFullName] = useState<string>('')
+  const [errorAlert, setErrorAlert] = useState<boolean>(false)
+  useEffect(() => {
+    
   }, [fullName, purchaseSuccess])
   const space= "  " 
   const stripe = useStripe();
   const elements = useElements();
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setErrorAlert(false)
+  
+  if (props.user === null) {
+    return (
+      <Error title="Not logged in" body="You need to be logged in to see this content" />
+    )
   }
-  const handleAddToPurchased = () => {
+  
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setErrorAlert(false);
+}
+  const handleAddToPurchased = ():void => {
  	if(props.user) {
  		let email = props.user.email
  		let cartContent = [...props.user.shoppingCart]
@@ -77,10 +95,10 @@ export default function CartCheckOutPage(props) {
  		}).catch(err => console.log(err))
  	}).catch(err => console.log(err.toString()))
   }}
-  const handleDeleteCart = (e) => {
+  const handleDeleteCart = (e:React.MouseEvent<HTMLButtonElement,MouseEvent>) => {
   	e.preventDefault()
     if(props.user){
-   		let email = props.user.email
+   		let email: string = props.user.email
         let cartID = props.user.shoppingCart    
         let data = {
           email,
@@ -107,7 +125,7 @@ export default function CartCheckOutPage(props) {
         })
     }               
   }   
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -118,48 +136,55 @@ export default function CartCheckOutPage(props) {
       return;
     }
 
-    const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
-    { cart: [...props.user.shoppingCart]})
+    if (props.user?.shoppingCart != null) {
+      const data = await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/payment/cart`,
+      { cart: [...props.user.shoppingCart]})
+    
     //{amount: 1500, cardType: "card"}) 
     // We pay 15€ with a credit card
     console.log(data.data.client_secret)
-    const cardElement = elements.getElement(CardNumberElement)
-    const result = await stripe.confirmCardPayment(data.data.client_secret , {
-      payment_method: {
-        card: cardElement,
-        billing_details: {
-          name: fullName,
-          address: {
-            city: props.user.billingAddress.city,
-            country: 'US',
-            line1: props.user.billingAddress.streetOne,
-            line2: props.user.billingAddress.streetTwo,
-            postal_code: props.user.billingAddress.zipcode,
-            state: props.user.billingAddress.state
+    const cardElement: StripeCardNumberElement|null = elements.getElement(CardNumberElement)
+    if (cardElement != null) {
+      const {paymentIntent, error} = await stripe.confirmCardPayment(data.data.client_secret , {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: fullName,
+            address: {
+              city: props.user.billingAddress.city,
+              country: 'US',
+              line1: props.user.billingAddress.streetOne,
+              line2: props.user.billingAddress.streetTwo,
+              postal_code: props.user.billingAddress.zipcode,
+              state: props.user.billingAddress.state
+            },
+            email: props.user.email
           },
-          email: props.user.email
-        },
-      }
-    })
+        }
+      })
 
-    if (result.error) {
-      // Show error to your customer (e.g., insufficient funds)
-      setErrorAlert(true)
-      console.log(result.error.message);
-    } else {
-      // The payment has been processed!
-      if (result.paymentIntent.status === 'succeeded') {
-       // Successfully purchased
-        setPurchaseSuccess(true)
-      } else {
-        setErrorAlert(true)
+        if (error) {
+          // Show error to your customer (e.g., insufficient funds)
+          setErrorAlert(true)
+          console.log(error.message);
+        } else {
+          // The payment has been processed!
+          if (paymentIntent != undefined && paymentIntent.status === 'succeeded') {
+          // Successfully purchased
+            setPurchaseSuccess(true)
+          } else {
+            setErrorAlert(true)
+          }
+        }
       }
     }
   }
+  
   if(purchaseSuccess) {
   	handleAddToPurchased()
     return <Redirect to="/cart/receipt" />
   }
+
   const nameLabel = `Name for order: ${props.user.firstname} ${props.user.lastname}`
   return (
   	<Grid
@@ -240,12 +265,12 @@ export default function CartCheckOutPage(props) {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <Snackbar open={errorAlert} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error">
+              <Snackbar open={errorAlert} autoHideDuration={6000} onClose={(e)=>handleClose(e)}>
+                <Alert onClose={(e)=>handleClose(e)} severity="error">
                   Payment Failed
                 </Alert>
               </Snackbar>
-              <form onSubmit={handleSubmit}> 
+              <form onSubmit={(e)=>handleSubmit(e)}> 
                   <label htmlFor="cardNumber">Card Number</label>
                   <CardNumberElement className="cardNumber" id="name" options={CARD_ELEMENT_OPTIONS} />
                   <label htmlFor="expiry">Expiration Date</label>
@@ -266,3 +291,5 @@ export default function CartCheckOutPage(props) {
     </Grid>
   )
 }
+
+export default CartCheckOutPage
