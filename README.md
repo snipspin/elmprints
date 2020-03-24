@@ -3,8 +3,14 @@
 ## Scope
 
 ### MVP
+* Elm Prints is an eCommerce site that sells movie and art posters
+* Users should be able to create an account
+* Users should be able to purchase posters and see detailed information about each individual item
+* Users should be able to search for posters
 
 ### Stretch goals
+* Mobile-friendly design
+* Users should be able to see their shopping cart and order history
 
 ## User stories
 
@@ -14,7 +20,7 @@
 * As a user I want a profile that includes my name, shipping- billing- and email address
 * As a user I want to be able to click on a product to see its details: a short description, price, image and shipping details
 * As a user I want to see a list of posters that I can purchase
-* As a user I want to be able to search for a poster.
+* As a user I want to be able to search for a poster
 * As a user I want to be able to buy a poster
 
 ### Stretch goals
@@ -104,6 +110,21 @@ Offers ready to use and styleable UI components based on Material Design.
 
 
 ## Installation
+* Various Node Modules are installed in both the server and client folders
+* If running this project locally, you will need to run the following command for both sets of Node Modules:
+```npm install```
+* .env files will also need to be created for both the server and client folders
+* The .env file in the client folder will need:
+```
+REACT_APP_SERVER_URL=your server URL
+```
+* The .env file in the server folder will need:
+```
+JWT_SECRET="any combination of characters"
+TMDB_API_KEY="your API KEY"
+HAM_API_KEY="your API KEY"
+STRIPE_SK="your Stripe SK"
+```
 
 ## Screenshots
 
