@@ -14,7 +14,9 @@ interface FaqItem {
 }
 
 const useStyles =  makeStyles(theme => (styles(theme)));
-function FAQPageCom() {
+
+const FAQPageCom: React.FC = () => {
+
     const [faqArray, setfaqArray] = useState<Array<FaqItem>>([])
     const [expanded, setExpanded] = React.useState<string | false>(false);
     const handleChange = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
@@ -22,7 +24,6 @@ function FAQPageCom() {
     };
 
     const classes = useStyles();
-    
     
     useEffect(() => {
         let faqs: Array<FaqItem> = []
@@ -33,6 +34,7 @@ function FAQPageCom() {
         setfaqArray(faqs);  
         console.log(faqArray);
     },[])
+
     return(
         <Grid
             container 
@@ -64,4 +66,5 @@ function FAQPageCom() {
         </Grid>
     )
 }
+
 export default FAQPageCom

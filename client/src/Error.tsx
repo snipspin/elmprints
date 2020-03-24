@@ -12,4 +12,5 @@ const Error: React.FC<ErrorProps> = (props) => {
             </div>
         )
     }
+
 export default Error

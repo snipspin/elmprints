@@ -2,6 +2,7 @@ import React, {MouseEvent} from 'react'
 import {Grid, Button} from '@material-ui/core'
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'
 import {Decoded} from './App'
+
 export interface CartItemProps {
 	id: string,
 	item: string,
@@ -11,8 +12,8 @@ export interface CartItemProps {
 	sourceID: string,
     user: Decoded | null,
     updateUser: (newToken: string | null) => void
-
 }
+
 const CartItem: React.FC<CartItemProps> = (props) => {
     const handleDeleteItem = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -25,27 +26,27 @@ const CartItem: React.FC<CartItemProps> = (props) => {
                 cartID,
                 productID
             }          
-            
-        fetch(`${process.env.REACT_APP_SERVER_URL}/cart/remove`, {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: {
-                'Content-Type' : 'application/json'
-                    }
+        
+            fetch(`${process.env.REACT_APP_SERVER_URL}/cart/remove`, {
+                    method: 'PUT',
+                    body: JSON.stringify(data),
+                    headers: {
+                    'Content-Type' : 'application/json'
+                }
             })
             .then((response: Response) => {
                 response.json().then(result => {
                     if(response.ok) {
-                        props.updateUser(result.token)                   
+                        props.updateUser(result.token)
                     } else {
                         console.log(`${response.status} ${response.statusText}: ${result.message}`)
                     }
                 }).catch((err: Error) => console.log(err))
-            }).catch((err: Error) => {
+            })
+            .catch((err: Error) => {
                 console.log(`Error: ${err.toString()}`)
             })
         }
-                    
     }
 
 	return (
