@@ -202,7 +202,7 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
             </Alert>
           </Snackbar>
           <Grid container
-                justify="space-between"
+                justify="space-around"
                 alignItems="center"
                 spacing={1}
           >
@@ -211,13 +211,13 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
               </Grid>
           </Grid>
           <Grid container
+                direction="column"
                 justify="space-between"
                 alignItems="center"
                 spacing={1}
                 className="posterDetailGrid"
             >
             <Grid item md={6} xs={12}>
-              <div className="posterDetailRight">
                 <h1>{props.currentProduct.title}</h1>
                   <div className="priceDiv">
                       <h4 className="posterDetailPrice">${props.currentProduct.price}</h4>
@@ -243,7 +243,6 @@ const PosterDetail: React.FC<ProductProps> = (props) => {
                   </div>
                   <h2>Description</h2>
                   <p>This poster is 1 foot by 3 feet</p>
-              </div>
             </Grid>
           </Grid>
         </div>
