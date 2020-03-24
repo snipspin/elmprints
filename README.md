@@ -112,7 +112,9 @@ Offers ready to use and styleable UI components based on Material Design.
 ## Installation
 * Various Node Modules are installed in both the server and client folders
 * If running this project locally, you will need to run the following command for both sets of Node Modules:
-```npm install```
+```
+npm install
+```
 * .env files will also need to be created for both the server and client folders
 * The .env file in the client folder will need:
 ```
